@@ -1,6 +1,6 @@
 /* Noor service worker: works offline after the first visit. The app shell is cached up front;
    everything else from this site (Qur'an text, hadith books, fonts) is cached the first time it loads. */
-const VERSION = 'noor-3.28.1-web4';
+const VERSION = 'noor-3.28.1-web5';
 const SHELL = ['./', 'index.html', 'web/bridge.js', 'web/desktop.css', 'web/desktop.js', 'web/web.js', 'lib/adhan.min.js', 'data/adhans.js', 'data/cities.js', 'data/adhkar.js',
   'hadith/bukhari.meta.js', 'hadith/muslim.meta.js', 'cards.json', 'reciters.json', 'times.json', 'quran/meta.json',
   'fonts/inter.woff2', 'fonts/amiri-quran.woff2', 'manifest.webmanifest', 'icons/icon-192.png'];

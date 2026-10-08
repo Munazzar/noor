@@ -295,10 +295,66 @@
     }
     function jump(a) { const n = count(P.surah), c = clamp(a, 1, n); if (c < P.from || c > P.to) { P.from = 1; P.to = n; P.rangeRep = 0; } P.ayah = c; P.verseRep = 0; P.phase = firstPhase(); }
 
-    /* Two players, like the app's Gapless.java: while one verse plays, the next is already loaded in the
-       other, and on "ended" the other starts at once, so recitation flows without breaks between verses. */
+    /* Like the app's Gapless.java (MediaPlayer.setNextMediaPlayer), each verse is decoded ahead of time
+       and scheduled on the Web Audio clock to start on the exact sample the previous one ends, so
+       recitation flows without breaks. Two <audio> players remain for other speeds (Web Audio would change
+       the pitch), for surah recordings, and for hosts that refuse the download. */
     const A = [new Audio(), new Audio()]; A.forEach(a => { a.preload = 'auto'; });
-    let el = A[0], pre = null;
+    let el = A[0], pre = null, wa = false;
+    const W = { ctx: null, gain: null, src: null, buf: null, url: '', t0: 0, off: 0, nxt: null, bufs: new Map(), ok: true };
+    const keep = new Audio(); keep.loop = true;   // silent loop, so the browser keeps media controls and background playback
+    function silentWav() {
+      const n = 8000 * 6, b = new ArrayBuffer(44 + n), v = new DataView(b), w = (o, t) => { for (let i = 0; i < t.length; i++) v.setUint8(o + i, t.charCodeAt(i)); };
+      w(0, 'RIFF'); v.setUint32(4, 36 + n, true); w(8, 'WAVEfmt '); v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true);
+      v.setUint32(24, 8000, true); v.setUint32(28, 8000, true); v.setUint16(32, 1, true); v.setUint16(34, 8, true); w(36, 'data'); v.setUint32(40, n, true);
+      new Uint8Array(b, 44).fill(128); return URL.createObjectURL(new Blob([b], { type: 'audio/wav' }));
+    }
+    function keepOn(on) { try { if (on) { if (!keep.src) keep.src = silentWav(); keep.play().catch(() => {}); } else keep.pause(); } catch (e) {} }
+    function wctx() {
+      if (!W.ctx) { const C = window.AudioContext || window.webkitAudioContext; if (!C) { W.ok = false; return null; }
+        W.ctx = new C({ latencyHint: 'playback' }); W.gain = W.ctx.createGain(); W.gain.connect(W.ctx.destination); }
+      if (W.ctx.state !== 'running') W.ctx.resume().catch(() => {});
+      return W.ctx;
+    }
+    const useWa = () => W.ok && !surahMode && speed === 1 && !!(window.AudioContext || window.webkitAudioContext);
+    function wbuf(url) {
+      let p = W.bufs.get(url); if (p) return p;
+      p = (async () => {
+        let r = null;
+        try { const c = await caches.open('noor-audio'); r = await c.match(url); if (r && r.type === 'opaque') r = null; } catch (e) {}
+        if (!r) { r = await fetch(url, { mode: 'cors' }); if (!r.ok) throw Object.assign(new Error('http ' + r.status), { http: true }); }
+        const data = await r.arrayBuffer();
+        return await new Promise((ok, no) => { const q = wctx().decodeAudioData(data, ok, no); if (q && q.catch) q.catch(no); });
+      })();
+      W.bufs.set(url, p); p.catch(() => W.bufs.delete(url));
+      while (W.bufs.size > 6) W.bufs.delete(W.bufs.keys().next().value);
+      return p;
+    }
+    function wnode(buf, when, off) { const n = W.ctx.createBufferSource(); n.buffer = buf; n.connect(W.gain); n.start(when, off); return n; }
+    function wkill(n) { if (!n) return; n.onended = null; try { n.stop(); } catch (e) {} try { n.disconnect(); } catch (e) {} }
+    function wstop() { wkill(W.src); W.src = null; if (W.nxt) wkill(W.nxt.src); W.nxt = null; }
+    const wpos = () => !W.buf ? 0 : Math.min(W.buf.duration, Math.max(0, W.src ? W.ctx.currentTime - W.t0 : W.off));
+    function whook(g) {
+      const n = W.src; n.onended = () => { if (n !== W.src || g !== gen || !playing) return; clipDone(); };
+    }
+    /* Start the current clip from `off` seconds. */
+    function wplay(g, buf, url, off) {
+      const c = wctx(); wstop(); A.forEach(a => { try { a.pause(); } catch (e) {} });
+      const at = c.currentTime + 0.03; W.buf = buf; W.url = url; W.t0 = at - off; W.src = wnode(buf, at, off); W.off = off;
+      wa = true; loading = false; playing = true; errStreak = 0; error = null; whook(g); keepOn(true); publish(); warm(g);
+    }
+    /* Decode the clip after this one and, when it follows straight on, schedule it for the moment this one ends. */
+    function warm(g) {
+      if (surahMode || !rec) return;
+      const save = Object.assign({}, P), ok = advance(), url = ok ? clipUrl() : null; Object.assign(P, save);
+      if (!url) return;
+      wbuf(url).then(buf => {
+        if (g !== gen || !wa || !playing || !W.src || W.nxt || gapMs > 0 || speed !== 1) return;
+        const end = W.t0 + W.buf.duration;
+        if (end - W.ctx.currentTime < 0.06) return;   // too late to line it up; it starts when this one ends
+        W.nxt = { url, buf, t0: end, src: wnode(buf, end, 0) };
+      }).catch(() => {});
+    }
     let rid = 'husary', rec = null, active = false, playing = false, loading = false, inGap = false, ended = false, error = null, errStreak = 0;
     let gen = 0, gapMs = 0, speed = 1, countRead = false, sleepAt = 0, sleepEos = false, sleepT = null, gapT = null, pollT = null;
     let surahMode = false, timed = false, tStart = null, tEnd = null, loadedSurah = -1, mq = null, gapSeekPending = false;
@@ -324,7 +380,8 @@
     function state() {
       if (!active) { const l = lsJ('audio_last', {}); return { active: false, playing: false, loading: false, rid: l.rid || 'husary', s: l.s || 1, a: l.a || 1, from: l.from || 1, to: l.to || 0, opts: opts() }; }
       let pos = 0, dur = 0;
-      if (el.src && isFinite(el.currentTime)) { pos = el.currentTime * 1000; dur = isFinite(el.duration) ? el.duration * 1000 : 0;
+      if (wa) { pos = wpos() * 1000; dur = W.buf ? W.buf.duration * 1000 : 0; }
+      else if (el.src && isFinite(el.currentTime)) { pos = el.currentTime * 1000; dur = isFinite(el.duration) ? el.duration * 1000 : 0;
         if (surahMode && timed && tStart) { pos -= tStart[P.ayah]; dur = tEnd[P.ayah] - tStart[P.ayah]; } }
       const o = { active: true, playing, loading, gap: inGap, ended, rid, s: P.surah, a: P.ayah, from: P.from, to: P.to, count: count(P.surah),
         phase: P.phase === 1 ? 'en' : P.phase === -1 ? 'basmala' : 'ar', vr: P.verseRep + 1, rr: P.rangeRep + 1, surahMode, timed,
@@ -348,7 +405,7 @@
     const stopPoll = () => { clearInterval(pollT); pollT = null; };
     function poll() {
       /* hand over to the waiting verse right at the end of this one, without waiting for the late "ended" event */
-      if (!surahMode && playing && !inGap && pre && pre.el.readyState >= 3 && el.duration > 0 && el.duration - el.currentTime <= 0.035 / Math.max(speed, .5)) { clipDone(); return; }
+      if (!wa && !surahMode && playing && !inGap && pre && pre.el.readyState >= 3 && el.duration > 0 && el.duration - el.currentTime <= 0.09 * speed) { clipDone(); return; }
       if (surahMode && timed && playing && tEnd && el.currentTime * 1000 >= tEnd[P.ayah] - 40 && loadedSurah === P.surah) surahVerseDone();
     }
     const clipName = (s, a) => String(s).padStart(3, '0') + String(a).padStart(3, '0') + '.mp3';
@@ -361,6 +418,7 @@
     const freeBlob = a => { if (a.src && a.src.startsWith('blob:')) try { URL.revokeObjectURL(a.src); } catch (e) {} };
     function playSource(g, src, seekMs) {
       if (g !== gen) return;
+      wa = false; keepOn(false);
       if (el.src !== src) freeBlob(el);
       el.src = src; el.playbackRate = speed;
       const ready = () => { el.removeEventListener('loadedmetadata', ready); if (g !== gen) return; if (seekMs) el.currentTime = seekMs / 1000; };
@@ -395,9 +453,14 @@
     }
     /* Start the preloaded clip straight away. False when it isn't the clip the plan wants. */
     function swapToPre() {
+      if (wa) {
+        const n = W.nxt; W.nxt = null;
+        if (!n || n.url !== clipUrl() || speed !== 1) { if (n) wkill(n.src); return false; }
+        const g = ++gen; wkill(W.src); W.src = n.src; W.buf = n.buf; W.url = n.url; W.t0 = n.t0;
+        loading = false; playing = true; error = null; active = true; whook(g); publish(); warm(g); return true;
+      }
       if (!pre || pre.url !== clipUrl() || pre.el.error) return false;
-      const old = el, g = ++gen; el = pre.el; pre = null;
-      try { old.pause(); } catch (e) {}
+      const g = ++gen; el = pre.el; pre = null;   // the old player finishes its last few milliseconds on its own
       try { el.currentTime = 0; } catch (e) {}
       el.playbackRate = speed; loading = el.readyState < 3; playing = true; error = null; active = true;
       el.play().then(() => { if (g !== gen) return; loading = false; playing = true; errStreak = 0; el.playbackRate = speed; startPoll(); publish(); preloadNext(); })
@@ -416,7 +479,7 @@
       if (ar && P.verseRep === 0) { dailyAdd('l', 1); heardCur(); if (countRead) markRead(P.surah, P.ayah); }
       if (advance()) {
         saveLast();
-        if (ar && gapMs > 0) { playing = false; inGap = true; publish(); gapT = setTimeout(() => { if (inGap) { inGap = false; if (!swapToPre()) beginClip(); } }, gapMs); return; }
+        if (ar && gapMs > 0) { playing = false; inGap = true; if (wa) { wstop(); W.off = W.buf ? W.buf.duration : 0; } publish(); gapT = setTimeout(() => { if (inGap) { inGap = false; if (!swapToPre()) beginClip(); } }, gapMs); return; }
         if (!swapToPre()) beginClip(); return;
       }
       finish();
@@ -438,12 +501,20 @@
     }
     function finish() {
       ended = true; if (sleepEos) { sleepEos = false; P.stopAtSurahEnd = false; }
-      playing = false; inGap = false; try { el.pause(); } catch (e) {} stopPoll(); publish();
+      playing = false; inGap = false; try { el.pause(); } catch (e) {} if (wa) { wstop(); W.off = W.buf ? W.buf.duration : 0; } keepOn(false); stopPoll(); publish();
     }
     function beginClip() {
       const g = ++gen; loading = true; playing = false; error = null; stopPoll(); active = true; publish();
       pre = null; A.forEach(a => { if (a !== el) try { a.pause(); } catch (e) {} });
-      cachedUrl(clipUrl()).then(u => playSource(g, u));
+      const url = clipUrl();
+      if (useWa() && wctx()) {
+        wstop(); try { el.pause(); } catch (e) {}
+        wbuf(url).then(buf => { if (g === gen) wplay(g, buf, url, 0); })
+          .catch(e => { if (g !== gen) return; if (!(e && e.http)) W.ok = false; wa = false; cachedUrl(url).then(u => playSource(g, u)); });
+        return;
+      }
+      wstop(); wa = false;
+      cachedUrl(url).then(u => playSource(g, u));
     }
     async function resolveMq(r) {
       const c = lsJ('mq_' + r.id, {});
@@ -471,6 +542,7 @@
     }
     function beginSurah() {
       const g = ++gen; loading = true; playing = false; error = null; stopPoll(); active = true; publish();
+      wstop(); wa = false; keepOn(false);
       const s = P.surah;
       if (s === loadedSurah && el.src && el.readyState > 0) {
         loading = false; el.currentTime = timed ? tStart[P.ayah] / 1000 : 0; el.play().catch(() => {}); playing = true; el.playbackRate = speed; startPoll(); publish(); return;
@@ -497,12 +569,19 @@
     function pause() {
       clearTimeout(gapT); const wasGap = inGap; inGap = false;
       try { el.pause(); } catch (e) {}
+      if (wa && W.src) { W.off = wpos(); wstop(); }
+      keepOn(false);
       if (loading) { gen++; loading = false; }
       if (wasGap && surahMode && timed) gapSeekPending = true;
       playing = false; stopPoll(); publish();
     }
     function resume() {
       if (ended) { start(P.surah, P.from, P.from, P.to); ended = false; begin(); return; }
+      if (wa && active && W.buf && !loading && !error) {
+        if (W.off >= W.buf.duration - 0.01) { begin(); return; }
+        if (speed === 1) { wplay(++gen, W.buf, W.url, W.off); return; }
+        const g = ++gen, ms = W.off * 1000; cachedUrl(W.url).then(u => playSource(g, u, ms)); return;
+      }
       if (active && el.src && el.readyState > 0 && !loading && !error) {
         if (gapSeekPending && tStart) { gapSeekPending = false; el.currentTime = tStart[P.ayah] / 1000; }
         else if (!surahMode && el.ended) { begin(); return; }
@@ -510,8 +589,8 @@
       }
       begin();
     }
-    function stopAll() { gen++; playing = false; loading = false; inGap = false; clearTimeout(gapT); clearTimeout(sleepT); sleepAt = 0; saveLast(); pre = null; A.forEach(a => { try { a.pause(); freeBlob(a); a.removeAttribute('src'); a.load(); } catch (e) {} }); loadedSurah = -1; active = false; ended = false; stopPoll(); publish(); }
-    function fadeThenPause(i) { if (!playing) { pause(); return; } el.volume = Math.max(0, i / 10); if (i <= 0) { pause(); el.volume = 1; return; } setTimeout(() => fadeThenPause(i - 1), 400); }
+    function stopAll() { gen++; wstop(); wa = false; W.buf = null; keepOn(false); playing = false; loading = false; inGap = false; clearTimeout(gapT); clearTimeout(sleepT); sleepAt = 0; saveLast(); pre = null; A.forEach(a => { try { a.pause(); freeBlob(a); a.removeAttribute('src'); a.load(); } catch (e) {} }); loadedSurah = -1; active = false; ended = false; stopPoll(); publish(); }
+    function fadeThenPause(i) { if (!playing) { pause(); return; } el.volume = Math.max(0, i / 10); if (W.gain) W.gain.gain.value = el.volume; if (i <= 0) { pause(); el.volume = 1; if (W.gain) W.gain.gain.value = 1; return; } setTimeout(() => fadeThenPause(i - 1), 400); }
     function cmd(c) {
       switch (c.op) {
         case 'play': setReciter(c.rid || rid); start(c.s || 1, c.a || 0, c.from || 0, c.to || 0); ended = false; error = null; errStreak = 0; if (surahMode && P.surah !== loadedSurah) loadedSurah = -1; begin(); break;
@@ -522,12 +601,18 @@
           if (surahMode && !timed) { if (P.surah < 114) start(P.surah + 1, 1, 0, 0); begin(); } else if (moveOn()) begin(); else finish(); break;
         case 'prev': clearTimeout(gapT); inGap = false;
           if (surahMode && !timed) { if (el.currentTime < 4 && P.surah > 1) start(P.surah - 1, 1, 0, 0); begin(); break; }
-          if (surahMode || !playing || el.currentTime <= 3 || P.phase !== 0) { prevVerse(); begin(); } else { el.currentTime = 0; publish(); } break;
+          if (surahMode || !playing || (wa ? wpos() : el.currentTime) <= 3 || P.phase !== 0) { prevVerse(); begin(); } else if (wa) { wplay(++gen, W.buf, W.url, 0); } else { el.currentTime = 0; publish(); } break;
         case 'stop': stopAll(); break;
         case 'jump': jump(c.a || 1); ended = false; begin(); break;
         case 'range': { const a = P.ayah, ph = P.phase; start(P.surah, a, c.from || 1, c.to || 0); if (a === P.ayah) { P.phase = ph; saveLast(); publish(); } else begin(); break; }
-        case 'opts': if (c.v) { put('audio_opts', JSON.stringify(Object.assign(opts(), c.v))); applyOpts(c.v); } publish(); break;
-        case 'seek': if (el.src) { let ms = +c.ms || 0; if (surahMode && timed && tStart) ms += tStart[P.ayah]; el.currentTime = Math.max(0, ms) / 1000; } publish(); break;
+        case 'opts': if (c.v) { put('audio_opts', JSON.stringify(Object.assign(opts(), c.v))); applyOpts(c.v);
+            /* a new speed while a verse plays through Web Audio carries on in the pitch-keeping player from the same spot */
+            if (wa && playing && speed !== 1 && W.buf) { const g = ++gen, ms = wpos() * 1000; wstop(); cachedUrl(W.url).then(u => playSource(g, u, ms)); }
+            else if (wa && W.nxt && (speed !== 1 || gapMs > 0)) { wkill(W.nxt.src); W.nxt = null; }
+            else if (wa && playing && speed === 1 && gapMs === 0 && !W.nxt) warm(gen); }
+          publish(); break;
+        case 'seek': if (wa && W.buf) { const t = clamp((+c.ms || 0) / 1000, 0, W.buf.duration); if (playing) wplay(++gen, W.buf, W.url, t); else { W.off = t; publish(); } break; }
+          if (el.src) { let ms = +c.ms || 0; if (surahMode && timed && tStart) ms += tStart[P.ayah]; el.currentTime = Math.max(0, ms) / 1000; } publish(); break;
         case 'sleep': clearTimeout(sleepT); sleepEos = !!c.eos; P.stopAtSurahEnd = sleepEos; sleepAt = c.min > 0 ? Date.now() + c.min * 60000 : 0;
           if (c.min > 0) sleepT = setTimeout(() => { sleepAt = 0; fadeThenPause(10); }, c.min * 60000); publish(); break;
         case 'device': put('audio_opts', JSON.stringify(Object.assign(opts(), { device: c.id | 0 }))); publish(); break;
