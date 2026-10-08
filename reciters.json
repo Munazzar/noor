@@ -1,0 +1,416 @@
+{
+"v": 1,
+"english": {
+"name": "Ibrahim Walk (Saheeh International)",
+"folder": "English/Sahih_Intnl_Ibrahim_Walk_192kbps"
+},
+"base": "https://everyayah.com/data/",
+"reciters": [
+{
+"id": "husary",
+"name": "Mahmoud Khalil Al-Husary",
+"ar": "محمود خليل الحصري",
+"style": "Murattal",
+"origin": "Egypt",
+"tags": [
+"classic",
+"learn"
+],
+"src": "ea",
+"folder": "Husary_128kbps",
+"note": "Clear, measured tajweed. A favourite for learning."
+},
+{
+"id": "husary_mj",
+"name": "Al-Husary (Mujawwad)",
+"ar": "الحصري · مجوّد",
+"style": "Mujawwad",
+"origin": "Egypt",
+"tags": [
+"classic",
+"soothing"
+],
+"src": "ea",
+"folder": "Husary_128kbps_Mujawwad",
+"note": "Slow and melodic."
+},
+{
+"id": "husary_ml",
+"name": "Al-Husary (Muallim)",
+"ar": "الحصري · المعلّم",
+"style": "Muallim",
+"origin": "Egypt",
+"tags": [
+"learn"
+],
+"src": "ea",
+"folder": "Husary_Muallim_128kbps",
+"note": "Teaching recitation, very slow and clear."
+},
+{
+"id": "basit",
+"name": "Abdul Basit Abdus-Samad",
+"ar": "عبد الباسط عبد الصمد",
+"style": "Murattal",
+"origin": "Egypt",
+"tags": [
+"classic",
+"soothing"
+],
+"src": "ea",
+"folder": "Abdul_Basit_Murattal_192kbps",
+"note": "The iconic voice."
+},
+{
+"id": "basit_mj",
+"name": "Abdul Basit (Mujawwad)",
+"ar": "عبد الباسط · مجوّد",
+"style": "Mujawwad",
+"origin": "Egypt",
+"tags": [
+"classic",
+"soothing"
+],
+"src": "ea",
+"folder": "Abdul_Basit_Mujawwad_128kbps",
+"note": "Long, melodic breaths."
+},
+{
+"id": "minshawi",
+"name": "Muhammad Siddiq Al-Minshawi",
+"ar": "محمد صديق المنشاوي",
+"style": "Murattal",
+"origin": "Egypt",
+"tags": [
+"classic",
+"soothing"
+],
+"src": "ea",
+"folder": "Minshawy_Murattal_128kbps",
+"note": "Deep and moving."
+},
+{
+"id": "minshawi_mj",
+"name": "Al-Minshawi (Mujawwad)",
+"ar": "المنشاوي · مجوّد",
+"style": "Mujawwad",
+"origin": "Egypt",
+"tags": [
+"classic"
+],
+"src": "ea",
+"folder": "Minshawy_Mujawwad_192kbps",
+"note": "Melodic and emotional."
+},
+{
+"id": "tablawi",
+"name": "Muhammad Al-Tablawi",
+"ar": "محمد الطبلاوي",
+"style": "Murattal",
+"origin": "Egypt",
+"tags": [
+"classic"
+],
+"src": "ea",
+"folder": "Mohammad_al_Tablaway_128kbps"
+},
+{
+"id": "alafasy",
+"name": "Mishary Rashid Alafasy",
+"ar": "مشاري راشد العفاسي",
+"style": "Murattal",
+"origin": "Kuwait",
+"tags": [
+"soothing",
+"popular"
+],
+"src": "ea",
+"folder": "Alafasy_128kbps",
+"note": "Smooth and widely loved."
+},
+{
+"id": "maher",
+"name": "Maher Al-Muaiqly",
+"ar": "ماهر المعيقلي",
+"style": "Murattal",
+"origin": "Makkah",
+"tags": [
+"haram",
+"soothing"
+],
+"src": "ea",
+"folder": "MaherAlMuaiqly128kbps",
+"note": "Imam of Masjid al-Haram. Calm."
+},
+{
+"id": "dosari",
+"name": "Yasser Al-Dosari",
+"ar": "ياسر الدوسري",
+"style": "Murattal",
+"origin": "Makkah",
+"tags": [
+"haram",
+"soothing"
+],
+"src": "ea",
+"folder": "Yasser_Ad-Dussary_128kbps",
+"note": "Imam of Masjid al-Haram."
+},
+{
+"id": "sudais",
+"name": "Abdur-Rahman As-Sudais",
+"ar": "عبد الرحمن السديس",
+"style": "Murattal",
+"origin": "Makkah",
+"tags": [
+"haram"
+],
+"src": "ea",
+"folder": "Abdurrahmaan_As-Sudais_192kbps",
+"note": "Imam of Masjid al-Haram."
+},
+{
+"id": "shuraym",
+"name": "Sa'ud Ash-Shuraym",
+"ar": "سعود الشريم",
+"style": "Murattal",
+"origin": "Makkah",
+"tags": [
+"haram"
+],
+"src": "ea",
+"folder": "Saood_ash-Shuraym_128kbps",
+"note": "Former imam of Masjid al-Haram. Brisk."
+},
+{
+"id": "budair",
+"name": "Salah Al-Budair",
+"ar": "صلاح البدير",
+"style": "Murattal",
+"origin": "Madinah",
+"tags": [
+"haram"
+],
+"src": "ea",
+"folder": "Salah_Al_Budair_128kbps",
+"note": "Imam of the Prophet’s Mosque."
+},
+{
+"id": "ayyub",
+"name": "Muhammad Ayyub",
+"ar": "محمد أيوب",
+"style": "Murattal",
+"origin": "Madinah",
+"tags": [
+"haram",
+"learn"
+],
+"src": "ea",
+"folder": "Muhammad_Ayyoub_128kbps",
+"note": "Former imam of the Prophet’s Mosque. Measured."
+},
+{
+"id": "alijaber",
+"name": "Ali Jaber",
+"ar": "علي جابر",
+"style": "Murattal",
+"origin": "Makkah",
+"tags": [
+"haram",
+"soothing"
+],
+"src": "ea",
+"folder": "Ali_Jaber_64kbps",
+"note": "Former imam of Masjid al-Haram. Calm."
+},
+{
+"id": "qatami",
+"name": "Nasser Al-Qatami",
+"ar": "ناصر القطامي",
+"style": "Murattal",
+"origin": "Saudi Arabia",
+"tags": [
+"soothing"
+],
+"src": "ea",
+"folder": "Nasser_Alqatami_128kbps",
+"note": "Soothing and emotional."
+},
+{
+"id": "ghamdi",
+"name": "Saad Al-Ghamdi",
+"ar": "سعد الغامدي",
+"style": "Murattal",
+"origin": "Saudi Arabia",
+"tags": [
+"soothing",
+"popular"
+],
+"src": "ea",
+"folder": "Ghamadi_40kbps",
+"note": "Gentle. Lower audio quality (40 kbps)."
+},
+{
+"id": "shatri",
+"name": "Abu Bakr Ash-Shatri",
+"ar": "أبو بكر الشاطري",
+"style": "Murattal",
+"origin": "Saudi Arabia",
+"tags": [
+"soothing"
+],
+"src": "ea",
+"folder": "Abu_Bakr_Ash-Shaatree_128kbps",
+"note": "Warm and steady."
+},
+{
+"id": "ajmi",
+"name": "Ahmed Al-Ajmi",
+"ar": "أحمد العجمي",
+"style": "Murattal",
+"origin": "Saudi Arabia",
+"tags": [
+"soothing"
+],
+"src": "ea",
+"folder": "Ahmed_ibn_Ali_al-Ajamy_128kbps_ketaballah.net"
+},
+{
+"id": "rifai",
+"name": "Hani Ar-Rifai",
+"ar": "هاني الرفاعي",
+"style": "Murattal",
+"origin": "Saudi Arabia",
+"tags": [
+"soothing"
+],
+"src": "ea",
+"folder": "Hani_Rifai_192kbps",
+"note": "Emotional."
+},
+{
+"id": "qahtani",
+"name": "Khalid Al-Qahtani",
+"ar": "خالد القحطاني",
+"style": "Murattal",
+"origin": "Saudi Arabia",
+"tags": [
+"soothing"
+],
+"src": "ea",
+"folder": "Khaalid_Abdullaah_al-Qahtaanee_192kbps"
+},
+{
+"id": "abbad",
+"name": "Fares Abbad",
+"ar": "فارس عباد",
+"style": "Murattal",
+"origin": "Saudi Arabia",
+"tags": [
+"soothing"
+],
+"src": "ea",
+"folder": "Fares_Abbad_64kbps",
+"note": "Gentle."
+},
+{
+"id": "balushi",
+"name": "Hazza Al-Balushi",
+"ar": "هزاع البلوشي",
+"style": "Murattal",
+"origin": "UAE",
+"tags": [
+"soothing",
+"popular"
+],
+"src": "mq",
+"en": [
+"hazza",
+"balushi"
+],
+"arkw": [
+"هزاع"
+],
+"note": "Very soothing. Whole-surah recordings from mp3quran.net."
+},
+{
+"id": "sobhi",
+"name": "Islam Sobhi",
+"ar": "إسلام صبحي",
+"style": "Murattal",
+"origin": "Egypt",
+"tags": [
+"soothing",
+"popular"
+],
+"src": "mq",
+"en": [
+"islam sobhi",
+"sobhi"
+],
+"arkw": [
+"إسلام صبحي"
+],
+"note": "Soothing. Whole-surah recordings from mp3quran.net."
+},
+{
+"id": "kurdi",
+"name": "Ra'ad Al-Kurdi",
+"ar": "رعد الكردي",
+"style": "Murattal",
+"origin": "Iraq",
+"tags": [
+"soothing"
+],
+"src": "mq",
+"en": [
+"kurdi"
+],
+"arkw": [
+"رعد"
+],
+"note": "Soothing. Whole-surah recordings from mp3quran.net."
+},
+{
+"id": "abkar",
+"name": "Idrees Abkar",
+"ar": "إدريس أبكر",
+"style": "Murattal",
+"origin": "Saudi Arabia",
+"tags": [
+"soothing"
+],
+"src": "mq",
+"en": [
+"abkar",
+"abkr"
+],
+"arkw": [
+"أبكر"
+],
+"note": "Emotional. Whole-surah recordings from mp3quran.net."
+}
+],
+"cats": [
+[
+"all",
+"All"
+],
+[
+"soothing",
+"Soothing"
+],
+[
+"classic",
+"Classic Egyptian"
+],
+[
+"haram",
+"Imams of the Haramain"
+],
+[
+"learn",
+"For learning"
+]
+]
+}

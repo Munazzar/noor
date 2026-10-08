@@ -1,0 +1,180 @@
+{
+ "base": [
+  "https://raw.githubusercontent.com/Kiwifu/adhan-mp3/b9180a2bb769f74cff8e378ef2cc7aaf8db5cd5b/",
+  "https://cdn.jsdelivr.net/gh/Kiwifu/adhan-mp3@b9180a2bb769f74cff8e378ef2cc7aaf8db5cd5b/"
+ ],
+ "source": "github.com/Kiwifu/adhan-mp3",
+ "list": [
+  {
+   "id": "makkah",
+   "name": "Makkah · Ali Ahmed Mulla",
+   "place": "Masjid al-Haram",
+   "fajr": false,
+   "file": "Ali_Ibn_Ahmad_Mala_-_HQ_(علي_بن_أحمد_ملا).mp3",
+   "dur": 244,
+   "gain": -3.0
+  },
+  {
+   "id": "makkah2",
+   "name": "Makkah · Muhammad Ramadan Saad",
+   "place": "Masjid al-Haram",
+   "fajr": false,
+   "file": "Muhammad_Ramadan_Saad_-_Al_Haram_Al_Maki_(محمد_رمضان_سعد_-_الحرم_المكي).mp3",
+   "dur": 219,
+   "gain": -2.2
+  },
+  {
+   "id": "makkah_fajr",
+   "name": "Makkah · Fajr",
+   "place": "Masjid al-Haram",
+   "fajr": true,
+   "file": "Adhan_Fajr_Al_Haram_Al_Maki_(أذان_الفجر_الحرم_المكي).mp3",
+   "dur": 223,
+   "gain": 8.0
+  },
+  {
+   "id": "madinah",
+   "name": "Madinah",
+   "place": "Masjid an-Nabawi",
+   "fajr": false,
+   "file": "Adhan_Al_Haram_Al_Madani_-_Al_Madinah_1_(أذان_الحرم_المدني_-_المدينة_المنورة).mp3",
+   "dur": 190,
+   "gain": 0.0
+  },
+  {
+   "id": "madinah_fajr",
+   "name": "Madinah · Fajr",
+   "place": "Masjid an-Nabawi",
+   "fajr": true,
+   "file": "Adhan_Fajr_Al_Haram_Al_Madani_(أذان_الفجر_الحرم_المدني).mp3",
+   "dur": 279,
+   "gain": -0.7
+  },
+  {
+   "id": "aqsa",
+   "name": "Al-Aqsa",
+   "place": "Jerusalem",
+   "fajr": false,
+   "file": "Adhan_Al_Aqsa_-_Jerusalem_(أذان_المسجد_الأقصى_-_القدس).mp3",
+   "dur": 152,
+   "gain": 8.0
+  },
+  {
+   "id": "mishary",
+   "name": "Mishary Alafasy",
+   "place": "Kuwait",
+   "fajr": false,
+   "file": "Mishary_Rashid_Alafasy_2_-_Kuwait_(مشاري_راشد_العفاسي_-_الكويت).mp3",
+   "dur": 257,
+   "gain": -4.3
+  },
+  {
+   "id": "mishary_fajr",
+   "name": "Mishary Alafasy · Fajr",
+   "place": "Kuwait",
+   "fajr": true,
+   "file": "Mishary_Rashid_Alafasy_4_-_Fajr_Kuwait_(مشاري_راشد_العفاسي_-_فجر_الكويت).mp3",
+   "dur": 289,
+   "gain": -4.3
+  },
+  {
+   "id": "abdulbasit",
+   "name": "Abdul Basit Abdus Samad",
+   "place": "Egypt",
+   "fajr": false,
+   "file": "Abdulbasit_Abdusamad_3_-_Egypt_(عبد_الباسط_عبد_الصمد_-_مصر).mp3",
+   "dur": 187,
+   "gain": 1.2
+  },
+  {
+   "id": "abdulbasit_fajr",
+   "name": "Abdul Basit · Fajr",
+   "place": "Egypt",
+   "fajr": true,
+   "file": "Abdulbasit_Abdusamad_7_-_Fajr_Egypt_(عبد_الباسط_عبد_الصمد_-_فجر_مصر).mp3",
+   "dur": 193,
+   "gain": -11.4
+  },
+  {
+   "id": "husary",
+   "name": "Mahmoud Khalil al-Husary",
+   "place": "Cairo",
+   "fajr": false,
+   "file": "Mahmoud_Khalil_Al_Hussary_-_Cairo_(محمود_خليل_الحصري_-_القاهرة).mp3",
+   "dur": 128,
+   "gain": 7.9
+  },
+  {
+   "id": "naqshbandi",
+   "name": "Sayed al-Naqshbandi",
+   "place": "Egypt",
+   "fajr": false,
+   "file": "Sheikh_Al_Naqshbandi_(الشيخ_النقشبندى).mp3",
+   "dur": 137,
+   "gain": -4.0
+  },
+  {
+   "id": "toubar_fajr",
+   "name": "Nasreddine Toubar · Fajr",
+   "place": "Egypt",
+   "fajr": true,
+   "file": "Fajr_Adhan_by_Nasreddine_Toubar_(اذان_الفجر_بصوت_نصر_الدين_طوبار).mp3",
+   "dur": 288,
+   "gain": 0.3
+  },
+  {
+   "id": "qatami",
+   "name": "Nasser al-Qatami",
+   "place": "Saudi Arabia",
+   "fajr": false,
+   "file": "Nasser_Al_Qatami_1_-_Saudi_Arabia_(ناصر_القطامي_-_المملكة_العربية_السعودية).mp3",
+   "dur": 132,
+   "gain": 2.5
+  },
+  {
+   "id": "zahrani",
+   "name": "Mansour al-Zahrani",
+   "place": "Saudi Arabia",
+   "fajr": false,
+   "file": "Mansur_Al_Zahrane_(منصور_الزهراني).mp3",
+   "dur": 185,
+   "gain": 1.8
+  },
+  {
+   "id": "daghriri",
+   "name": "Hamad al-Daghriri",
+   "place": "Saudi Arabia",
+   "fajr": false,
+   "file": "Hamad_Al_Daghriri_(حمد_الدغريري).mp3",
+   "dur": 192,
+   "gain": -2.3
+  },
+  {
+   "id": "dosari",
+   "name": "Yasser al-Dosari",
+   "place": "Saudi Arabia",
+   "fajr": false,
+   "file": "Yasser_Al-Dosari_-_Saudi_Arabia_(ياسر_الدوسري_-_المملكة_العربية_السعودية).mp3",
+   "dur": 182,
+   "gain": 0.6
+  },
+  {
+   "id": "kabbara",
+   "name": "Muhammad Salahuddin Kabbara",
+   "place": "Lebanon",
+   "fajr": false,
+   "file": "Mohammed_Salahuddin_Kabbara_1_(محمد_صلاح_الدين_كبارة).mp3",
+   "dur": 194,
+   "gain": 1.2
+  },
+  {
+   "id": "turkey",
+   "name": "Anuar Duman",
+   "place": "Turkey",
+   "fajr": false,
+   "file": "Anuar_Duman_-_Turkey_(أنوار_دومان_-_تركيا).mp3",
+   "dur": 295,
+   "gain": -5.6
+  }
+ ]
+}
