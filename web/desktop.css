@@ -1,0 +1,79 @@
+.side-logo { display: none; }
+/* Noor on big screens: the phone layout becomes a desktop layout.
+   Side navigation instead of the bottom tab bar, a wider page and multi-column lists. */
+@media (min-width: 1024px) {
+  .side-logo { display: block; }
+  :root { --side: 112px; }
+
+  /* side navigation */
+  .tabbar {
+    left: 24px; top: 50%; bottom: auto; transform: translateY(-50%);
+    width: 84px; height: auto; flex-direction: column; gap: 2px; padding: 10px 8px; border-radius: 34px;
+  }
+  .side-logo {
+    display: block; flex: none; width: 46px; height: 46px; margin: 4px auto 12px; border-radius: 14px; position: relative; z-index: 1;
+    background: url(../icons/icon-any-192.png) center / cover; box-shadow: 0 6px 18px -6px rgba(0,0,0,.45);
+  }
+  .tabbar button { flex: none; height: 68px; font-size: 11px; gap: 5px; border-radius: 22px; }
+  .tabbar button svg { width: 23px; height: 23px; }
+  .tabbar .lens { transition: top .45s cubic-bezier(.34,1.4,.64,1), height .45s cubic-bezier(.34,1.4,.64,1), left .45s, width .45s; }
+  .tabbar.hide { transform: translate(-160%, -50%); opacity: 0; }
+  .tabbar button:hover:not(.on) { color: var(--text); }
+
+  /* the page */
+  .page {
+    max-width: 1180px; padding-left: calc(var(--side) + 32px); padding-right: 40px;
+    padding-top: calc(var(--sat) + 36px); padding-bottom: 56px;
+  }
+  .page.has-mini { padding-bottom: 120px; }
+  .title { font-size: 42px; }
+  .chips { margin: 0; padding: 2px 0 6px; flex-wrap: wrap; overflow: visible; }
+
+  /* now-playing and dock bars sit bottom right, out of the content's way */
+  #mini, #dkDock { left: auto; right: 28px; transform: none; bottom: 24px; width: 420px; }
+  #tabbar.hide ~ #mini, #tabbar.hide ~ #dkDock { transform: translateY(200%); }
+
+  /* Today: two columns */
+  #todayCards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 20px; align-items: start; }
+  #todayCards > .trk, #todayCards > .feel, #todayCards > .priv-mini { grid-column: 1 / -1; }
+  #todayCards > .cont2 { grid-template-columns: 1fr; margin-bottom: 14px; }
+  #todayCards > .cont2:only-child, #todayCards > .k-mine:last-of-type { grid-column: 1 / -1; }
+  #todayCards > .card { height: calc(100% - 14px); }
+
+  /* lists and grids */
+  #qList, #lsList { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 14px; }
+  #libList, #remList, #gRes { columns: 2; column-gap: 14px; }
+  #libList > *, #remList > *, #gRes > * { break-inside: avoid; }
+  #libList > :not(article):not(.list-card), #remList > :not(article):not(.list-card), #gRes > :not(article):not(.list-card) { column-span: all; }
+  .more-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+  .t-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+  .stats { flex-wrap: nowrap; }
+  .stats > * { flex: 1; }
+  .hero { padding: 28px; }
+
+  /* sheets open as centred dialogs */
+  .sheet { left: calc(var(--side) + 16px); right: 16px; bottom: 50%; max-width: 620px; max-height: 82vh; border-radius: 28px;
+    transform: translateY(calc(50% + 120vh)); }
+  .sheet.on { transform: translateY(50%); }
+  .sheet .grab { display: none; }
+  .sheet { padding-top: 22px; padding-bottom: 22px; }
+  .dim { background: rgba(3,6,15,.55); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+
+  /* reading: a comfortable column */
+  .r-inner { max-width: 780px; }
+
+  /* the onboarding tour */
+  .tour-slide { max-width: 560px; margin-left: auto; margin-right: auto; }
+}
+
+@media (min-width: 1440px) {
+  #qList, #lsList { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .more-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+
+/* desktop pointers: hover feedback the phone never needed */
+@media (hover: hover) and (pointer: fine) {
+  .list-card, .more-tile, .t-tile, .c2, .shortcuts button { transition: transform .2s ease, box-shadow .2s ease; }
+  .list-card:hover, .more-tile:hover, .t-tile:hover, .c2:hover { transform: translateY(-2px); }
+  .shortcuts button:hover { transform: translateY(-2px); }
+}

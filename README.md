@@ -18,6 +18,8 @@ The Android app is a WebView around `index.html`. Its native features are called
 | Live daily verse and hadith sync, tafsir, hadith search | Same public APIs (alquran.cloud, fawazahmed0/hadith-api, quran.com) |
 | Focus mode (DND, screen pinning) | Full screen and Screen Wake Lock |
 
+On screens 1024px and wider, `web/desktop.css` and `web/desktop.js` switch to a desktop layout: a side navigation bar, a wider page, two-column Today and Library, multi-column surah lists and grids, and sheets that open as centred dialogs. Phones get the app's layout unchanged.
+
 `sw.js` makes the app installable and usable offline after the first visit.
 
 Home-screen widgets and background alarms are Android-only, so the web app has nothing to configure for them.
