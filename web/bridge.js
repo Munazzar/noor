@@ -295,7 +295,10 @@
     }
     function jump(a) { const n = count(P.surah), c = clamp(a, 1, n); if (c < P.from || c > P.to) { P.from = 1; P.to = n; P.rangeRep = 0; } P.ayah = c; P.verseRep = 0; P.phase = firstPhase(); }
 
-    const el = new Audio(); el.preload = 'auto';
+    /* Two players, like the app's Gapless.java: while one verse plays, the next is already loaded in the
+       other, and on "ended" the other starts at once, so recitation flows without breaks between verses. */
+    const A = [new Audio(), new Audio()]; A.forEach(a => { a.preload = 'auto'; });
+    let el = A[0], pre = null;
     let rid = 'husary', rec = null, active = false, playing = false, loading = false, inGap = false, ended = false, error = null, errStreak = 0;
     let gen = 0, gapMs = 0, speed = 1, countRead = false, sleepAt = 0, sleepEos = false, sleepT = null, gapT = null, pollT = null;
     let surahMode = false, timed = false, tStart = null, tEnd = null, loadedSurah = -1, mq = null, gapSeekPending = false;
@@ -341,9 +344,11 @@
       const h = (a, f) => { try { navigator.mediaSession.setActionHandler(a, f); } catch (e) {} };
       h('play', () => cmd({ op: 'resume' })); h('pause', () => cmd({ op: 'pause' })); h('nexttrack', () => cmd({ op: 'next' })); h('previoustrack', () => cmd({ op: 'prev' })); h('stop', () => cmd({ op: 'stop' }));
     }
-    const startPoll = () => { stopPoll(); pollT = setInterval(poll, 200); };
+    const startPoll = () => { stopPoll(); pollT = setInterval(poll, 25); };
     const stopPoll = () => { clearInterval(pollT); pollT = null; };
     function poll() {
+      /* hand over to the waiting verse right at the end of this one, without waiting for the late "ended" event */
+      if (!surahMode && playing && !inGap && pre && pre.el.readyState >= 3 && el.duration > 0 && el.duration - el.currentTime <= 0.035 / Math.max(speed, .5)) { clipDone(); return; }
       if (surahMode && timed && playing && tEnd && el.currentTime * 1000 >= tEnd[P.ayah] - 40 && loadedSurah === P.surah) surahVerseDone();
     }
     const clipName = (s, a) => String(s).padStart(3, '0') + String(a).padStart(3, '0') + '.mp3';
@@ -353,19 +358,22 @@
       try { const c = await caches.open('noor-audio'); const r = await c.match(url); if (r && r.type !== 'opaque') return URL.createObjectURL(await r.blob()); } catch (e) {}
       return url;
     }
-    let lastObj = null;
+    const freeBlob = a => { if (a.src && a.src.startsWith('blob:')) try { URL.revokeObjectURL(a.src); } catch (e) {} };
     function playSource(g, src, seekMs) {
       if (g !== gen) return;
-      if (lastObj && lastObj !== src) { try { URL.revokeObjectURL(lastObj); } catch (e) {} lastObj = null; }
-      if (src.startsWith('blob:')) lastObj = src;
+      if (el.src !== src) freeBlob(el);
       el.src = src; el.playbackRate = speed;
       const ready = () => { el.removeEventListener('loadedmetadata', ready); if (g !== gen) return; if (seekMs) el.currentTime = seekMs / 1000; };
       el.addEventListener('loadedmetadata', ready);
-      el.play().then(() => { if (g !== gen) return; loading = false; playing = true; errStreak = 0; el.playbackRate = speed; startPoll(); publish(); })
+      el.play().then(() => { if (g !== gen) return; loading = false; playing = true; errStreak = 0; el.playbackRate = speed; startPoll(); publish(); preloadNext(); })
         .catch(e => { if (g !== gen) return; if (e && e.name === 'NotAllowedError') { loading = false; playing = false; publish(); } else loadFailed("Couldn't load the audio. Check your internet connection."); });
     }
-    el.addEventListener('error', () => { if (el.src && (loading || playing)) loadFailed("Couldn't play this audio."); });
-    el.addEventListener('ended', () => {
+    A.forEach(a => a.addEventListener('error', () => {
+      if (a !== el) { if (pre && pre.el === a) pre = null; return; }   // the waiting verse failed to load: it loads again when its turn comes
+      if (el.src && (loading || playing)) loadFailed("Couldn't play this audio.");
+    }));
+    A.forEach(a => a.addEventListener('ended', () => {
+      if (a !== el) return;
       if (surahMode) {
         if (timed) { if (P.surah === loadedSurah) surahVerseDone(); return; }
         dailyAdd('l', count(P.surah)); const m = qMeta()[P.surah - 1]; if (m) heardSet(m.start, m.start + m.count);
@@ -373,7 +381,29 @@
         start(P.surah + 1, 1, 0, 0); begin(); return;
       }
       clipDone();
-    });
+    }));
+    const clipUrl = () => base() + folderFor(P.phase) + '/' + clipName(P.phase === -1 ? 1 : P.surah, P.phase === -1 ? 1 : P.ayah);
+    /* Load the clip that comes after this one into the idle player. */
+    async function preloadNext() {
+      pre = null; if (surahMode || !rec) return;
+      const save = Object.assign({}, P), ok = advance(), url = ok ? clipUrl() : null; Object.assign(P, save);
+      if (!url) return;
+      const g = gen, other = el === A[0] ? A[1] : A[0], src = await cachedUrl(url);
+      if (g !== gen) return;
+      if (other.src !== src) { freeBlob(other); other.src = src; other.load(); }
+      other.playbackRate = speed; pre = { el: other, url };
+    }
+    /* Start the preloaded clip straight away. False when it isn't the clip the plan wants. */
+    function swapToPre() {
+      if (!pre || pre.url !== clipUrl() || pre.el.error) return false;
+      const old = el, g = ++gen; el = pre.el; pre = null;
+      try { old.pause(); } catch (e) {}
+      try { el.currentTime = 0; } catch (e) {}
+      el.playbackRate = speed; loading = el.readyState < 3; playing = true; error = null; active = true;
+      el.play().then(() => { if (g !== gen) return; loading = false; playing = true; errStreak = 0; el.playbackRate = speed; startPoll(); publish(); preloadNext(); })
+        .catch(() => { if (g === gen) beginClip(); });
+      publish(); return true;
+    }
     function heardCur() { if (P.phase !== 0) return; const m = qMeta()[P.surah - 1]; if (m) heardSet(m.start + P.ayah - 1, m.start + P.ayah); }
     function loadFailed(msg) {
       loading = false; playing = false; errStreak++; error = msg;
@@ -386,8 +416,8 @@
       if (ar && P.verseRep === 0) { dailyAdd('l', 1); heardCur(); if (countRead) markRead(P.surah, P.ayah); }
       if (advance()) {
         saveLast();
-        if (ar && gapMs > 0) { playing = false; inGap = true; publish(); gapT = setTimeout(() => { if (inGap) { inGap = false; beginClip(); } }, gapMs); return; }
-        beginClip(); return;
+        if (ar && gapMs > 0) { playing = false; inGap = true; publish(); gapT = setTimeout(() => { if (inGap) { inGap = false; if (!swapToPre()) beginClip(); } }, gapMs); return; }
+        if (!swapToPre()) beginClip(); return;
       }
       finish();
     }
@@ -412,12 +442,8 @@
     }
     function beginClip() {
       const g = ++gen; loading = true; playing = false; error = null; stopPoll(); active = true; publish();
-      const url = base() + folderFor(P.phase) + '/' + clipName(P.phase === -1 ? 1 : P.surah, P.phase === -1 ? 1 : P.ayah);
-      cachedUrl(url).then(u => playSource(g, u));
-      prefetch();
-    }
-    function prefetch() { /* warm the browser cache for the next clip */
-      try { const s = P.surah, a = P.ayah < P.to ? P.ayah + 1 : P.ayah; if (P.phase === 0 && a !== P.ayah) { const l = document.createElement('link'); l.rel = 'prefetch'; l.as = 'audio'; l.href = base() + rec.folder + '/' + clipName(s, a); document.head.appendChild(l); setTimeout(() => l.remove(), 60000); } } catch (e) {}
+      pre = null; A.forEach(a => { if (a !== el) try { a.pause(); } catch (e) {} });
+      cachedUrl(clipUrl()).then(u => playSource(g, u));
     }
     async function resolveMq(r) {
       const c = lsJ('mq_' + r.id, {});
@@ -484,7 +510,7 @@
       }
       begin();
     }
-    function stopAll() { gen++; playing = false; loading = false; inGap = false; clearTimeout(gapT); clearTimeout(sleepT); sleepAt = 0; saveLast(); try { el.pause(); el.removeAttribute('src'); el.load(); } catch (e) {} loadedSurah = -1; active = false; ended = false; stopPoll(); publish(); }
+    function stopAll() { gen++; playing = false; loading = false; inGap = false; clearTimeout(gapT); clearTimeout(sleepT); sleepAt = 0; saveLast(); pre = null; A.forEach(a => { try { a.pause(); freeBlob(a); a.removeAttribute('src'); a.load(); } catch (e) {} }); loadedSurah = -1; active = false; ended = false; stopPoll(); publish(); }
     function fadeThenPause(i) { if (!playing) { pause(); return; } el.volume = Math.max(0, i / 10); if (i <= 0) { pause(); el.volume = 1; return; } setTimeout(() => fadeThenPause(i - 1), 400); }
     function cmd(c) {
       switch (c.op) {

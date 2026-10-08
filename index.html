@@ -42,13 +42,13 @@
   --sunnah:#ffb547;--sunnah-soft:rgba(255,181,71,.18);
   --mine:#b49cff;--mine-soft:rgba(180,156,255,.2);
   --accent:#7cc4ff;
-  --blob1:#11b5a4;--blob2:#5a4fe0;--blob3:#e89a2c;--blob4:#c93f7a;
+  --blob1:#0f8f86;--blob2:#3f46b8;--blob3:#14506e;--blob4:#2b2f7a;
   --pattern:rgba(255,255,255,.055);
   --dim:rgba(3,6,15,.5);
   --bar-tint:rgba(16,20,36,.55);
 }
 :root.light{
-  --bg:#e9edf5;
+  --bg:#eef1f7;
   --text:#0d1220;--text-2:rgba(13,18,32,.66);--text-3:rgba(13,18,32,.45);
   --glass:linear-gradient(145deg,rgba(255,255,255,.72),rgba(255,255,255,.42) 55%,rgba(255,255,255,.55));
   --glass-strong:linear-gradient(145deg,rgba(255,255,255,.85),rgba(255,255,255,.55) 60%,rgba(255,255,255,.7));
@@ -61,7 +61,7 @@
   --sunnah:#b86a00;--sunnah-soft:rgba(232,154,44,.16);
   --mine:#6a4bd8;--mine-soft:rgba(106,75,216,.13);
   --accent:#1f6fd6;
-  --blob1:#5fe0cf;--blob2:#9d95ff;--blob3:#ffc978;--blob4:#ff9cc2;
+  --blob1:#a9e6dd;--blob2:#c3c3f5;--blob3:#bfdcef;--blob4:#d6d3f7;
   --pattern:rgba(13,18,32,.05);
   --dim:rgba(20,26,45,.25);
   --bar-tint:rgba(255,255,255,.45);
@@ -1877,7 +1877,7 @@ select.name-in option{color:#111}
     <div class="section-h">Notifications</div>
     <div class="glass group">
       <div class="set-row"><div class="lbl">Notifications<div class="sub" id="nSub">Off: nothing is scheduled</div></div><button class="switch" id="nSwitch" aria-label="Notifications"></button></div>
-      <div class="n-warn" id="nPerm" hidden><span style="flex:1">Notifications are blocked for Noor in Android settings.</span><button class="pill-btn" id="nOpenSettings">Allow</button></div>
+      <div class="n-warn" id="nPerm" hidden><span style="flex:1">Notifications are blocked for Noor in your browser settings.</span><button class="pill-btn" id="nOpenSettings">Allow</button></div>
       <div id="nBody" hidden>
         <div class="set-row"><div class="lbl">Sound<div class="sub" id="nSoundSub">Silent: shows quietly, no sound</div></div><button class="switch" id="nSound" aria-label="Sound"></button></div>
         <div class="set-block"><div class="lbl">Scheduled</div>
@@ -1922,11 +1922,11 @@ select.name-in option{color:#111}
       <p><b>Qur'an</b> (all 6,236 verses in the Read tab, plus the daily cards): Uthmani Arabic text with the Saheeh International English translation (via the quran-json dataset from The Noble Qur'an Encyclopedia). Verse numbers are standard.</p>
       <p><b>Sunnah</b>: about 500 hadith, all from <b>Sahih al-Bukhari</b> and <b>Sahih Muslim</b>. Most are the narrations Imam an-Nawawi collected in <b>Riyad as-Salihin</b>, taken from the sunnah.com database, with the same numbering and source.</p>
       <p><b>In Times Of…</b>: verses from the same Qur'an text; hadith only from Bukhari &amp; Muslim or graded sahih/hasan (al-Albani, Darussalam), copied from the sunnah.com database; Tafsir Ibn Kathir from quran.com; scholar sayings only with a book reference.</p>
-      <p><b>Prayer times</b> are calculated on your phone with the open-source Adhan library (MIT licence). The offline city list is from GeoNames (CC BY 4.0). Adhan recordings are downloaded from a public collection on GitHub only when you choose one.</p>
+      <p><b>Prayer times</b> are calculated on this device with the open-source Adhan library (MIT licence). The offline city list is from GeoNames (CC BY 4.0). Adhan recordings are downloaded from a public collection on GitHub only when you choose one.</p>
       <p><b>Live content</b> comes from api.alquran.cloud (Qur'an) and the open hadith-api (Bukhari &amp; Muslim only). It's labelled <b>NEW</b>. Tap any card to open its source.</p>
       <p><b>Bukhari &amp; Muslim</b> in the Library: the complete Sahih al-Bukhari (7,554 hadith) and Sahih Muslim (7,360), Arabic with English, from the open hadith-api (fawazahmed0), numbered as on sunnah.com.</p>
       <p><b>Adhkar &amp; Ruqyah</b>: morning and evening adhkar from the Morning-and-Evening-Adhkar-DB (MIT), which follows Hisn al-Muslim with each source and grading; one narration graded weak there is left out. The other adhkar and the ruqyah are only from the Qur'an, Bukhari and Muslim, or narrations graded sahih or hasan, each shown with its reference. References to Bukhari or Muslim open the full hadith in the app.</p>
-      <p><b>Recitations</b> stream from everyayah.com (verse by verse) and mp3quran.net (whole surahs, with their verse timings), and are saved on the phone only if you download them. <b>Tajweed colours</b>: rule positions from the open quran-tajweed data by Collin Fair (CC BY 4.0). <b>Madinah page numbers</b>: the quran-meta package (MIT).</p>
+      <p><b>Recitations</b> stream from everyayah.com (verse by verse) and mp3quran.net (whole surahs, with their verse timings), and are saved on this device only if you download them. <b>Tajweed colours</b>: rule positions from the open quran-tajweed data by Collin Fair (CC BY 4.0). <b>Madinah page numbers</b>: the quran-meta package (MIT).</p>
       <p><b>Fonts</b>: Amiri Quran, Inter, Playfair Display, Cormorant Garamond, Dancing Script, Great Vibes, Caveat, Quicksand, Bebas Neue and DSEG7, all under the SIL Open Font License.</p>
       <p><button class="pill-btn" id="openSunnah">Open sunnah.com</button> <button class="pill-btn" id="openQuran">Open quran.com</button></p>
     </div>
@@ -2065,7 +2065,7 @@ const B = window.Noor || (() => {
     getReciters: () => { const r = new XMLHttpRequest(); r.open('GET', 'reciters.json', false); r.send(); return r.responseText; },
     audioState: () => JSON.stringify(MOCKA.state()),
     audioCmd: j => MOCKA.cmd(JSON.parse(j)),
-    audioDevices: () => JSON.stringify({ list: [{ id: 2, kind: 'speaker', name: 'Phone speaker' }, { id: 7, kind: 'bluetooth', name: 'Galaxy Buds2 Pro' }], canPick: true, sdk: 34 }),
+    audioDevices: () => JSON.stringify({ list: [{ id: 2, kind: 'speaker', name: 'This device' }, { id: 7, kind: 'bluetooth', name: 'Galaxy Buds2 Pro' }], canPick: true, sdk: 34 }),
     openOutputPicker: () => { window.__picker = true; },
     audioDownload: (rid, s) => { let d = 0; const t = setInterval(() => { d += 3; const done = d >= 9; window.onAudioDl && window.onAudioDl(JSON.stringify({ rid, s, done: done ? 1 : d, total: done ? 1 : 9, state: done ? 'done' : 'run' })); if (done) { clearInterval(t); const c = JSON.parse(ls('mockDl') || '{}'); (c[rid] = c[rid] || []).push(s); put('mockDl', JSON.stringify(c)); } }, 60); },
     audioCancelDownload: () => {},
@@ -2304,7 +2304,7 @@ function renderToday() {
       <div class="en" style="font-size:18px;font-weight:600">Write something to remind yourself of.</div><div class="src">Shown on the My Reminders widget.</div>
       <div class="actions"><button class="pill-btn primary">${ICON.plus}Add a reminder</button></div></article>`;
   }
-  html += `<button class="priv-mini" data-goto="settings-priv">${PT_ICON.shield}<span>Private by design · everything stays on this phone</span></button>`;
+  html += `<button class="priv-mini" data-goto="settings-priv">${PT_ICON.shield}<span>Private by design · everything stays on this device</span></button>`;
   $('#todayCards').innerHTML = html;
 }
 
@@ -2341,7 +2341,7 @@ function shortcutsHTML() {
     ['library', 'Library', '<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v16h4.5a2.5 2.5 0 0 1 2.5 2.5z"/>', '#6f7fe6'],
     ['dock', 'Dock clock', '<rect x="3" y="4" width="18" height="12" rx="2.5"/><path d="M8 20h8M12 16v4"/><path d="M8 10h2.5M13.5 8.5v3"/>', '#c9763a'],
     ['mine', 'My reminders', '<path d="M5 4.5h14v12H9l-4 3.5z"/><path d="M8.5 9h7M8.5 12.5h4.5"/>', '#8a6cf0'],
-    ['widgets', 'Widgets', '<rect x="3.5" y="3.5" width="7.5" height="7.5" rx="2"/><rect x="13" y="3.5" width="7.5" height="17" rx="2"/><rect x="3.5" y="13" width="7.5" height="7.5" rx="2"/>', '#4a90d9']];
+    ['saved', 'Saved', '<path d="M7 3.5h10a1 1 0 0 1 1 1V21l-6-4-6 4V4.5a1 1 0 0 1 1-1z"/>', '#4a90d9']];
   return `<div class="shortcuts">${it.map(([k, l, ic, c]) => `<button data-short="${k}" style="--mc:${c}"><span class="sc-ic glass">${MI(ic)}</span><span class="sc-l">${esc(l)}</span></button>`).join('')}</div>`;
 }
 document.addEventListener('click', e => {
@@ -2839,11 +2839,11 @@ function renderMine() {
 
 function privFullHTML() {
   return `<div class="glass pt-priv priv-full" id="privCard">${PT_ICON.shield}<div><b>Private by design</b>
-    <p>Noor has no account, no ads, no analytics and no tracking, and it runs no servers or databases. Everything you create stays on this phone: your name, reminders, saved cards, prayer and fasting logs, reading progress, streak and settings.</p>
-    <p>Prayer times and the Qibla are calculated on the phone. Your location is never uploaded or shared.</p>
+    <p>Noor has no account, no ads, no analytics and no tracking, and it runs no servers or databases. Everything you create stays on this device: your name, reminders, saved cards, prayer and fasting logs, reading progress, streak and settings.</p>
+    <p>Prayer times and the Qibla are calculated on this device. Your location is never uploaded or shared.</p>
     <p>Bukhari, Muslim, the adhkar and the Qur'an text are built into the app, so reading and searching them works offline. The app only goes online for audio, tafsir and the optional live cards, and it sends only what it needs to fetch them, never anything about you.</p>
-    <p>Photos or videos you pick as a Dock background are copied into Noor's own storage on the phone and never uploaded.</p>
-    <p>Uninstalling the app removes everything from the phone. If Android backup is on, your phone may keep a copy of Noor's settings in your own Google account so they come back on a new phone; Noor itself never sees it.</p></div></div>`;
+    <p>Photos or videos you pick as a Dock background are copied into Noor's own storage on this device and never uploaded.</p>
+    <p>Clearing this site's data in your browser removes everything from this device. Noor itself never sees any of it.</p></div></div>`;
 }
 function renderSettings() {
   { const g = $('#gsPick'); if (g) g.innerHTML = gardenStyleHTML(); }
@@ -3008,9 +3008,8 @@ const MORE = [
     ['alerts', 'Adhan & alerts', 'A sound or a notice for each prayer', MI('<path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/>'), '#d9822b'],
     ['dock', 'Dock clock', 'Clock, calendar, verses and the next prayer for your stand', MI('<rect x="3" y="4" width="18" height="12" rx="2.5"/><path d="M8 20h8M12 16v4"/><path d="M8 10h2.5M13.5 8.5v3"/>'), '#c9763a']]],
   ['Yours', [
-    ['mine', 'My reminders', 'In your own words, on your widget', MI('<path d="M5 4.5h14v12H9l-4 3.5z"/><path d="M8.5 9h7M8.5 12.5h4.5"/>'), '#8a6cf0'],
+    ['mine', 'My reminders', 'In your own words, one a day', MI('<path d="M5 4.5h14v12H9l-4 3.5z"/><path d="M8.5 9h7M8.5 12.5h4.5"/>'), '#8a6cf0'],
     ['notif', 'Notifications', 'Daily verse, hadith and reading', MI('<path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/>'), '#e0a23a'],
-    ['widgets', 'Widgets', 'How each home-screen widget looks', MI('<rect x="3.5" y="3.5" width="7.5" height="7.5" rx="2"/><rect x="13" y="3.5" width="7.5" height="17" rx="2"/><rect x="3.5" y="13" width="7.5" height="7.5" rx="2"/>'), '#4a90d9'],
     ['settings', 'Settings', 'Look, language, audio, privacy', MI('<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>'), '#7c8595'],
     ['tour', 'Welcome tour', 'What each part of Noor does', MI('<circle cx="12" cy="12" r="8.5"/><path d="M9.8 9.5a2.3 2.3 0 1 1 3.2 2.1c-.6.3-1 .8-1 1.5v.4"/><path d="M12 16.8v.1"/>'), '#5aa469']]]
 ];
@@ -3140,7 +3139,7 @@ function addReminder() {
   newText.blur(); $('#newNote').blur(); haptic();
   const nt = $('#newNtSw').classList.contains('on') ? $('#newNtTime').value : '';
   $('#newNtSw').classList.remove('on'); $('#newNtTime').disabled = true;
-  if (nt) remNotifySet(r, nt); else toast('Added to your widget');
+  if (nt) remNotifySet(r, nt); else toast('Added to your reminders');
   renderMine();
 }
 $('#addBtn').onclick = addReminder;
@@ -3835,8 +3834,8 @@ function focusSheet(first) {
     <div class="glass group">
       ${row('fNotif', 'Silence notifications', 'Turns on Do Not Disturb while you read, then puts it back. Alarms still ring.', o.notif)}
       ${row('fCalls', 'Silence calls', o.notif ? 'Calls stay silent too while you read' : 'Turns the ringer down while you read; notifications are unchanged', o.calls)}
-      ${(o.notif || o.calls) && !ok ? '<div class="set-row"><div class="lbl">Allow Do Not Disturb<div class="sub">Android needs your permission once: find Noor in the list, switch it on, then come back</div></div><button class="pill-btn" id="fDndAllow">Allow</button></div>' : ''}
-      ${row('fPin', 'Lock the phone to Noor', 'Other apps can\'t open until you leave focus. Tap <b>Unlock</b> at the top, or press Back, to unlock.', o.pin)}
+      ${(o.notif || o.calls) && !ok ? '<div class="set-row"><div class="lbl">Allow Do Not Disturb<div class="sub">Browsers cannot silence notifications. Turn on Do Not Disturb on your device</div></div><button class="pill-btn" id="fDndAllow">Allow</button></div>' : ''}
+      ${row('fPin', 'Keep Noor full screen', 'Other apps can\'t open until you leave focus. Tap <b>Unlock</b> at the top, or press Back, to unlock.', o.pin)}
     </div>
     <div class="actions" style="margin-top:14px"><button class="pill-btn primary" id="fGo" style="flex:1;justify-content:center">${inFocus ? 'Apply' : 'Start focus'}</button></div>`);
   const flip = k => () => { haptic(); const n = fOpt(); n[k] = !n[k]; set.focusOpt = n; saveSet(); focusSheet(first); };
@@ -4123,7 +4122,7 @@ function renderTopic() {
     <div class="glass meter" style="--mc:${mc}"><div class="lbl">${good ? 'How strongly are you feeling it?' : 'How strongly are you feeling this right now?'}</div>
       <div class="meter-row" id="tMeter">${[1, 2, 3, 4, 5].map(i => `<button data-l="${i}" class="${i === tLevel ? 'on' : i < tLevel ? 'lit' : ''}" aria-label="${T_LEVELS[i]}">${i}</button>`).join('')}</div>
       <div class="meter-ends"><span>A little</span><span>Very strongly</span></div>
-      <div class="meter-say" id="tSay">${tLevel ? `<b>${T_LEVELS[tLevel]}.</b> ${(good ? T_SAY_GOOD : T_SAY)[tLevel]}` : 'Tap a number. Duas are shown first when feelings run high, and your check-ins are kept here on your phone only.'}</div>
+      <div class="meter-say" id="tSay">${tLevel ? `<b>${T_LEVELS[tLevel]}.</b> ${(good ? T_SAY_GOOD : T_SAY)[tLevel]}` : 'Tap a number. Duas are shown first when feelings run high, and your check-ins are kept here on this device only.'}</div>
       ${last ? `<div class="meter-last">Last check-in ${lvlBars(last.l, levelColor(t, last.l))} ${T_LEVELS[last.l].toLowerCase()} · ${tAgo(last.at)}</div>` : ''}</div>`;
   if (tLevel >= 4 && t.heavy) html += careCard(tLevel);
   else if (tLevel === 5 && !good) html += careCard(tLevel, true);
@@ -4204,7 +4203,7 @@ $('#tHistBtn').onclick = () => { haptic(); openHistory(); };
 $('#tAboutBtn').onclick = () => { haptic(); openTimesAbout(); };
 function openHistory() {
   const rows = TS.checkins.slice(0, 60).map(c => { const t = tTopicById(c.t); return t ? `<div class="hist" data-topic="${t.id}"><div class="t">${esc(t.t)}<small>${new Date(c.at).toLocaleString([], { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}</small></div>${lvlBars(c.l, levelColor(t, c.l))}</div>` : ''; }).join('');
-  openSheet(`<h3>Check-in history</h3><div class="about" style="padding:0 0 10px">Each time you rate a feeling it's noted here, on this phone only. Tap one to open it again.</div>
+  openSheet(`<h3>Check-in history</h3><div class="about" style="padding:0 0 10px">Each time you rate a feeling it's noted here, on this device only. Tap one to open it again.</div>
     <div id="histList">${rows || '<div class="empty" style="padding:14px 0">No check-ins yet. Open a topic and tap how strongly you feel it.</div>'}</div>
     ${rows ? '<div class="actions" style="margin-top:14px"><span class="spacer"></span><button class="pill-btn danger" id="histClear">Clear history</button></div>' : ''}`);
   $('#histList').onclick = e => { const r = e.target.closest('[data-topic]'); if (r) { haptic(); closeSheet(); openTopic(r.dataset.topic); } };
@@ -4274,7 +4273,7 @@ window.onTafsir = (key, html) => {
   $$('.t-slot').forEach(slot => {
     if (slot.dataset.key !== key || slot.dataset.open !== 'tafsir') return;
     slot.innerHTML = html ? tafsirHTML(key, html)
-      : `<div class="t-exp"><div class="h">TAFSIR IBN KATHIR</div><p>Couldn't load the tafsir. It needs the internet the first time; after that it's saved on your phone.</p>
+      : `<div class="t-exp"><div class="h">TAFSIR IBN KATHIR</div><p>Couldn't load the tafsir. It needs the internet the first time; after that it's saved on this device.</p>
          <div class="actions" style="margin-top:6px"><button class="pill-btn" data-retry="${esc(key)}">Try again</button><button class="pill-btn" data-qc="${esc(key)}">quran.com ↗</button></div></div>`;
   });
 };
@@ -4318,7 +4317,7 @@ function tItemMenu(it) {
     const short = text.length > 280 ? text.slice(0, 277).replace(/\s+\S*$/, '') + '…' : text;
     const note = it.k === 'q' ? "Qur'an " + it.key : it.k === 'h' ? refShort(it.ref) : it.who;
     if (rems.some(r => r.text === short)) { closeSheet(); toast('Already in your reminders'); return; }
-    rems.unshift({ id: Date.now(), text: short, note: note.slice(0, 80) }); saveRems(); closeSheet(); toast('Added to your reminders widget');
+    rems.unshift({ id: Date.now(), text: short, note: note.slice(0, 80) }); saveRems(); closeSheet(); toast('Added to your reminders');
   };
 }
 
@@ -4470,7 +4469,7 @@ function openReciters() {
   if (lsCat === 'fav' && !favs().length) lsCat = 'all';
   openSheet(`<h3>Choose a reciter</h3><div class="chips" id="rcCats" style="margin:0 -20px 10px;padding:2px 20px 6px">${catChips()}</div>
     <div id="rcList">${list()}</div>
-    <div class="about" style="padding:8px 2px 0">Verse-by-verse audio comes from everyayah.com and is saved on your phone as you listen. Whole-surah recordings come from mp3quran.net; verse highlighting, repeat and jump work for them when the site has verse timings.</div>`);
+    <div class="about" style="padding:8px 2px 0">Verse-by-verse audio comes from everyayah.com and is saved on this device as you listen. Whole-surah recordings come from mp3quran.net; verse highlighting, repeat and jump work for them when the site has verse timings.</div>`);
   $('#rcCats').onclick = e => { const b = e.target.closest('button'); if (!b) return; haptic(); lsCat = b.dataset.v; $$('#rcCats button').forEach(x => x.classList.toggle('on', x === b)); $('#rcList').innerHTML = list(); };
   $('#rcList').onclick = e => {
     const fb = e.target.closest('[data-recfav]');
@@ -4634,11 +4633,11 @@ function sheetSleep() {
 function sheetOut() {
   let d = { list: [], canPick: false }; try { d = JSON.parse(B.audioDevices()); } catch (e) {}
   const cur = aOpt('device', 0);
-  const icon = k => ({ speaker: 'Phone speaker', bluetooth: 'Bluetooth', wired: 'Wired headphones', usb: 'USB audio', hdmi: 'HDMI', hearing: 'Hearing aid' })[k] || k;
+  const icon = k => ({ speaker: 'This device', bluetooth: 'Bluetooth', wired: 'Wired headphones', usb: 'USB audio', hdmi: 'HDMI', hearing: 'Hearing aid' })[k] || k;
   openSheet(`<h3>Play audio on</h3><div id="devList">
-    <div class="dev ${!cur ? 'on' : ''}" data-dev="0"><div class="t">Automatic<small>Android decides (usually your headphones when connected)</small></div><span class="radio"></span></div>
-    ${d.canPick ? d.list.map(x => `<div class="dev ${cur === x.id ? 'on' : ''}" data-dev="${x.id}"><div class="t">${esc(x.name || icon(x.kind))}<small>${esc(icon(x.kind))}</small></div><span class="radio"></span></div>`).join('') : '<div class="about" style="padding:10px 0">Picking a device from here needs Android 9 or newer. Use the button below.</div>'}</div>
-    <div class="actions" style="margin-top:14px"><button class="pill-btn" id="devSys" style="flex:1;justify-content:center">More options (Android output switcher)</button></div>`);
+    <div class="dev ${!cur ? 'on' : ''}" data-dev="0"><div class="t">Automatic<small>Your browser decides (usually your headphones when connected)</small></div><span class="radio"></span></div>
+    ${d.canPick ? d.list.map(x => `<div class="dev ${cur === x.id ? 'on' : ''}" data-dev="${x.id}"><div class="t">${esc(x.name || icon(x.kind))}<small>${esc(icon(x.kind))}</small></div><span class="radio"></span></div>`).join('') : '<div class="about" style="padding:10px 0">Your browser chooses the speaker. Use the button below to pick another one if it allows it.</div>'}</div>
+    <div class="actions" style="margin-top:14px"><button class="pill-btn" id="devSys" style="flex:1;justify-content:center">More options</button></div>`);
   $('#devList').onclick = e => { const r = e.target.closest('[data-dev]'); if (!r) return; haptic(); const id = +r.dataset.dev; $$('#devList .dev').forEach(x => x.classList.toggle('on', x === r)); audio({ op: 'device', id }); AU.opts = Object.assign({}, AU.opts, { device: id }); if (pOpen) renderPanel(); toast(id ? 'Output: ' + r.querySelector('.t').firstChild.textContent : 'Output: automatic'); };
   $('#devSys').onclick = () => { haptic(); try { B.openOutputPicker(); } catch (e) {} };
 }
@@ -4648,7 +4647,7 @@ function sheetDl() {
   let ci = { bytes: 0, reciterBytes: 0, surahs: [] }; try { ci = JSON.parse(B.audioCacheInfo(r.id)); } catch (e) {}
   const have = (ci.surahs || []).includes(s), busy = dlState && dlState.state === 'run';
   openSheet(`<h3>Listen offline</h3><div class="about" style="padding:0 0 8px">${r.src === 'mq' ? 'Whole-surah file for' : 'Every verse of'} <b>${esc(m.tr)}</b> by <b>${esc(r.name)}</b>. Verses you play are also kept automatically.</div>
-    <div id="dlBox">${have ? '<div class="about" style="padding:4px 0;color:var(--quran)"><b style="color:var(--quran)">✓ Saved on this phone</b></div>' : `<button class="pill-btn primary" id="dlGo" style="width:100%;justify-content:center" ${busy ? 'disabled' : ''}>${AIC.dl}Save ${esc(m.tr)} for offline</button>`}
+    <div id="dlBox">${have ? '<div class="about" style="padding:4px 0;color:var(--quran)"><b style="color:var(--quran)">✓ Saved on this device</b></div>' : `<button class="pill-btn primary" id="dlGo" style="width:100%;justify-content:center" ${busy ? 'disabled' : ''}>${AIC.dl}Save ${esc(m.tr)} for offline</button>`}
       <div class="meterbar" id="dlBar" ${busy ? '' : 'hidden'}><i style="width:${busy ? Math.round(dlState.done / dlState.total * 100) : 0}%"></i></div></div>
     <div class="opt-h">Storage<small>${fmtMB(ci.reciterBytes)} for ${esc(r.name)} · ${fmtMB(ci.bytes)} in total · ${(ci.surahs || []).length} surah${(ci.surahs || []).length === 1 ? '' : 's'} fully saved</small></div>
     <div class="actions" style="flex-wrap:wrap"><button class="pill-btn danger" id="dlClr">Remove ${esc(r.name.split(' (')[0])}'s audio</button><button class="pill-btn danger" id="dlAll">Remove all audio</button></div>`);
@@ -4662,7 +4661,7 @@ window.onAudioDl = j => {
   if (d.state !== 'run') {
     const m = QMETA[d.s - 1];
     toast(d.state === 'done' ? `${m ? m.tr : 'Surah'} saved for offline` : d.state === 'cancelled' ? 'Download cancelled' : 'Download failed. Check your connection.');
-    if ($('#dlBox') && d.state === 'done') $('#dlBox').innerHTML = '<div class="about" style="padding:4px 0"><b style="color:var(--quran)">✓ Saved on this phone</b></div>';
+    if ($('#dlBox') && d.state === 'done') $('#dlBox').innerHTML = '<div class="about" style="padding:4px 0"><b style="color:var(--quran)">✓ Saved on this device</b></div>';
     if (tab === 'listen') renderLsList();
   }
 };
@@ -5455,7 +5454,7 @@ function hbAfter(id, k) { hbRefresh(); const sb = $('#sheetBody'); if ($('#sheet
 
 /* ---------- app look: background, accent, name ---------- */
 const APP_BG = {
-  noor: { l: 'Noor', dark: ['#060a17', '#11b5a4', '#5a4fe0', '#e89a2c', '#c93f7a'], light: ['#e9edf5', '#5fe0cf', '#9d95ff', '#ffc978', '#ff9cc2'] },
+  noor: { l: 'Noor', dark: ['#060a17', '#0f8f86', '#3f46b8', '#14506e', '#2b2f7a'], light: ['#eef1f7', '#a9e6dd', '#c3c3f5', '#bfdcef', '#d6d3f7'] },
   emerald: { l: 'Emerald', dark: ['#03110d', '#0f9a68', '#12b5a4', '#0b5d45', '#c9a53a'], light: ['#e8f4ef', '#7fe0bd', '#9fe8d8', '#bfe3a8', '#ffe29a'] },
   ocean: { l: 'Ocean', dark: ['#040b1a', '#1f6fd6', '#11b5a4', '#3a2f9e', '#0b5d8a'], light: ['#e8f0fa', '#8cc4ff', '#7fe0e0', '#b4b0ff', '#a8d8ff'] },
   amethyst: { l: 'Amethyst', dark: ['#0b0718', '#6a4bd8', '#b04bd8', '#3a2f9e', '#c93f7a'], light: ['#efeaf8', '#c4b0ff', '#e3a8ff', '#b4b0ff', '#ffb0d0'] },
@@ -5566,7 +5565,6 @@ const FEATURES = [
   ['My reminders', 'Your own reminders for the widget', 'reminder reminders note notes my mine', () => go('mine')],
   ['Library', 'Saved verses and hadith', 'library saved favourites favorites bookmarks', () => go('library')],
   ['Notifications', 'Daily verse, hadith and reading reminders', 'notification notifications alert alarm remind daily', () => goSettings('#nSwitch')],
-  ['Widgets', 'Look and content of each home-screen widget', 'widget widgets home screen background opacity', () => goSettings('#wList')],
   ['App background & name', 'Themes, accent colour, your name', 'theme background dark light colour color accent name appearance', () => goSettings('#appBgPick')],
   ['Welcome tour', 'What each part of the app does', 'tour help guide intro welcome', () => openTour()]
 ];
@@ -5631,7 +5629,7 @@ function runSearch(now) {
 }
 function searchOnline(q) {
   const id = ++gSeq; gLastOnline = q;
-  if (HC_IDS.every(c => hcMeta(c).count)) {   // bundled: search on the phone, no download
+  if (HC_IDS.every(c => hcMeta(c).count)) {   // bundled: search on this device, no download
     const box = $('#gOnline'); if (box) box.innerHTML = `<div class="t-exp" style="margin-top:12px"><div class="spin-l">${T_SPIN} Searching Bukhari &amp; Muslim…</div></div>`;
     hcLoadAll().then(() => {
       const res = []; let total = 0;
@@ -5696,12 +5694,9 @@ const TOUR = [
   { c: ['#2fae62', '#6f7fe6'], i: TI('<circle cx="12" cy="12" r="8.5"/><path d="M8.2 12.3l2.6 2.6 5-5.4"/>'),
     h: 'Your own trackers', p: 'Track anything you choose, the way you choose, on the Progress tab and on Today.',
     pts: [['', '<b>Six ways to track</b>: yes or no, a count (100 istighfar), an amount with your unit, minutes, a 1 to 5 rating, or days you stayed away from something'], ['', '<b>Your schedule</b>: every day, chosen days, or a number of times a week, with a daily reminder'], ['', '<b>Streaks and history</b>: a month view for each tracker; tap any day to change it']] },
-  { c: ['#35d399', '#0f6e4c'], i: TI('<rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="18" height="8" rx="2"/>'),
-    h: 'Home-screen widgets', p: 'Widgets keep Noor one glance away. On card widgets, tap the right half for the next card and the left half to go back.',
-    pts: [['', '<b>Prayer Times</b>: the next prayer with a countdown, in a list or one slim row'], ['', "<b>Daily Qur'an &amp; Sunnah</b>: a new card every day"], ['', '<b>My Reminders</b>: your own words, one a day'], ['', "<b>Qur'an Reader</b>: one verse at a time, tap Read to move on"], ['', '<b>Long-press</b> any widget to give it its own look']] },
   { c: ['#f0a53a', '#22c58b'], i: TI('<path d="M12 6.5C10 5 7.5 4.5 4 4.8v13.4c3.5-.3 6 .2 8 1.8 2-1.6 4.5-2.1 8-1.8V4.8c-3.5-.3-6 .2-8 1.7z"/><path d="M12 6.5V20"/>'),
     h: "Read the whole Qur'an", p: 'All 6,236 verses with English translation. Verses are marked read as you scroll, and your progress map fills in from amber to green.',
-    pts: [['', '<b>Pages</b>: turn each page with your finger, like a printed mushaf (or an English book, in the reader menu)'], ['', '<b>Focus mode</b>: full screen, the screen stays on, notifications are silenced, and Noor can stay pinned'], ['', '<b>Clear progress</b>: surah, juz, the whole Qur\'an and today\'s goal at the top of the reader'], ['', '<b>Progress map</b> of all 114 surahs'], ['', '<b>Continue</b> exactly where you stopped, in the app or widget'], ['', '<b>Tap the headphones</b> in the reader to listen from that verse']] },
+    pts: [['', '<b>Pages</b>: turn each page with your finger, like a printed mushaf (or an English book, in the reader menu)'], ['', '<b>Focus mode</b>: full screen, and the screen stays on while you read'], ['', '<b>Clear progress</b>: surah, juz, the whole Qur\'an and today\'s goal at the top of the reader'], ['', '<b>Progress map</b> of all 114 surahs'], ['', '<b>Continue</b> exactly where you stopped'], ['', '<b>Tap the headphones</b> in the reader to listen from that verse']] },
   { c: ['#7cc4ff', '#5a4fe0'], i: TI('<path d="M4 15v-3a8 8 0 0 1 16 0v3"/><path d="M4 15a2 2 0 0 1 2-2h1.5v7H6a2 2 0 0 1-2-2zM20 15a2 2 0 0 0-2-2h-1.5v7H18a2 2 0 0 0 2-2z"/>'),
     h: 'Listen', p: 'Beautiful recitations by Al-Husary, Abdul Basit, Minshawi, Alafasy, Al-Balushi and more, with the text following along.',
     pts: [['', '<b>Seamless</b>: each verse flows straight into the next'], ['', '<b>Favourite reciters</b>: star them and they stay at the top, one tap away'], ['', '<b>Repeat</b> verses or a range, to memorise'], ['', '<b>Speed</b>, sleep timer and English translation audio'], ['', '<b>Keeps playing</b> with the app closed; control it from the lock screen'], ['', '<b>Save surahs</b> to listen offline']] },
@@ -5709,8 +5704,8 @@ const TOUR = [
     h: 'In Times Of…', p: "Anxious, low, grieving, grateful? Choose what you're going through and find verses, hadith and duas for it.",
     pts: [['', '<b>Feeling meter</b>: duas come first when feelings run high'], ['', '<b>Tafsir Ibn Kathir</b> under any verse'], ['', '<b>Scholars</b> like Ibn Taymiyyah and al-Ghazali, with book references']] },
   { c: ['#3f8cff', '#0f6e4c'], i: TI('<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/>'),
-    h: 'Prayer times, adhan & Qibla', p: 'Times for where you are, worked out on your phone. Your location never leaves it: no uploads, no accounts, no database.',
-    pts: [['', '<b>Adhan</b> from Makkah, Madinah, Mishary Alafasy, Abdul Basit and more, or just a notification, chosen for each prayer'], ['', '<b>Qibla compass</b> that turns to the Kaaba'], ['', '<b>Your method</b>: angles, Hanafi Asr, high-latitude rules, minute adjustments and iqamah times'], ['', '<b>Month timetable</b> and two home-screen widgets']] },
+    h: 'Prayer times, adhan & Qibla', p: 'Times for where you are, worked out on this device. Your location never leaves it: no uploads, no accounts, no database.',
+    pts: [['', '<b>Adhan</b> from Makkah, Madinah, Mishary Alafasy, Abdul Basit and more, or just a notification, chosen for each prayer'], ['', '<b>Qibla compass</b> that turns to the Kaaba'], ['', '<b>Your method</b>: angles, Hanafi Asr, high-latitude rules, minute adjustments and iqamah times'], ['', '<b>Month timetable</b>']] },
   { c: ['#ffb547', '#e2553a'], i: TI('<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="m9 15 2 2 4-4"/>'),
     h: 'Prayers, Qur\'an & your garden', p: 'Tick off your five prayers on the Today page. Reading and listening count automatically, and every active day helps your plant grow.', plant: true,
     pts: [['', '<b>A plant that grows</b>: from a seed to flowers in the first weeks, a tree after about six months, then fruit; each year adds a tree'], ['', '<b>Keep it alive</b>: missing a day starts again from a seed; once it\'s a tree you have a week to come back'], ['', '<b>Month calendar</b> with Hijri dates: a ring for each day\'s five prayers; tap a day to see and change it'], ['', '<b>Each prayer\'s month</b> at a glance, so you can see which one needs care'], ['', "<b>Daily Qur'an goal</b> you choose"]] },
@@ -5806,7 +5801,7 @@ function swipeTab(dir) {
   const v = $('#v-' + TAB_ORDER[j]); v.classList.remove('from-l', 'from-r'); void v.offsetWidth; v.classList.add(dir > 0 ? 'from-r' : 'from-l');
 }
 
-/* ---------- Prayer times: calculated on this phone with the Adhan library (the Java side uses a verified port) ---------- */
+/* ---------- Prayer times: calculated on this device with the Adhan library (the Java side uses a verified port) ---------- */
 const PT_KEYS = ['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'];
 const PT_NAMES = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
 const PT_TRACK = ['f', '', 'd', 'a', 'm', 'i'];
@@ -5997,7 +5992,7 @@ window.onLocation = r => {
   if (!r || !r.ok) {
     if (who !== 'user') return;
     const err = r && r.err;
-    toast(err === 'denied' ? 'Location permission is off. Pick your city instead.' : err === 'off' ? 'Turn on Location in your phone settings, or pick your city.' : "Couldn't find your location. Pick your city instead.",
+    toast(err === 'denied' ? 'Location permission is off. Pick your city instead.' : err === 'off' ? 'Turn on location for this site in your browser, or pick your city.' : "Couldn't find your location. Pick your city instead.",
       err === 'denied' ? 'Settings' : '', err === 'denied' ? () => { try { B.openAppSettings(); } catch (e) {} } : null);
     if (ptSheet && ptSheet.k === 'loc') ptRenderSheet();
     return;
@@ -6083,7 +6078,7 @@ function renderSalah() {
     <div class="section-h">Settings</div>
     <div class="glass group">
       <button class="set-row pt-link" data-pt="alerts"><div class="lbl">Adhan &amp; alerts<div class="sub">${esc(ptAlertSummary(c))}</div></div><span class="go">›</span></button>
-      <button class="set-row pt-link" data-pt="loc"><div class="lbl">Location<div class="sub">${esc(c.loc.name)} · ${(+c.loc.lat).toFixed(3)}, ${(+c.loc.lon).toFixed(3)}${c.loc.src === 'gps' ? ' · from your phone' : ''}</div></div><span class="go">›</span></button>
+      <button class="set-row pt-link" data-pt="loc"><div class="lbl">Location<div class="sub">${esc(c.loc.name)} · ${(+c.loc.lat).toFixed(3)}, ${(+c.loc.lon).toFixed(3)}${c.loc.src === 'gps' ? ' · from this device' : ''}</div></div><span class="go">›</span></button>
       <button class="set-row pt-link" data-pt="calc"><div class="lbl">Calculation<div class="sub">${esc(ptMethodName(c))} · ${c.madhab === 'hanafi' ? 'Hanafi' : 'Standard'} Asr${ptAdjCount(c) ? ' · adjusted' : ''}</div></div><span class="go">›</span></button>
       <button class="set-row pt-link" data-pt="iq"><div class="lbl">Iqamah times<div class="sub">${ptIqCount(c) ? ptIqCount(c) + ' set · shown with the times and on the widget' : 'Optional: your masjid\'s jama\'ah times'}</div></div><span class="go">›</span></button>
     </div>
@@ -6103,13 +6098,13 @@ function ptWarnHTML(c) {
   if (!anyOn) return '';
   let h = '';
   if (!PT_ST.notif) h += `<div class="glass pt-warn"><span>Notifications are off for Noor, so prayer alerts can't show.</span><button class="pill-btn primary" data-pt="notif">Allow</button></div>`;
-  if (!PT_ST.exact) h += `<div class="glass pt-warn"><span>Allow <b>Alarms &amp; reminders</b> so the adhan plays right on time. Without it Android may delay it by a few minutes.</span><button class="pill-btn primary" data-pt="exact">Allow</button></div>`;
+  if (!PT_ST.exact) h += `<div class="glass pt-warn"><span>Allow <b>Alarms &amp; reminders</b> so the adhan plays right on time. Without it the adhan may be delayed by a few minutes.</span><button class="pill-btn primary" data-pt="exact">Allow</button></div>`;
   const miss = [0, 2, 3, 4, 5].filter(i => ptMode(c, i) === 'adhan' && !ptHave(ptSound(c, i)) && ptDl[ptSound(c, i)] == null);
   if (miss.length) h += `<div class="glass pt-warn"><span>The adhan for ${miss.map(i => PT_NAMES[i]).join(', ')} isn't downloaded yet. Until it is, you'll get a notification instead.</span><button class="pill-btn primary" data-pt="dlmissing">Download</button></div>`;
   return h;
 }
 function ptPrivacyHTML() {
-  return `<div class="glass pt-priv">${PT_ICON.shield}<div><b>Private by design</b><p>Prayer times and the Qibla are calculated on this phone. Your location is never uploaded or shared. Noor has no account, no tracking and no database anywhere; everything stays on your device.</p></div></div>`;
+  return `<div class="glass pt-priv">${PT_ICON.shield}<div><b>Private by design</b><p>Prayer times and the Qibla are calculated on this device. Your location is never uploaded or shared. Noor has no account, no tracking and no database anywhere; everything stays on your device.</p></div></div>`;
 }
 function renderSalahAll() {
   if (tab === 'salah') renderSalah();
@@ -6152,7 +6147,7 @@ function ptLocHTML(c) {
       <label>Name<input class="name-in" id="ptLname" maxlength="40" placeholder="e.g. Home" value="${c.loc && c.loc.src === 'manual' ? esc(c.loc.name) : ''}"></label>
       <label>Time zone<select class="name-in" id="ptLtz">${tzs.map(z => `<option value="${esc(z)}" ${z === ((c.loc && c.loc.tz) || devTz) ? 'selected' : ''}>${esc(z.replace(/_/g, ' '))}</option>`).join('')}</select></label>
       <button class="pill-btn primary" data-pt="saveman">Use these coordinates</button></details>
-    <p class="pt-small">Using your location needs Android's location permission (approximate is enough). It's only used on this phone.</p>`;
+    <p class="pt-small">Using your location needs your browser's location permission (approximate is enough). It's only used on this device.</p>`;
 }
 function ptCityResults() {
   const q = $('#ptCityQ').value; if (ptSheet) ptSheet.q = q;
@@ -6180,7 +6175,7 @@ function ptCalcHTML(c) {
     <div class="opt-h">Adjust by minutes<small>Match your masjid's timetable exactly</small></div>
     <div class="glass-in">${PT_KEYS.map((k, i) => `<div class="set-row flat"><div class="lbl">${PT_NAMES[i]}</div>${stp('adj.' + k, Math.trunc(ptNum(adj[k], 0)), 1, ' min', -60, 60)}</div>`).join('')}</div>
     <div class="opt-h">Time format</div>
-    <div class="opt-row" data-optkey="fmt">${[['auto', 'Like my phone'], ['12', '12-hour'], ['24', '24-hour']].map(([v, l]) => `<button data-v="${v}" class="${(c.fmt || 'auto') === v ? 'on' : ''}">${l}</button>`).join('')}</div>
+    <div class="opt-row" data-optkey="fmt">${[['auto', 'Like my device'], ['12', '12-hour'], ['24', '24-hour']].map(([v, l]) => `<button data-v="${v}" class="${(c.fmt || 'auto') === v ? 'on' : ''}">${l}</button>`).join('')}</div>
     <div class="set-row flat"><div class="lbl">Sunrise on the widget</div><button class="switch ${c.wSunrise !== false ? 'on' : ''}" data-pt="wsun"></button></div>
     <p class="pt-small">Calculated with the open-source Adhan library (astronomical formulas from Jean Meeus). Checked against published timetables for Makkah, London, Dubai, Doha, Kuwait, Ankara and Singapore.</p>`;
 }
@@ -6194,7 +6189,7 @@ function ptAlertsHTML(c) {
     <div class="set-row flat"><div class="lbl">Quiet in silent mode<div class="sub">On silent or vibrate you get a notification instead of the adhan</div></div><button class="switch ${c.silent !== false ? 'on' : ''}" data-pt="silent"></button></div>
     ${ptWarnHTML(c)}
     <p class="pt-small">The adhan plays at your <b>alarm volume</b>. Stop it from the notification, or press the power button. It won't play during a call.</p>
-    ${(PT_ST.have || []).length ? `<div class="opt-h">Saved on this phone</div><div class="glass-in">${PT_ST.have.map(id => `<div class="set-row flat"><div class="lbl">${esc(ptSoundName(id))}</div><button class="pill-btn" data-pt-del="${id}">Remove</button></div>`).join('')}</div>` : ''}`;
+    ${(PT_ST.have || []).length ? `<div class="opt-h">Saved on this device</div><div class="glass-in">${PT_ST.have.map(id => `<div class="set-row flat"><div class="lbl">${esc(ptSoundName(id))}</div><button class="pill-btn" data-pt-del="${id}">Remove</button></div>`).join('')}</div>` : ''}`;
 }
 function ptAlertHTML(c, i) {
   const m = ptMode(c, i), cur = ptSound(c, i), list = ptAdhans().list.slice();
@@ -6210,11 +6205,11 @@ function ptAlertHTML(c, i) {
     ${i === 1 ? '<p class="pt-small">A reminder that the time for Fajr has ended.</p>' : m === 'adhan' ? `
       <div class="opt-h">Adhan sound<small>${i === 0 ? 'Fajr adhans include "as-salatu khayrun min an-nawm". ' : ''}Downloaded once when you choose it, then works offline.</small></div>
       <div class="pt-snds">${list.map(row).join('')}
-        <div class="pt-snd ${cur === 'custom' ? 'on' : ''}"><button class="pt-snd-main" data-snd="custom"><i></i><span><b>${esc(PT_ST.customName || 'Your own sound')}</b><small>${PT_ST.customName ? 'From your phone' : 'Pick any audio file on your phone'}</small></span></button>
+        <div class="pt-snd ${cur === 'custom' ? 'on' : ''}"><button class="pt-snd-main" data-snd="custom"><i></i><span><b>${esc(PT_ST.customName || 'Your own sound')}</b><small>${PT_ST.customName ? 'From this device' : 'Pick any audio file on this device'}</small></span></button>
           ${PT_ST.customName ? `<button class="icon-btn pt-pv ${ptPrev && ptPrev.id === 'custom' ? 'on' : ''}" data-pv="custom" aria-label="Preview your sound">${ptPrev && ptPrev.id === 'custom' ? PT_ICON.stop : PT_ICON.play}</button>` : ''}</div></div>
       <div class="pt-row-btns"><button class="pill-btn" data-pt="pickfile">${PT_ST.customName ? 'Choose a different file' : 'Choose a file'}</button>
         <button class="pill-btn" data-pt="test" ${ptHave(cur) ? '' : 'disabled'}>Test at alarm volume</button>
-        <button class="pill-btn" data-pt="allsame">Use for all prayers</button></div>` : m === 'notify' ? '<p class="pt-small">A notification with your phone\'s notification sound, with a button to mark the prayer as prayed.</p>' : '<p class="pt-small">Nothing will sound or show for this prayer.</p>'}`;
+        <button class="pill-btn" data-pt="allsame">Use for all prayers</button></div>` : m === 'notify' ? '<p class="pt-small">A notification with your device\'s notification sound, with a button to mark the prayer as prayed.</p>' : '<p class="pt-small">Nothing will sound or show for this prayer.</p>'}`;
 }
 function ptIqHTML(c) {
   return `<h3>Iqamah times</h3><p class="pt-small" style="margin-top:0">Optional. Set when your masjid starts the jama'ah: a number of minutes after the adhan, or a fixed time.</p>
@@ -6249,7 +6244,7 @@ function ptQiblaHTML(c) {
       <div class="qb-dial" id="qbDial">${ticks}<b class="n">N</b><b class="e">E</b><b class="s">S</b><b class="w">W</b>
         <div class="qb-line" style="transform:rotate(${q}deg)"><span class="qb-kaaba" style="transform:rotate(${-q}deg)"><svg viewBox="0 0 24 24"><path d="M4 7.5 12 4l8 3.5v10L12 21l-8-3.5z" fill="#15171c" stroke="#d9b45a" stroke-width="1.2"/><path d="M4 10.5 12 14l8-3.5" fill="none" stroke="#d9b45a" stroke-width="1.6"/></svg></span></div></div></div>
     <div class="qb-info"><b id="qbDeg">${Math.round(q)}°</b><span>from true north, clockwise</span><small>Makkah is ${Math.round(km).toLocaleString()} km away</small></div>
-    <div class="qb-hint" id="qbHint">${has ? 'Hold your phone flat and turn until the Kaaba is at the top.' : 'This phone has no compass. Face ' + Math.round(q) + '° clockwise from north (use a map or a physical compass).'}</div>
+    <div class="qb-hint" id="qbHint">${has ? 'Hold your phone flat and turn until the Kaaba is at the top.' : 'This device has no compass. Face ' + Math.round(q) + '° clockwise from north (use a map or a physical compass).'}</div>
     <p class="pt-small">Keep away from metal, magnets and speakers. If it seems off, move your phone in a figure 8 to calibrate the compass.</p>`;
 }
 function ptQiblaStart() {
@@ -6757,7 +6752,7 @@ function snSheet() {
     <div class="section-h">More</div>
     <div class="glass group">
       ${sw('landscape', 'Open in landscape', 'Turns the screen sideways while the dock is open')}
-      ${sw('lock', 'Lock the phone to Noor', 'Other apps can\'t open while the dock is on. Tap ✕ (or Back) to unlock.')}
+      ${sw('lock', 'Keep Noor full screen', 'Other apps can\'t open while the dock is on. Tap ✕ (or Back) to unlock.')}
       ${sw('night', 'Dim at night', 'Darker and warmer from after Isha until Fajr')}
       ${canBat ? sw('charge', 'Open when charging', 'Starts the dock when you plug in while Noor is open') : ''}
     </div>
@@ -7084,6 +7079,7 @@ else {
   setTimeout(plantAlarmSync, 3000);
 }
 </script>
+<script src="web/web.js"></script>
 <script src="web/desktop.js"></script>
 </body>
 </html>
