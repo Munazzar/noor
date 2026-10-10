@@ -1,0 +1,44 @@
+{
+  "type": "AdaptiveCard",
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "VERSE OF THE DAY",
+      "size": "Small",
+      "weight": "Bolder",
+      "color": "Accent"
+    },
+    {
+      "type": "TextBlock",
+      "text": "${ar}",
+      "size": "Large",
+      "wrap": true,
+      "horizontalAlignment": "Right",
+      "maxLines": 4,
+      "spacing": "Small"
+    },
+    {
+      "type": "TextBlock",
+      "text": "${en}",
+      "wrap": true,
+      "maxLines": 6,
+      "spacing": "Small"
+    },
+    {
+      "type": "TextBlock",
+      "text": "${ref}",
+      "isSubtle": true,
+      "size": "Small",
+      "spacing": "Small"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Execute",
+      "title": "Open in Noor",
+      "verb": "verse"
+    }
+  ]
+}

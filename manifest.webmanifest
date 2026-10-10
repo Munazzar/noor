@@ -9,15 +9,111 @@
   "orientation": "any",
   "background_color": "#060a17",
   "theme_color": "#060a17",
-  "categories": ["lifestyle", "education", "books"],
+  "categories": [
+    "lifestyle",
+    "education",
+    "books"
+  ],
   "icons": [
-    { "src": "icons/icon-any-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "icons/icon-any-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
-    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "icons/icon-any-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-any-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ],
   "shortcuts": [
-    { "name": "Prayer times", "url": "./?tab=salah", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
-    { "name": "Qur'an reader", "url": "./?tab=read", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
+    {
+      "name": "Prayer times",
+      "url": "./?tab=salah",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Qur'an reader",
+      "url": "./?tab=read",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "widgets": [
+    {
+      "name": "Prayer times",
+      "short_name": "Prayer times",
+      "description": "Today's prayer times and the next prayer",
+      "tag": "noor-prayers",
+      "template": "noor-prayers",
+      "ms_ac_template": "widgets/prayers.json",
+      "data": "widgets/data.json",
+      "type": "application/json",
+      "screenshots": [
+        {
+          "src": "widgets/prayers.png",
+          "sizes": "600x600",
+          "label": "Prayer times widget"
+        }
+      ],
+      "icons": [
+        {
+          "src": "icons/icon-any-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ],
+      "auth": false,
+      "update": 900
+    },
+    {
+      "name": "Verse of the day",
+      "short_name": "Verse",
+      "description": "The verse of the day from Noor",
+      "tag": "noor-verse",
+      "template": "noor-verse",
+      "ms_ac_template": "widgets/verse.json",
+      "data": "widgets/data.json",
+      "type": "application/json",
+      "screenshots": [
+        {
+          "src": "widgets/verse.png",
+          "sizes": "600x600",
+          "label": "Verse of the day widget"
+        }
+      ],
+      "icons": [
+        {
+          "src": "icons/icon-any-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ],
+      "auth": false,
+      "update": 3600
+    }
   ]
 }

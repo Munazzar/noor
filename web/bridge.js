@@ -193,6 +193,7 @@
       if (t > prev && t <= now) showReminder(it.type === 'note' ? 'note:' + (it.text || '') : (it.type || 'verse'), !!n.sound);
     });
     prayerTick(prev, now);
+    widgetFeed();
     const pa = +ls('plant_at', 0); if (pa && pa > prev && pa <= now) { notify(ls('plant_t', ''), ls('plant_b', ''), 'noor-plant', 'track'); del('plant_at'); }
   }
   const PK = ['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'], PN = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
@@ -212,6 +213,32 @@
         if (mode(i) === 'adhan' && i !== 1) adhan.play(sound(i), false);
       }
     }
+  }
+
+  /* ---------- Windows 11 widgets: the page leaves a week of prayer times and verses where the service worker can read them ---------- */
+  let feedKey = '', feedPing = 0;
+  const pad2 = n => String(n).padStart(2, '0');
+  async function widgetFeed() {
+    if (!('caches' in window) || !('serviceWorker' in navigator)) return;
+    const s = settings(), d = today(), now = Date.now(), key = JSON.stringify([s.pt, s.hijriAdjust, s.live, d, ls('lastSync')]);
+    if (key !== feedKey) {
+      const f = { v: 1, at: now, place: '', tz: '', days: [], verses: [] }, c = s.pt;
+      if (c && c.loc && c.loc.lat != null && typeof window.ptDay === 'function') try {
+        const tz = window.ptTz(c); f.tz = tz; f.place = c.loc.name || '';
+        for (let k = -1; k < 8; k++) { const ymd = window.ptYmd(tz, now, k), t = window.ptDay(c, ymd); f.days.push({ ymd: ymd[0] + '-' + pad2(ymd[1]) + '-' + pad2(ymd[2]), t, f: t.map(x => window.ptFmt(c, x)) }); }
+      } catch (e) { f.days = []; }
+      const arr = all();
+      for (let k = 0; k < 8; k++) {
+        const x = arr[dailyOf(arr, 'quran', d + k)] || {}; let hijri = '';
+        try { hijri = String(window.hijriDate(new Date(now + k * 864e5), +(s.hijriAdjust || 0)).en).split(' · ').pop(); } catch (e) {}
+        f.verses.push({ day: d + k, ar: x.ar || '', en: x.en || '', ref: x.ref || '', hijri });
+      }
+      try { await (await caches.open('noor-widget')).put('widgets/feed.json', new Response(JSON.stringify(f), { headers: { 'Content-Type': 'application/json' } })); } catch (e) { return; }
+      feedKey = key; feedPing = 0;
+    }
+    if (now - feedPing < 300000) return;   // the widgets also refresh on their own every 15 minutes
+    feedPing = now;
+    try { const r = await navigator.serviceWorker.ready; r.active && r.active.postMessage({ widgets: 'refresh' }); } catch (e) {}
   }
 
   /* ---------- blobs: IndexedDB for adhan files and dock backgrounds ---------- */
@@ -820,6 +847,7 @@
     document.addEventListener('visibilitychange', () => { if (!document.hidden) { try { window.onAppResume && window.onAppResume(); } catch (e) {} tick(); maybeSync(); } });
     const tab = new URLSearchParams(location.search).get('tab'); if (tab && window.openFromWidget) setTimeout(() => window.openFromWidget(tab), 300);
     setInterval(tick, 15000);
+    setTimeout(widgetFeed, 2000);
     maybeSync();
   });
   function maybeSync() { if (!liveEnabled()) return; const d = today(); if (ls('live_quran_' + d) !== null && ls('live_hadith_' + d) !== null) return; runSync(false).then(r => { if (r === 'ok') call('onSynced', r); }); }

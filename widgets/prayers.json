@@ -1,0 +1,20 @@
+{
+  "type": "AdaptiveCard",
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.5",
+  "body": [
+    { "type": "TextBlock", "text": "${date}", "weight": "Bolder", "wrap": true },
+    { "type": "TextBlock", "text": "${hijri}", "isSubtle": true, "size": "Small", "spacing": "None", "wrap": true },
+    { "type": "TextBlock", "$when": "${setup}", "text": "Open Noor and set your location to see prayer times here.", "wrap": true, "spacing": "Medium" },
+    { "type": "TextBlock", "$when": "${not(setup)}", "text": "Next: ${next}", "color": "Accent", "weight": "Bolder", "size": "Medium", "wrap": true, "spacing": "Medium" },
+    {
+      "type": "ColumnSet", "$data": "${prayers}", "spacing": "Small",
+      "columns": [
+        { "type": "Column", "width": "stretch", "items": [{ "type": "TextBlock", "text": "${name}", "weight": "${w}", "color": "${c}" }] },
+        { "type": "Column", "width": "auto", "items": [{ "type": "TextBlock", "text": "${time}", "weight": "${w}", "color": "${c}" }] }
+      ]
+    },
+    { "type": "TextBlock", "$when": "${hasPlace}", "text": "${place}", "isSubtle": true, "size": "Small", "wrap": true, "spacing": "Small" }
+  ],
+  "actions": [{ "type": "Action.Execute", "title": "${if(setup, 'Set location', 'Open prayer times')}", "verb": "salah" }]
+}

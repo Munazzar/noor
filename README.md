@@ -24,6 +24,10 @@ On screens 1024px and wider, `web/desktop.css` and `web/desktop.js` switch to a 
 
 Home-screen widgets and background alarms are Android-only, so the web app has nothing to configure for them.
 
+## Windows 11 widgets
+
+Noor installs as an app (PWA) from any modern browser. On Windows 11, when it is installed from Microsoft Edge, it also offers two widgets for the Widgets board: **Prayer times** (today's times with the next prayer highlighted) and **Verse of the day**. They are defined under `widgets` in `manifest.webmanifest`, use the Adaptive Card templates in `widgets/`, and are filled in by `sw.js`. The page leaves a week of prayer times and verses in the `noor-widget` cache, so the widgets stay correct without the app open. Other platforms, including iOS and Android, do not support widgets for web apps.
+
 ## Run locally
 
 ```sh
