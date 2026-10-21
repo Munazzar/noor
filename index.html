@@ -1756,6 +1756,56 @@ select.name-in option{color:#111}
 .sr-opts{display:flex;flex-direction:column;gap:8px;margin-top:12px}
 .sr-opts .pill-btn{justify-content:flex-start;height:46px}
 .sr-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+/* 3.31: languages, filters, hadith numbers, battles, page view, listening options */
+.sr-tag{margin-inline-start:6px;color:var(--accent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 45%,transparent)}
+.sr-book .sr-av svg{width:22px;height:22px}
+.sr-flt,.sr-cf{margin-bottom:12px}
+.sr-mh{font-size:12.5px;font-weight:700;color:var(--text-2);margin:14px 0 6px}
+.sr-modes{margin:0;padding:2px 0 4px;flex-wrap:wrap}
+.sr-head .sr-modes{margin:0 -2px}
+.sr-dlrow{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:12px;font-size:13px;color:var(--text-2)}
+.sr-dlrow .pill-btn{height:34px;font-size:13px}
+.sr-ch .t small.sr-cn{display:block;font-size:11.5px;font-weight:560;color:var(--text-3);margin-top:1px}
+.sr-ch .sr-bmi{flex:none;color:var(--accent);display:grid}
+.sr-ch .sr-bmi svg{width:16px;height:16px}
+.sr-p{line-height:calc(1.85 * var(--sr-lh,1))}
+.sr-p[dir=rtl]{line-height:calc(2.05 * var(--sr-lh,1))}
+.sr-urd.sr-p,.sr-p .sr-urd{line-height:calc(2.5 * var(--sr-lh,1))}
+.sr-arb{font-family:var(--sr-arf,system-ui),"Noto Naskh Arabic","Noto Sans Arabic",serif}
+.sr-ref{display:block;width:max-content;max-width:100%;font-family:Inter,system-ui,sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.02em;line-height:1.4;color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent);border-radius:99px;padding:2px 9px;margin:0 0 8px}
+.sr-p .sr-ref+.sr-mk{margin-top:2px}
+.sr-duo .sr-arx{font-size:calc(var(--sr-fs,17px) * 1.08);line-height:calc(2.05 * var(--sr-lh,1));margin-bottom:10px}
+.sr-duo .sr-trx{font-size:calc(var(--sr-fs,17px) * .94);line-height:calc(1.8 * var(--sr-lh,1));color:var(--text-2)}
+.sr-duo .sr-trx.sr-urd{line-height:calc(2.4 * var(--sr-lh,1))}
+.sr-chh-ar{margin-top:6px;font-size:calc(var(--sr-fs,17px) * 1.05);color:var(--text-2);line-height:1.7}
+.sr-sub{font-size:calc(var(--sr-fs,17px) * 1.08);font-weight:700;margin:20px 6px 10px;line-height:1.6;color:var(--accent)}
+.sr-bt{margin:0 0 16px;break-inside:avoid}
+.sr-bt img{display:block;width:100%;height:auto;max-height:min(46vh,var(--sr-pgh,9999px));object-fit:cover;border-radius:18px;background:var(--field)}
+.sr-facts{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.sr-facts span{font-size:12.5px;font-weight:650;padding:4px 10px;border-radius:99px;background:var(--field);box-shadow:inset 0 0 0 1px var(--field-border)}
+.sr-bt p{font-size:calc(var(--sr-fs,17px) * .95);line-height:calc(2 * var(--sr-lh,1));color:var(--text-2);margin:0}
+.sr-quiz{margin:22px 0 6px}
+.sr-qz{padding:14px;border-radius:18px;margin-bottom:10px;break-inside:avoid}
+.sr-qz b{display:block;font-size:16px;line-height:1.8;margin-bottom:10px}
+.sr-qo{display:flex;flex-direction:column;gap:8px}
+.sr-qo .pill-btn{justify-content:flex-start;height:auto;min-height:44px;padding:8px 14px;font-size:15px;line-height:1.6;text-align:start}
+.sr-qo .pill-btn.ok{box-shadow:inset 0 0 0 2px #22c58b;color:#22c58b}
+.sr-qo .pill-btn.no{box-shadow:inset 0 0 0 2px #e0708a;color:#e0708a}
+.sr-why{font-size:14px;line-height:1.9;color:var(--text-2);margin:10px 2px 0}
+.sr-play .sr-chipr{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:10px}
+.sr-sub2{font-weight:500;font-size:12.5px;color:var(--text-2);margin-top:2px}
+.sr-reader.paged .r-scroll{overflow:hidden;touch-action:pan-y}
+.sr-reader.paged .r-inner{column-fill:auto}
+.sr-reader.paged .sr-p,.sr-reader.paged .sr-chh,.sr-reader.paged .sr-sub{break-inside:auto}
+.sr-reader.paged .sr-end{break-inside:avoid}
+.sr-pgnav{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--sab) + 14px);z-index:9;display:flex;align-items:center;gap:6px;padding:5px;border-radius:99px}
+.sr-pgnav span{min-width:96px;text-align:center;font-size:13px;color:var(--text-2);line-height:1.25}
+.sr-pgnav span b{color:var(--text)}
+.sr-pgnav span small{display:block;font-size:11px;color:var(--text-3)}
+.sr-pgnav .icon-btn{width:40px;height:40px}
+.sr-reader .glass.sr-play,.sr-reader .glass.sr-pgnav{background:radial-gradient(120% 45% at 15% 0%,rgba(255,255,255,.12),transparent 55%) no-repeat,color-mix(in srgb,var(--bg) 94%,transparent)}
+.sr-flt,.sr-cf{flex-wrap:wrap;overflow:visible}
+.sr-reader .r-title b{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.3}
 </style>
 <link rel="stylesheet" href="web/desktop.css">
 </head>
@@ -2017,7 +2067,7 @@ select.name-in option{color:#111}
       <p><b>Bukhari &amp; Muslim</b> in the Library: the complete Sahih al-Bukhari (7,554 hadith) and Sahih Muslim (7,360), Arabic with English, from the open hadith-api (fawazahmed0), numbered as on sunnah.com.</p>
       <p><b>Adhkar &amp; Ruqyah</b>: morning and evening adhkar from the Morning-and-Evening-Adhkar-DB (MIT), which follows Hisn al-Muslim with each source and grading; one narration graded weak there is left out. The other adhkar and the ruqyah are only from the Qur'an, Bukhari and Muslim, or narrations graded sahih or hasan, each shown with its reference. References to Bukhari or Muslim open the full hadith in the app.</p>
       <p><b>Recitations</b> stream from everyayah.com (verse by verse) and mp3quran.net (whole surahs, with their verse timings), and are saved on this device only if you download them. <b>Tajweed colours</b>: rule positions from the open quran-tajweed data by Collin Fair (CC BY 4.0). <b>Madinah page numbers</b>: the quran-meta package (MIT).</p>
-      <p><b>Seerah</b>: <i>Nur al-Yaqin</i> by Muhammad al-Khudari (d. 1927) and the <i>Sirah</i> of Ibn Hisham (d. 833), Arabic texts from the OpenITI corpus (CC BY-NC-SA 4.0, via al-Maktaba al-Shamila); both works are in the public domain, and the modern editors' footnotes are left out. They are classical biographies and, like every Seerah book, include some reports graded weak. Reading aloud uses the text-to-speech voice on your device.</p>
+      <p><b>Seerah</b>: <i>Seerah in Sahih al-Bukhari</i>, the biography chapters of Sahih al-Bukhari arranged by event, in Arabic, English (Muhsin Khan) and Urdu from the open hadith-api (fawazahmed0), numbered as on sunnah.com, with the chapter order taken from the OpenITI text of Bukhari. <i>Shama'il al-Tirmidhi</i> in Arabic and English from the open hadith-json database (sunnah.com), via the islamic-library-data project. <i>The Great Battles</i>: scenes, maps, questions and recorded narration from the open islamic-library-data project (github.com/mohammed-2-5/islamic-library-data), written from Ibn Hisham, al-Waqidi and the Musnad of Ahmad; the narration is downloaded from the jsDelivr CDN when you first play a battle. Classical biographies in Arabic from the OpenITI corpus (CC BY-NC-SA 4.0, via al-Maktaba al-Shamila), all in the public domain, with the modern editors' footnotes and prefaces left out: <i>Nur al-Yaqin</i> by Muhammad al-Khudari (d. 1927), <i>al-Fusul fi Sirat al-Rasul</i> by Ibn Kathir (d. 1373), <i>Jawami' al-Sira</i> by Ibn Hazm (d. 1064), <i>Mukhtasar Sirat al-Rasul</i> by Muhammad ibn Abd al-Wahhab (d. 1792) and the <i>Sirah</i> of Ibn Hisham (d. 833). Apart from Bukhari, these include some reports graded weak. Reading aloud uses the text-to-speech voice on your device.</p>
       <p><b>Fonts</b>: Amiri Quran, Inter, Playfair Display, Cormorant Garamond, Dancing Script, Great Vibes, Caveat, Quicksand, Bebas Neue and DSEG7, all under the SIL Open Font License.</p>
       <p><button class="pill-btn" id="openSunnah">Open sunnah.com</button> <button class="pill-btn" id="openQuran">Open quran.com</button></p>
     </div>
@@ -2080,6 +2130,7 @@ select.name-in option{color:#111}
     <div class="r-prog" id="srProg"></div>
   </div>
   <div class="r-scroll" id="srScroll"><div class="r-inner" id="srInner"></div></div>
+  <div class="glass sr-pgnav" id="srPgNav" hidden></div>
   <div class="glass sr-play" id="srPlay" hidden></div>
 </div>
 <div class="dim" id="dim"></div>
@@ -5671,7 +5722,7 @@ const FEATURES = [
   ['In Times Of…', 'Verses and hadith for how you feel', 'feel feeling emotion help anxious sad depressed grief stress anger', () => go('times')],
   ['My reminders', 'Your own reminders for the widget', 'reminder reminders note notes my mine', () => go('mine')],
   ['Library', 'Saved verses and hadith', 'library saved favourites favorites bookmarks', () => go('library')],
-  ['Seerah', 'The Prophet\'s life: read, listen and bookmark', 'seerah sirah sira seerat sirat nabi prophet muhammad biography life history ibn hisham khudari nur al yaqin raheeq', () => go('seerah')],
+  ['Seerah', 'The Prophet\'s life: read, listen and bookmark', 'seerah sirah sira seerat sirat nabi prophet muhammad biography life history ibn hisham khudari nur al yaqin raheeq bukhari shamail shamail tirmidhi ghazwat ghazwa battles badr uhud khandaq khaybar hunayn urdu ibn kathir ibn hazm', () => go('seerah')],
   ['Notifications', 'Daily verse, hadith and reading reminders', 'notification notifications alert alarm remind daily', () => goSettings('#nSwitch')],
   ['App background & name', 'Themes, accent colour, your name', 'theme background dark light colour color accent name appearance', () => goSettings('#appBgPick')],
   ['Welcome tour', 'What each part of the app does', 'tour help guide intro welcome', () => openTour()]
@@ -5824,8 +5875,8 @@ const TOUR = [
     h: 'Fasting, night & reminders', p: 'Small helpers for the rest of the day and night.',
     pts: [['', '<b>Fasting tracker</b> on the Today card and calendar, with a hint on sunnah fast days (Mondays, Thursdays, the White Days, Arafah, Ashura)'], ['', '<b>Suhoor ends, midnight and the last third</b> of the night on the prayer times page'], ['', '<b>Reminder notifications</b>: have any reminder you write sent to you every day at a time you pick'], ['', '<b>Continuous reading</b>: a mushaf-style page in the reader menu']] },
   { c: ['#2fa77a', '#c08a2e'], i: TI('<path d="M12 3.5 14 8l4.8.4-3.6 3.2 1.1 4.8L12 13.9l-4.3 2.5 1.1-4.8L5.2 8.4 10 8z"/><path d="M5 20.5h14"/>'), ar: 'السيرة النبوية',
-    h: 'New: the Seerah', p: 'The life of the Prophet, from his birth to his passing, to read and to listen to. Open it from More → Seerah.',
-    pts: [['', '<b>Classic books</b>: Nur al-Yaqin by al-Khudari and the Sirah of Ibn Hisham, in Arabic, all chapters offline'], ['', '<b>Listen</b> with the voice on this device, with speed and a sleep timer'], ['', '<b>Pick up where you left off</b>, and keep <b>bookmarks with your own labels</b> and colours']] },
+    h: 'The Seerah, now in Urdu and English', p: 'The life of the Prophet to read and to listen to, from More → Seerah.',
+    pts: [['', '<b>Seerah in Sahih al-Bukhari</b> in Urdu, English and Arabic, or Arabic with the translation under it, plus the Shama&#39;il and five classical books'], ['', '<b>The great battles</b> with a recorded narration, maps and questions'], ['', '<b>Pages or scroll</b>, filters, <b>labelled bookmarks</b>, and listening with speed, repeat, pause and a sleep timer']] },
   { c: ['#b49cff', '#3a2f9e'], i: TI('<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>'), last: true,
     h: 'Make it yours', p: 'Choose a background and accent colour any time in Settings. What should we call you?' }
 ];
@@ -5853,7 +5904,7 @@ function tourGo(i, instant) {
 function closeTour() {
   const n = $('#tourName'); if (n && n.value.trim() !== (set.name || '')) set.name = n.value.trim().slice(0, 30);
   if (n) n.blur();
-  set.onboarded = true; set.tourV = 6; saveSet();
+  set.onboarded = true; set.tourV = 7; saveSet();
   $('#tour').classList.remove('on'); $('#tour').setAttribute('aria-hidden', 'true');
   if (tab === 'today') renderToday(); if (tab === 'settings') renderSettings();
 }
@@ -7180,16 +7231,41 @@ window.addEventListener('resize', () => { placeLens($('#tabbar'), $('#tabbar but
 /* ---------- 3.30: Seerah — the life of the Prophet, read and listen. Several books (open, public-domain texts),
    continue where you left off, chapters marked read, labelled bookmarks, and read-aloud with the device's own
    voice (native SeerahVoice service; speechSynthesis in a browser). State: localStorage 'noor_seerah', mirrored
-   into set.seerah on bigger changes so it is kept with the rest of the settings. ---------- */
+   into set.seerah on bigger changes so it is kept with the rest of the settings.
+   3.31: Seerah from Sahih al-Bukhari in Arabic, English and Urdu, the Shama'il in Arabic and English (read one
+   language or Arabic with the translation under it), the great battles with recorded narration and maps, three
+   more classical books, filters, a page view, and Qur'an-style listening options (repeat, pause, continue). ---------- */
+const SR_CDN = 'https://cdn.jsdelivr.net/gh/mohammed-2-5/islamic-library-data@141950e8733d1465f178135239ae481211c458e4/data/ghazwat/audio/';
 const SR_BOOKS = [
-  { id: 'khudari', lang: 'ar', t: 'نور اليقين في سيرة سيد المرسلين', tr: 'Nur al-Yaqin', by: 'Muhammad al-Khudari (d. 1927)', c: ['#2fa77a', '#1f6f5a'],
+  { id: 'bukhari', langs: ['en', 'ur', 'ar'], duo: true, kind: 'hadith', meta: 1, t: 'السيرة النبوية في صحيح البخاري', tr: 'Seerah in Sahih al-Bukhari', tu: 'صحیح بخاری میں سیرتِ نبوی', by: 'Imam al-Bukhari (d. 870)', c: ['#2f7fd0', '#1c4f8a'],
+    ref: { en: 'Sahih al-Bukhari', ur: 'صحیح بخاری', ar: 'صحيح البخاري' },
+    about: 'The Prophet\'s life told only through authentic hadith: the first revelation, the years in Makkah, the Hijrah, every expedition in Bukhari\'s Book of Military Expeditions, the Farewell Hajj and his passing, with his names, description and the signs of his prophethood. 713 hadith in 42 chapters, in the order of events.',
+    src: 'Hadith text of Sahih al-Bukhari in Arabic, English (Muhsin Khan) and Urdu from the open hadith-api (fawazahmed0), numbered as on sunnah.com, so every hadith can be checked there. Arranged by event in Noor, following the chapters of Bukhari\'s Book of the Merits of the Ansar and Book of Military Expeditions (OpenITI).' },
+  { id: 'shamail', langs: ['en', 'ar'], duo: true, kind: 'hadith', meta: 1, t: 'الشمائل المحمدية', tr: 'Shama\'il al-Tirmidhi', by: 'Imam al-Tirmidhi (d. 892)', c: ['#8a6cf0', '#4b3aa0'],
+    ref: { en: 'Shama\'il', ar: 'الشمائل' },
+    about: 'How the Prophet looked, dressed, ate, spoke, laughed, worshipped, slept and lived, in 402 hadith gathered by Imam al-Tirmidhi. Arabic with English.',
+    src: 'Arabic and English text from the open hadith-json database (sunnah.com) as packaged by the islamic-library-data project. Some of its narrations are graded weak by the scholars of hadith.' },
+  { id: 'ghazwat', lang: 'ar', kind: 'battles', audio: 1, t: 'الغزوات الكبرى', tr: 'The Great Battles', by: 'Narrated scenes, maps and questions', c: ['#d0603a', '#7a2f17'],
+    about: 'Badr, Uhud, the Trench, Khaybar, the Conquest of Makkah and Hunayn, each told scene by scene in fully vowelled Arabic with a recorded narration, a map and a few questions at the end. The narration downloads once per battle (about 4 MB) and then plays offline.',
+    src: 'Text, maps and recorded narration from the open islamic-library-data project (github.com/mohammed-2-5/islamic-library-data), written from the Sirah of Ibn Hisham, the Maghazi of al-Waqidi and the Musnad of Ahmad.' },
+  { id: 'khudari', lang: 'ar', kind: 'sira', t: 'نور اليقين في سيرة سيد المرسلين', tr: 'Nur al-Yaqin', by: 'Muhammad al-Khudari (d. 1927)', c: ['#2fa77a', '#1f6f5a'],
     about: 'A clear, concise classic written for everyone: the Prophet\'s lineage and birth, the revelation, the years in Makkah, the Hijrah, each year in Madinah, his passing, his character and his miracles.',
     src: 'Arabic text of the Dar al-Ma\'rifa edition (2004) from the OpenITI corpus (CC BY-NC-SA 4.0), which takes it from al-Maktaba al-Shamila. The author died in 1927, so the text itself is in the public domain. The modern editor\'s footnotes are left out.' },
-  { id: 'ibnhisham', lang: 'ar', t: 'السيرة النبوية لابن هشام', tr: 'Sirat Ibn Hisham', by: 'Ibn Hisham (d. 833), from Ibn Ishaq', c: ['#c08a2e', '#7a4f17'],
+  { id: 'ibnkathir', lang: 'ar', kind: 'sira', t: 'الفصول في سيرة الرسول', tr: 'Al-Fusul fi Sirat al-Rasul', by: 'Ibn Kathir (d. 1373)', c: ['#3a9fb0', '#1d5c66'],
+    about: 'Ibn Kathir\'s own short Seerah: the whole life in brief chapters, every expedition in order, then the signs of prophethood, his family, his description and character, and what was particular to him.',
+    src: 'Arabic text from the OpenITI corpus (CC BY-NC-SA 4.0), which takes it from al-Maktaba al-Shamila. The 14th-century text is in the public domain.' },
+  { id: 'ibnhazm', lang: 'ar', kind: 'sira', t: 'جوامع السيرة', tr: 'Jawami\' al-Sira', by: 'Ibn Hazm (d. 1064)', c: ['#b0763a', '#6a431b'],
+    about: 'A compact reference: lineage, birth and passing, the signs of prophethood, his expeditions, governors, scribes, envoys, wives and children, then the events year by year with the names of the people of Aqabah and Badr.',
+    src: 'Arabic text from the OpenITI corpus (CC BY-NC-SA 4.0), which takes it from al-Maktaba al-Shamila. The 11th-century text is in the public domain; the modern editors\' footnotes are left out.' },
+  { id: 'ibnabdalwahhab', lang: 'ar', kind: 'sira', t: 'مختصر سيرة الرسول', tr: 'Mukhtasar Sirat al-Rasul', by: 'Muhammad ibn Abd al-Wahhab (d. 1792)', c: ['#6a8f3a', '#3b5420'],
+    about: 'A summary of the Seerah that begins with the earlier prophets and the history of Makkah, follows the Prophet\'s life and expeditions, and continues with the rightly guided caliphs.',
+    src: 'Arabic text from the OpenITI corpus (CC BY-NC-SA 4.0), which takes it from al-Maktaba al-Shamila. The 18th-century text is in the public domain; the modern editions\' prefaces are left out.' },
+  { id: 'ibnhisham', lang: 'ar', kind: 'sira', t: 'السيرة النبوية لابن هشام', tr: 'Sirat Ibn Hisham', by: 'Ibn Hisham (d. 833), from Ibn Ishaq', c: ['#c08a2e', '#7a4f17'],
     about: 'The oldest complete Seerah: Ibn Hisham\'s edition of Ibn Ishaq\'s biography, with its chains of narration, the poetry of the time and the full detail of every event.',
     src: 'Arabic text of the al-Babi al-Halabi edition (Cairo, 1955) from the OpenITI corpus (CC BY-NC-SA 4.0), which takes it from al-Maktaba al-Shamila. The 9th-century text is in the public domain; the editors\' footnotes and added sub-headings are left out.' }
 ];
 const SR_LANG = { ar: ['العربية', 'rtl', 'sr-arb'], en: ['English', 'ltr', ''], ur: ['اردو', 'rtl', 'sr-urd'] };
+const SR_MODE_L = { ar: 'العربية', en: 'English', ur: 'اردو', 'ar+en': 'Arabic + English', 'ar+ur': 'عربی + اردو' };
 const SR_COLS = ['#22c58b', '#f0a53a', '#4a90d9', '#e0708a', '#8a6cf0'];
 const SRI = {
   play: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>',
@@ -7200,19 +7276,39 @@ const SRI = {
   mark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.5h12v17l-6-4-6 4z"/></svg>',
   edit: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>',
   book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10 5 7.5 4.5 4 4.8v13.4c3.5-.3 6 .2 8 1.8 2-1.6 4.5-2.1 8-1.8V4.8c-3.5-.3-6 .2-8 1.7z"/><path d="M12 6.5V20"/></svg>',
-  ear: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><path d="M4 15a2 2 0 0 1 2-2h1.5v7H6a2 2 0 0 1-2-2zM20 15a2 2 0 0 0-2-2h-1.5v7H18a2 2 0 0 0 2-2z"/></svg>'
+  ear: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><path d="M4 15a2 2 0 0 1 2-2h1.5v7H6a2 2 0 0 1-2-2zM20 15a2 2 0 0 0-2-2h-1.5v7H18a2 2 0 0 0 2-2z"/></svg>',
+  left: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>',
+  right: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>'
 };
-const SR = { st: null, view: 'home', b: '', q: '', open: false, rb: '', rc: 0, scT: 0, saveT: 0, loading: {} };
+const SR = { st: null, view: 'home', b: '', q: '', cf: 'all', open: false, rb: '', rc: 0, scT: 0, saveT: 0, loading: {} };
 const srBook = id => SR_BOOKS.find(b => b.id === id);
-const srData = id => (self.NOOR_DATA && NOOR_DATA['seerah.' + id]) || null;
-const srL = b => SR_LANG[(b && b.lang) || 'ar'] || SR_LANG.ar;
+const srMulti = b => !!(b && b.langs);
+function srModes(b) {
+  if (!srMulti(b)) return [b.lang];
+  const m = [...b.langs]; if (b.duo) b.langs.forEach(l => { if (l !== 'ar') m.push('ar+' + l); });
+  return m;
+}
+function srMode(id) {
+  const b = srBook(id); if (!srMulti(b)) return b ? b.lang : 'ar';
+  const m = (srState().lang || {})[id]; if (srModes(b).includes(m)) return m;
+  const nav = String(navigator.language || '').slice(0, 2);
+  return b.langs.includes(nav) ? nav : b.langs[0];
+}
+const srPrim = id => { const m = srMode(id); return m.includes('+') ? m.split('+')[1] : m; };
+const srSecL = id => { const m = srMode(id); return m.includes('+') ? m.split('+')[0] : ''; };
+const srKey = (id, l) => srMulti(srBook(id)) ? `seerah.${id}.${l}` : `seerah.${id}`;
+const srData = id => (self.NOOR_DATA && srBook(id) && NOOR_DATA[srKey(id, srPrim(id))]) || null;
+const srSec = id => { const l = srSecL(id); return l && self.NOOR_DATA ? NOOR_DATA[srKey(id, l)] || null : null; };
+const srMeta = id => (self.NOOR_DATA && NOOR_DATA['seerah.' + id + '.meta']) || null;
+const srL = b => SR_LANG[b ? srPrim(b.id) : 'ar'] || SR_LANG.ar;
+const srUnit = b => b && b.kind === 'battles' ? 'scene' : b && b.kind === 'hadith' ? 'hadith' : 'paragraph';
 function srState() {
   if (SR.st) return SR.st;
   let a = null; const b = set.seerah && typeof set.seerah === 'object' ? set.seerah : null;
   try { a = JSON.parse(localStorage.getItem('noor_seerah') || 'null'); } catch (e) {}
   const pick = a && b ? ((a.at || 0) >= (b.at || 0) ? a : b) : (a || b);
-  const st = Object.assign({ last: '', pos: {}, lpos: {}, done: {}, bm: [], rate: 1, fs: 1, follow: true, at: 0 }, JSON.parse(JSON.stringify(pick || {})));
-  ['pos', 'lpos', 'done'].forEach(k => { if (!st[k] || typeof st[k] !== 'object') st[k] = {}; });
+  const st = Object.assign({ last: '', pos: {}, lpos: {}, done: {}, bm: [], rate: 1, fs: 1, follow: true, at: 0, lang: {}, mode: 'scroll', lh: 1, font: '', rep: 1, gap: 0, cont: true, flt: 'all' }, JSON.parse(JSON.stringify(pick || {})));
+  ['pos', 'lpos', 'done', 'lang'].forEach(k => { if (!st[k] || typeof st[k] !== 'object') st[k] = {}; });
   if (!Array.isArray(st.bm)) st.bm = [];
   return SR.st = st;
 }
@@ -7222,14 +7318,27 @@ function srSave(deep) {
   if (deep) { clearTimeout(SR.saveT); set.seerah = st; saveSet(); }
 }
 function srSaveSoon() { const st = srState(); st.at = Date.now(); try { localStorage.setItem('noor_seerah', JSON.stringify(st)); } catch (e) {} }
-function srEnsure(id, cb) {
-  const d = srData(id); if (d) { cb(d); return; }
-  if (SR.loading[id]) { SR.loading[id].push(cb); return; }
-  SR.loading[id] = [cb];
-  const s = document.createElement('script'); s.src = 'seerah/' + id + '.js';
-  s.onload = () => { const l = SR.loading[id] || []; delete SR.loading[id]; const x = srData(id); if (x) l.forEach(f => f(x)); else toast("Couldn't open this book"); };
-  s.onerror = () => { delete SR.loading[id]; toast("Couldn't open this book"); };
+// A book needs the text in its reading language, the Arabic too when shown together, and its hadith numbers
+function srNeeds(id) {
+  const b = srBook(id); if (!b) return [];
+  const k = [srKey(id, srPrim(id))], s = srSecL(id); if (s) k.push(srKey(id, s));
+  if (b.meta) k.push('seerah.' + id + '.meta');
+  return k;
+}
+function srLoadKey(key, cb) {
+  if (self.NOOR_DATA && NOOR_DATA[key]) { cb(true); return; }
+  if (SR.loading[key]) { SR.loading[key].push(cb); return; }
+  SR.loading[key] = [cb];
+  const s = document.createElement('script'); s.src = 'seerah/' + key.slice(7) + '.js';
+  const end = ok => { const l = SR.loading[key] || []; delete SR.loading[key]; l.forEach(f => f(ok && !!(self.NOOR_DATA && NOOR_DATA[key]))); };
+  s.onload = () => end(true); s.onerror = () => end(false);
   document.head.appendChild(s);
+}
+function srEnsure(id, cb) {
+  const need = srNeeds(id).filter(k => !(self.NOOR_DATA && NOOR_DATA[k]));
+  if (!need.length) { const d = srData(id); if (d) cb(d); return; }
+  let left = need.length, bad = false;
+  need.forEach(k => srLoadKey(k, ok => { if (!ok) bad = true; if (--left) return; if (bad) toast("Couldn't open this book"); else { const d = srData(id); if (d) cb(d); } }));
 }
 function srCum(d) {
   if (d.cum) return d.cum;
@@ -7249,9 +7358,22 @@ function srSetDone(id, c, v) {
   s = s.slice(0, c) + (v ? '1' : '0') + s.slice(c + 1); srState().done[id] = s;
 }
 function srDoneCount(id) { return (srDone(id).match(/1/g) || []).length; }
+const srTxtL = (l, t) => { const x = SR_LANG[l] || SR_LANG.ar; return `<span dir="${x[1]}" class="${x[2]}">${esc(t)}</span>`; };
 const srTxt = (b, t) => { const l = srL(b); return `<span dir="${l[1]}" class="${l[2]}">${esc(t)}</span>`; };
+const srTitle = b => b.tu && srPrim(b.id) === 'ur' ? srTxtL('ur', b.tu) : srTxtL('ar', b.t);
+const srRefOf = (id, c, p) => { const m = srMeta(id); return m && m.ref && m.ref[c] ? m.ref[c][p] : null; };
+const srRefLabel = (b, r) => r == null || !b.ref ? '' : `${b.ref[srPrim(b.id)] || b.ref.en} ${r}`;
 
 /* --- the Seerah page (More → Seerah) --- */
+const SR_FLT = [['all', 'All'], ['ur', 'اردو'], ['en', 'English'], ['ar', 'العربية'], ['hadith', 'Hadith'], ['battles', 'With audio'], ['going', 'In progress']];
+function srFltOk(b, f) {
+  const st = srState();
+  if (f === 'ur' || f === 'en' || f === 'ar') return srMulti(b) ? b.langs.includes(f) : b.lang === f;
+  if (f === 'hadith') return b.kind === 'hadith';
+  if (f === 'battles') return b.kind === 'battles';
+  if (f === 'going') return !!(st.pos[b.id] || st.lpos[b.id]);
+  return true;
+}
 function srRender() {
   const el = $('#srBody'); if (!el) return;
   const st = srState();
@@ -7268,14 +7390,18 @@ function srRender() {
       <div class="row"><button class="pill-btn primary" data-sr="cont" data-b="${lb.id}">${SRI.book}Continue reading</button><button class="pill-btn" data-sr="listen" data-b="${lb.id}">${SRI.ear}Listen</button></div></div>`;
     if (!d) srEnsure(lb.id, () => { if (tab === 'seerah' && SR.view === 'home') srRender(); });
   }
-  h += `<div class="section-h">Books</div>` + SR_BOOKS.map(b => {
-    const d = srData(b.id), p = st.pos[b.id], pct = d && p ? srPct(b.id, p) : 0, dn = srDoneCount(b.id), l = srL(b);
-    return `<button class="glass sr-book" data-sr="book" data-b="${b.id}"><span class="sr-av" style="--c1:${b.c[0]};--c2:${b.c[1]}">${b.lang === 'ar' ? 'ع' : b.lang === 'ur' ? 'ا' : 'En'}</span>
-      <span class="t"><span class="sr-lang">${esc(l[0])}</span><b>${srTxt(b, b.t)}</b><small>${esc(b.tr)} · ${esc(b.by)}${dn ? ` · ${dn} chapter${dn > 1 ? 's' : ''} read` : ''}</small>
+  const f = SR_FLT.some(x => x[0] === st.flt) ? st.flt : 'all', list = SR_BOOKS.filter(b => srFltOk(b, f));
+  h += `<div class="section-h">Books</div><div class="chips sr-flt" data-noswipe>${SR_FLT.map(([k, l]) => `<button class="${k === f ? 'on' : ''}" data-srflt="${k}">${esc(l)}</button>`).join('')}</div>`;
+  h += list.length ? list.map(b => {
+    const p = st.pos[b.id], d = srData(b.id), pct = d && p ? srPct(b.id, p) : 0, dn = srDoneCount(b.id);
+    const langs = srMulti(b) ? b.langs.map(l => SR_LANG[l][0]).join(' · ') : SR_LANG[b.lang][0];
+    const av = b.kind === 'battles' ? SRI.ear : b.kind === 'hadith' ? 'ح' : 'ع';
+    return `<button class="glass sr-book" data-sr="book" data-b="${b.id}"><span class="sr-av" style="--c1:${b.c[0]};--c2:${b.c[1]}">${av}</span>
+      <span class="t"><span class="sr-lang">${esc(langs)}</span>${b.kind === 'battles' ? '<span class="sr-lang sr-tag">Recorded narration</span>' : b.kind === 'hadith' ? '<span class="sr-lang sr-tag">Hadith</span>' : ''}<b>${srTxtL('ar', b.t)}</b><small>${esc(b.tr)} · ${esc(b.by)}${dn ? ` · ${dn} chapter${dn > 1 ? 's' : ''} read` : ''}</small>
       ${p ? `<span class="bar"><i style="${barStyle(pct)}"></i></span>` : ''}</span></button>`;
-  }).join('');
+  }).join('') : '<div class="about">No book matches this filter yet.</div>';
   h += `<div class="section-h">Bookmarks</div>` + srBmListHTML(st.bm);
-  h += `<div class="sr-note">These are classical biographies. Like every Seerah book, they include some reports that scholars grade as weak, so they are not held to the Qur'an, Bukhari and Muslim standard of the rest of Noor. Listening uses the voice on this device. Sources are listed in Settings → Sources.</div>`;
+  h += `<div class="sr-note">Seerah in Sahih al-Bukhari is authentic hadith throughout. The Shama'il, the battle scenes and the classical biographies include some reports that scholars grade as weak, so they are not held to the Qur'an, Bukhari and Muslim standard of the rest of Noor. Listening uses the voice on this device, except for the battles, which have a recorded narration. Sources are listed in Settings → Sources.</div>`;
   el.innerHTML = h;
 }
 function srBmListHTML(list) {
@@ -7287,43 +7413,63 @@ function srBmListHTML(list) {
       <button class="icon-btn" data-srbmedit="${esc(m.id)}" aria-label="Edit bookmark">${SRI.edit}</button></div>`;
   }).join('');
 }
+function srModeChips(b, attr) {
+  return `<div class="chips sr-row sr-modes" data-noswipe>${srModes(b).map(m => `<button class="${m === srMode(b.id) ? 'on' : ''}" ${attr}="${m}">${esc(SR_MODE_L[m])}</button>`).join('')}</div>`;
+}
 function srRenderBook(el) {
-  const b = srBook(SR.b), d = srData(b.id), st = srState(), l = srL(b);
-  if (!d) { el.innerHTML = `<div class="about">Opening ${esc(b.tr)}…</div>`; srEnsure(b.id, () => { if (tab === 'seerah') srRender(); }); return; }
+  const b = srBook(SR.b), d = srData(b.id), st = srState();
+  if (!d || srNeeds(b.id).some(k => !NOOR_DATA[k])) { el.innerHTML = `<div class="about">Opening ${esc(b.tr)}…</div>`; srEnsure(b.id, () => { if (tab === 'seerah') srRender(); }); return; }
   const p = st.pos[b.id], pct = p ? srPct(b.id, p) : 0, dn = srDoneCount(b.id), mine = st.bm.filter(m => m.b === b.id);
-  let h = `<button class="pill-btn" data-sr="home" style="margin:0 0 12px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>All books</button>
-    <div class="glass sr-head"><span class="sr-lang">${esc(l[0])}</span><h2>${srTxt(b, b.t)}</h2><div class="by">${esc(b.tr)} · ${esc(b.by)}</div><p>${esc(b.about)}</p>
+  const langs = srMulti(b) ? b.langs.map(l => SR_LANG[l][0]).join(' · ') : SR_LANG[b.lang][0];
+  let h = `<button class="pill-btn" data-sr="home" style="margin:0 0 12px">${SRI.left}All books</button>
+    <div class="glass sr-head"><span class="sr-lang">${esc(langs)}</span><h2>${srTitle(b)}</h2><div class="by">${esc(b.tr)} · ${esc(b.by)}</div><p>${esc(b.about)}</p>
+    ${srMulti(b) ? `<div class="sr-mh">Read in</div>${srModeChips(b, 'data-srmode')}` : ''}
     <div class="r-prog"><span><b>${d.length}</b> chapters</span><span class="${dn === d.length ? 'ok' : ''}"><b>${dn}</b> read</span>${p ? `<span><b>${Math.round(pct * 100)}%</b> through</span>` : ''}</div>
     ${p ? `<span class="bar"><i style="${barStyle(pct)}"></i></span>` : ''}
-    <div class="row"><button class="pill-btn primary" data-sr="cont" data-b="${b.id}">${SRI.book}${p ? 'Continue reading' : 'Start reading'}</button><button class="pill-btn" data-sr="listen" data-b="${b.id}">${SRI.ear}Listen</button></div></div>
+    <div class="row"><button class="pill-btn primary" data-sr="cont" data-b="${b.id}">${SRI.book}${p ? 'Continue reading' : 'Start reading'}</button><button class="pill-btn" data-sr="listen" data-b="${b.id}">${SRI.ear}Listen</button></div>
+    ${b.audio ? srAudioRow(b) : ''}</div>
     <label class="search glass"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input id="srQ" type="search" placeholder="Search chapters and text…" autocomplete="off" value="${esc(SR.q)}" dir="auto"></label><div id="srList"></div>`;
+      <input id="srQ" type="search" placeholder="${b.kind === 'hadith' ? 'Search the text or a hadith number…' : 'Search chapters and text…'}" autocomplete="off" value="${esc(SR.q)}" dir="auto"></label>
+    <div class="chips sr-cf" data-noswipe>${[['all', 'All chapters'], ['new', 'Not read'], ['done', 'Read'], ['bm', 'Bookmarked']].map(([k, l]) => `<button class="${SR.cf === k ? 'on' : ''}" data-srcf="${k}">${l}</button>`).join('')}</div><div id="srList"></div>`;
   if (mine.length) h += `<div class="section-h">Bookmarks in this book</div>` + srBmListHTML(mine);
   h += `<div class="sr-note">${esc(b.src)}</div>`;
   el.innerHTML = h;
   $('#srQ').addEventListener('input', e => { SR.q = e.target.value; srRenderList(); });
   srRenderList();
 }
+// Recorded narration kept on the device (native app only)
+function srAudioRow(b) {
+  if (!B.seerahAudio) return '';
+  const m = srMeta(b.id); if (!m) return '';
+  let n = 0; m.forEach(x => { try { if (+B.seerahAudio('has:' + x.id) >= x.a.length) n++; } catch (e) {} });
+  return `<div class="sr-dlrow"><span>Narration on this phone: <b>${n} of ${m.length}</b> battles</span>${n ? '<button class="pill-btn" data-sr="dldel">Remove</button>' : ''}</div>`;
+}
 function srRenderList() {
   const b = srBook(SR.b), d = srData(SR.b), el = $('#srList'); if (!b || !d || !el) return;
   const st = srState(), p = st.pos[b.id], q = SR.q.trim();
-  if (q.length >= 2) {
+  if (q.length >= 2 || (/^\d+$/.test(q) && b.meta)) {
     const n = srNorm(q), out = []; let more = false;
+    const meta = srMeta(b.id);
+    if (/^\d+$/.test(q) && meta && meta.ref) meta.ref.forEach((r, c) => r.forEach((x, i) => { if (String(x).split('–').some(y => y === q) || (String(x).includes('–') && +q >= +String(x).split('–')[0] && +q <= +String(x).split('–')[1])) out.push([c, i, d[c][2][i]]); }));
     d.forEach((ch, c) => { if (srNorm(ch[0]).includes(n)) out.push([c, -1, ch[0]]); });
     for (let c = 0; c < d.length && !more; c++) d[c][2].forEach((t, i) => { if (more) return; if (srNorm(t).includes(n)) { if (out.length >= 60) more = true; else out.push([c, i, t]); } });
-    el.innerHTML = out.length ? out.map(([c, i, t]) => `<button class="glass sr-res" data-srgo="${c}:${Math.max(0, i)}"><small>Chapter ${c + 1} · ${srTxt(b, d[c][0])}</small>${i >= 0 ? `<span>${srTxt(b, srSnip(t, q))}</span>` : ''}</button>`).join('') + (more ? '<div class="sr-note">Showing the first 60 matches. Add another word to narrow it down.</div>' : '')
+    el.innerHTML = out.length ? out.map(([c, i, t]) => { const r = i >= 0 ? srRefOf(b.id, c, i) : null;
+      return `<button class="glass sr-res" data-srgo="${c}:${Math.max(0, i)}"><small>Chapter ${c + 1} · ${srTxt(b, d[c][0])}${r != null ? ' · ' + esc(srRefLabel(b, r)) : ''}</small>${i >= 0 ? `<span>${srTxt(b, srSnip(t, q))}</span>` : ''}</button>`; }).join('') + (more ? '<div class="sr-note">Showing the first 60 matches. Add another word to narrow it down.</div>' : '')
       : '<div class="about">Nothing found in this book.</div>';
     srMarkHits(el, q); return;
   }
+  const bmc = new Set(st.bm.filter(m => m.b === b.id).map(m => m.c));
+  const keep = c => SR.cf === 'new' ? !srIsDone(b.id, c) : SR.cf === 'done' ? srIsDone(b.id, c) : SR.cf === 'bm' ? bmc.has(c) : true;
   let g = null, h = '';
   d.forEach((ch, c) => {
+    if (!keep(c)) return;
     if (ch[1] && ch[1] !== g) { g = ch[1]; h += `<div class="sr-grp">${srTxt(b, g)}</div>`; }
-    h += `<button class="glass sr-ch ${srIsDone(b.id, c) ? 'done' : ''}" data-srgo="${c}:0"><span class="n">${srIsDone(b.id, c) ? '✓' : c + 1}</span><span class="t">${srTxt(b, ch[0])}</span>${p && p.c === c ? '<span class="here">HERE</span>' : ''}</button>`;
+    h += `<button class="glass sr-ch ${srIsDone(b.id, c) ? 'done' : ''}" data-srgo="${c}:0"><span class="n">${srIsDone(b.id, c) ? '✓' : c + 1}</span><span class="t">${srTxt(b, ch[0])}<small class="sr-cn">${ch[2].length} ${srUnit(b)}${ch[2].length > 1 && srUnit(b) !== 'hadith' ? 's' : ''}</small></span>${bmc.has(c) ? `<span class="sr-bmi">${SRI.mark}</span>` : ''}${p && p.c === c ? '<span class="here">HERE</span>' : ''}</button>`;
   });
-  el.innerHTML = h;
+  el.innerHTML = h || `<div class="about">${SR.cf === 'bm' ? 'No bookmarks in this book yet.' : SR.cf === 'done' ? 'No chapter read yet.' : 'Every chapter is read. Well done.'}</div>`;
 }
-// Arabic search ignores harakat, tatweel and the different alif and ya forms
-const srNorm = s => String(s).toLowerCase().replace(/[ً-ٰٟـ]/g, '').replace(/[آأإٱ]/g, 'ا').replace(/ى/g, 'ي').replace(/ة/g, 'ه');
+// Arabic and Urdu search ignores harakat, tatweel and the different alif, ya, kaf and ha forms
+const srNorm = s => String(s).toLowerCase().replace(/[ً-ٰٟـ]/g, '').replace(/[آأإٱ]/g, 'ا').replace(/[ىی]/g, 'ي').replace(/ک/g, 'ك').replace(/[ةہۃ]/g, 'ه');
 function srSnip(t, q) {
   const n = srNorm(q), i = srNorm(t).indexOf(n); if (i < 0) return t.slice(0, 160);
   const a = Math.max(0, i - 60); return (a ? '…' : '') + t.slice(a, i + n.length + 100) + (i + n.length + 100 < t.length ? '…' : '');
@@ -7337,6 +7483,7 @@ function srMarkHits(el, q) {
 }
 
 /* --- the reader --- */
+const srPaged = () => srState().mode === 'pages';
 function srOpen(id, c, p, flash) {
   srEnsure(id, d => {
     const b = srBook(id), st = srState(); if (!b) return;
@@ -7344,31 +7491,59 @@ function srOpen(id, c, p, flash) {
     SR.rb = id; SR.rc = c; SR.open = true; st.last = id;
     if (!st.pos[id] || st.pos[id].c !== c || st.pos[id].p !== p) st.pos[id] = { c, p };
     srApplySize();
-    srRenderChapter(p, flash);
     $('#srReader').classList.add('on'); $('#srReader').setAttribute('aria-hidden', 'false'); $('#tabbar').classList.add('hide');
+    srRenderChapter(p, flash);
     srSaveSoon(); srPlayUI();
   });
 }
 function srApplySize() {
-  const b = srBook(SR.rb), st = srState();
-  const base = b && b.lang === 'en' ? parseFloat(set.enSize || 16.5) + 1 : b && b.lang === 'ur' ? 19 : 19;
-  $('#srReader').style.setProperty('--sr-fs', (base * (st.fs || 1)).toFixed(1) + 'px');
+  const b = srBook(SR.rb), st = srState(), r = $('#srReader');
+  const base = b && srPrim(b.id) === 'en' ? parseFloat(set.enSize || 16.5) + 1 : 19;
+  r.style.setProperty('--sr-fs', (base * (st.fs || 1)).toFixed(1) + 'px');
+  r.style.setProperty('--sr-lh', st.lh || 1);
+  r.style.setProperty('--sr-arf', st.font === 'amiri' ? '"Amiri Quran",serif' : 'system-ui,"Noto Naskh Arabic","Noto Sans Arabic",serif');
+  r.classList.toggle('paged', srPaged());
 }
-function srRenderChapter(p, flash) {
-  const id = SR.rb, c = SR.rc, d = srData(id), b = srBook(id), ch = d[c], l = srL(b), st = srState();
-  const marks = {}; st.bm.forEach(m => { if (m.b === id && m.c === c) marks[m.p] = m; });
+function srParaHTML(b, ch, i, sec, mark) {
+  const l = srL(b), t = ch[2][i], r = srRefOf(b.id, SR.rc, i);
+  const ref = r != null ? `<span class="sr-ref" dir="auto">${esc(srRefLabel(b, r))}</span>` : '';
+  const mk = mark ? '<i class="sr-mk"></i>' : '', st = mark ? `style="--bc:${SR_COLS[mark.col || 0]}"` : '';
+  if (sec && sec[i] != null) return `<div class="sr-p sr-duo" data-p="${i}" ${st}>${ref}${mk}<div class="sr-arx sr-arb" dir="rtl">${esc(sec[i])}</div><div class="sr-trx ${l[2]}" dir="${l[1]}">${esc(t)}</div></div>`;
+  return `<p class="sr-p ${l[2]}" dir="${l[1]}" data-p="${i}" ${st}>${ref}${mk}${esc(t)}</p>`;
+}
+function srBattleHead(m) {
+  return `<div class="sr-bt"><img src="seerah/maps/${esc(m.id)}.webp" alt="Map of the battle" decoding="async">
+    <div class="sr-facts" dir="rtl"><span>السنة ${toArabicDigits(m.y)} هـ · ${esc(m.g)}</span><span>المسلمون ${toArabicDigits(m.f[0])}</span>${m.f[1] ? `<span>العدو ${toArabicDigits(m.f[1])}</span>` : ''}<span>${esc(m.r)}</span></div>
+    <p class="sr-arb" dir="rtl">${esc(m.s)}</p></div>`;
+}
+function srQuizHTML(m) {
+  if (!m.q || !m.q.length) return '';
+  return `<div class="sr-quiz"><div class="section-h" style="margin-top:6px">Test yourself · اختبر نفسك</div>${m.q.map((q, qi) => `<div class="glass sr-qz" data-qz="${qi}"><b class="sr-arb" dir="rtl">${esc(q.q)}</b>
+    <div class="sr-qo">${q.options.map((o, oi) => `<button class="pill-btn sr-arb" dir="rtl" data-qa="${qi}:${oi}">${esc(o)}</button>`).join('')}</div><p class="sr-why sr-arb" dir="rtl" hidden>${esc(q.why || '')}</p></div>`).join('')}</div>`;
+}
+function srRenderChapter(p, flash, toEnd) {
+  const id = SR.rb, c = SR.rc, d = srData(id), b = srBook(id), ch = d[c], l = srL(b), st = srState(), sec = srSec(id), m = b.kind === 'battles' ? (srMeta(id) || [])[c] : null;
+  const marks = {}; st.bm.forEach(x => { if (x.b === id && x.c === c) marks[x.p] = x; });
+  const subs = {}; if (m) m.sec.forEach(([t, i]) => { subs[i] = t; });
   $('#srName').textContent = ch[0];
   $('#srName').setAttribute('dir', 'auto');
   $('#srSub').textContent = `${b.tr} · chapter ${c + 1} of ${d.length}`;
-  $('#srInner').innerHTML = `<div class="sr-chh">${ch[1] && ch[1] !== ch[0] ? `<small>${srTxt(b, ch[1])}</small>` : ''}<h2 class="${l[2]}" dir="${l[1]}">${esc(ch[0])}</h2></div>`
-    + ch[2].map((t, i) => { const m = marks[i]; return `<p class="sr-p ${l[2]}" dir="${l[1]}" data-p="${i}" ${m ? `style="--bc:${SR_COLS[m.col || 0]}"` : ''}>${m ? '<i class="sr-mk"></i>' : ''}${esc(t)}</p>`; }).join('')
+  const sch = sec && sec[c] ? sec[c][2] : null;
+  $('#srInner').innerHTML = `<div class="sr-chh">${ch[1] && ch[1] !== ch[0] ? `<small>${srTxt(b, ch[1])}</small>` : ''}<h2 class="${l[2]}" dir="${l[1]}">${esc(ch[0])}</h2>${sch ? `<div class="sr-arb sr-chh-ar" dir="rtl">${esc(sec[c][0])}</div>` : ''}</div>`
+    + (m ? srBattleHead(m) : '')
+    + ch[2].map((t, i) => (subs[i] != null ? `<h3 class="sr-sub sr-arb" dir="rtl">${esc(subs[i])}</h3>` : '') + srParaHTML(b, ch, i, sch, marks[i])).join('')
+    + (m ? srQuizHTML(m) + `<div class="sr-note" dir="rtl">المصادر: ${esc(m.src.join('، '))}</div>` : '')
     + `<div class="sr-end">${c + 1 < d.length ? `<button class="pill-btn primary" data-sr="next">Next: <span dir="${l[1]}" class="${l[2]}">${esc(d[c + 1][0])}</span></button>` : '<div class="m">The end of the book.</div>'}
       ${c > 0 ? `<button class="pill-btn" data-sr="prev">Previous: <span dir="${l[1]}" class="${l[2]}">${esc(d[c - 1][0])}</span></button>` : ''}
-      <div class="m">Chapters are marked read when you reach their end.</div></div>`;
+      <div class="m">${srPaged() ? 'Chapters are marked read when you reach their last page.' : 'Chapters are marked read when you reach their end.'}</div></div>`;
   const sc = $('#srScroll');
-  const tgt = p > 0 ? $(`#srInner .sr-p[data-p="${p}"]`) : null;
   sc.scrollTop = 0;
-  if (tgt) sc.scrollTop = Math.max(0, tgt.offsetTop - 12);
+  if (srPaged()) { srPgLayout(); srPgShow(toEnd ? PG.n - 1 : p > 0 ? (PG.pp[p] || 0) : 0, true); }
+  else {
+    const tgt = p > 0 ? $(`#srInner .sr-p[data-p="${p}"]`) : null;
+    if (tgt) sc.scrollTop = Math.max(0, tgt.offsetTop - 12);
+  }
+  const tgt = p > 0 ? $(`#srInner .sr-p[data-p="${p}"]`) : null;
   if (tgt && flash) { tgt.classList.add('flash'); setTimeout(() => tgt.classList.remove('flash'), 1700); }
   srMarkHere(); srSpeakMark(); srBarUpdate();
 }
@@ -7378,13 +7553,14 @@ function srMarkHere() {
   const e = $(`#srInner .sr-p[data-p="${p}"]`); if (e) e.classList.add('here');
 }
 function srBarUpdate() {
-  const id = SR.rb, d = srData(id); if (!d) return;
-  const pos = srState().pos[id] || { c: SR.rc, p: 0 }, pct = srPct(id, pos), n = d[SR.rc][2].length, dn = srDoneCount(id);
+  const id = SR.rb, d = srData(id), b = srBook(id); if (!d) return;
+  const pos = srState().pos[id] || { c: SR.rc, p: 0 }, pct = srPct(id, pos), n = d[SR.rc][2].length, dn = srDoneCount(id), u = srUnit(b);
   $('#srBar').style.cssText = barStyle(pct) + `;width:${Math.max(1.5, pct * 100)}%`;
-  $('#srProg').innerHTML = `<span><b>${Math.min(n, (pos.c === SR.rc ? pos.p : 0) + 1)}/${n}</b> paragraphs</span><span><b>${Math.round(pct * 100)}%</b> of the book</span><span class="${dn === d.length ? 'ok' : ''}"><b>${dn}</b> of ${d.length} chapters read</span>`;
+  $('#srProg').innerHTML = (srPaged() ? `<span><b>${PG.p + 1}/${PG.n}</b> pages</span>` : `<span><b>${Math.min(n, (pos.c === SR.rc ? pos.p : 0) + 1)}/${n}</b> ${u === 'hadith' ? 'hadith' : u + 's'}</span>`)
+    + `<span><b>${Math.round(pct * 100)}%</b> of the book</span><span class="${dn === d.length ? 'ok' : ''}"><b>${dn}</b> of ${d.length} chapters read</span>`;
 }
 function srOnScroll() {
-  if (!SR.open) return;
+  if (!SR.open || srPaged()) return;
   const sc = $('#srScroll'), top = sc.getBoundingClientRect().top + 8;
   let cur = 0;
   for (const e of $$('#srInner .sr-p')) { if (e.getBoundingClientRect().bottom > top + 24) { cur = +e.dataset.p; break; } }
@@ -7393,14 +7569,67 @@ function srOnScroll() {
   if (sc.scrollTop + sc.clientHeight >= sc.scrollHeight - 140 && !srIsDone(id, c)) { srSetDone(id, c, true); srBarUpdate(); srSaveSoon(); }
 }
 $('#srScroll').addEventListener('scroll', () => { if (!SR.scT) SR.scT = requestAnimationFrame(() => { SR.scT = 0; srOnScroll(); }); }, { passive: true });
+
+/* --- page view: the chapter flows into screen-sized columns; swipe, or tap the sides, to turn the page --- */
+const PG = { p: 0, n: 1, W: 0, G: 48, pp: [], rtl: false, tx: 0, ty: 0, tt: 0 };
+function srPgLayout() {
+  const sc = $('#srScroll'), inner = $('#srInner'), b = srBook(SR.rb); if (!b) return;
+  const cs = getComputedStyle(sc), rtl = srL(b)[1] === 'rtl';
+  const W = Math.min(640, Math.floor(sc.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight)));
+  const H = Math.floor(sc.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom));
+  Object.assign(PG, { W, rtl });
+  inner.setAttribute('dir', rtl ? 'rtl' : 'ltr');
+  Object.assign(inner.style, { height: Math.max(200, H) + 'px', columnWidth: W + 'px', columnGap: PG.G + 'px', width: W + 'px', overflow: 'hidden' });
+  inner.scrollLeft = 0;
+  inner.style.setProperty('--sr-pgh', Math.max(200, H) + 'px');
+  const ir = inner.getBoundingClientRect(), step = W + PG.G;
+  const pageOf = r => Math.max(0, Math.round((rtl ? ir.right - r.right : r.left - ir.left) / step));
+  PG.pp = [];
+  $$('#srInner .sr-p').forEach(e => { const rr = e.getClientRects(); PG.pp[+e.dataset.p] = rr.length ? pageOf(rr[0]) : 0; });
+  const last = $('#srInner .sr-end'), lr = last ? last.getClientRects() : [];
+  PG.n = Math.max(1, (lr.length ? pageOf(lr[lr.length - 1]) : 0) + 1);
+}
+function srPgShow(p, instant) {
+  const inner = $('#srInner'), st = srState(), id = SR.rb, c = SR.rc;
+  PG.p = Math.max(0, Math.min(PG.n - 1, p | 0));
+  inner.scrollTo({ left: (PG.rtl ? -1 : 1) * PG.p * (PG.W + PG.G), behavior: instant ? 'auto' : 'smooth' });
+  let cur = 0; PG.pp.forEach((pg, i) => { if (pg <= PG.p) cur = i; });
+  const pos = st.pos[id];
+  if (!pos || pos.c !== c || pos.p !== cur) { st.pos[id] = { c, p: cur }; srMarkHere(); clearTimeout(SR.saveT); SR.saveT = setTimeout(srSaveSoon, 400); }
+  if (PG.p === PG.n - 1 && !srIsDone(id, c)) { srSetDone(id, c, true); srSaveSoon(); }
+  srBarUpdate(); srPgNav();
+}
+function srPgNav() {
+  const nav = $('#srPgNav'); if (!nav) return;
+  if (!SR.open || !srPaged()) { nav.hidden = true; return; }
+  const d = srData(SR.rb);
+  nav.hidden = false;
+  nav.innerHTML = `<button class="icon-btn" data-pg="${PG.rtl ? 'next' : 'prev'}" aria-label="${PG.rtl ? 'Next page' : 'Previous page'}">${SRI.left}</button>
+    <span><b>${PG.p + 1}</b> / ${PG.n}<small>${PG.p === PG.n - 1 && d && SR.rc + 1 < d.length ? 'Next chapter →' : `chapter ${SR.rc + 1}`}</small></span>
+    <button class="icon-btn" data-pg="${PG.rtl ? 'prev' : 'next'}" aria-label="${PG.rtl ? 'Previous page' : 'Next page'}">${SRI.right}</button>`;
+}
+function srPgTurn(dir) {
+  const d = srData(SR.rb); if (!d) return;
+  if (dir > 0) { if (PG.p + 1 < PG.n) srPgShow(PG.p + 1); else if (SR.rc + 1 < d.length) srGoChapter(SR.rc + 1); else toast('The end of the book'); }
+  else { if (PG.p > 0) srPgShow(PG.p - 1); else if (SR.rc > 0) srGoChapter(SR.rc - 1, true); }
+}
+$('#srPgNav').addEventListener('click', e => { const x = e.target.closest('[data-pg]'); if (!x) return; haptic(); srPgTurn(x.dataset.pg === 'next' ? 1 : -1); });
+$('#srScroll').addEventListener('touchstart', e => { if (!srPaged() || e.touches.length !== 1) return; PG.tx = e.touches[0].clientX; PG.ty = e.touches[0].clientY; PG.tt = Date.now(); }, { passive: true });
+$('#srScroll').addEventListener('touchend', e => {
+  if (!srPaged() || !PG.tt) return; const t = e.changedTouches[0], dx = t.clientX - PG.tx, dy = t.clientY - PG.ty; PG.tt = 0;
+  if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4) { srPgTurn((dx < 0) !== PG.rtl ? 1 : -1); PG.swiped = Date.now(); }
+}, { passive: true });
+window.addEventListener('resize', () => { if (SR.open && srPaged()) { const p = (srState().pos[SR.rb] || {}).p || 0; srPgLayout(); srPgShow(PG.pp[p] || 0, true); } });
+
 function srClose() {
   SR.open = false;
   $('#srReader').classList.remove('on'); $('#srReader').setAttribute('aria-hidden', 'true');
   if (!$('#reader').classList.contains('on')) $('#tabbar').classList.remove('hide');
+  srPgNav();
   srSave(true);
   if (tab === 'seerah') srRender(); if (tab === 'today') renderToday();
 }
-function srGoChapter(c) { const d = srData(SR.rb); if (!d || c < 0 || c >= d.length) return; SR.rc = c; srState().pos[SR.rb] = { c, p: 0 }; srRenderChapter(0); srSave(true); }
+function srGoChapter(c, toEnd) { const d = srData(SR.rb); if (!d || c < 0 || c >= d.length) return; SR.rc = c; srState().pos[SR.rb] = { c, p: 0 }; srRenderChapter(0, false, toEnd); srSave(true); }
 $('#srExit').onclick = () => { haptic(); srClose(); };
 $('#srListen').onclick = () => {
   haptic(); const pos = srState().pos[SR.rb] || { c: SR.rc, p: 0 };
@@ -7409,57 +7638,97 @@ $('#srListen').onclick = () => {
 };
 $('#srMenu').onclick = () => { haptic(); srMenu(); };
 $('#srInner').addEventListener('click', e => {
+  const qa = e.target.closest('[data-qa]');
+  if (qa) { haptic(); srQuizAnswer(qa); return; }
+  if (srPaged()) {
+    if (PG.swiped && Date.now() - PG.swiped < 400) return;
+    const r = $('#srScroll').getBoundingClientRect(), x = (e.clientX - r.left) / r.width;
+    if (x < 0.22 || x > 0.78) { if (e.target.closest('button')) return; haptic(); srPgTurn((x > 0.78) !== PG.rtl ? 1 : -1); return; }
+  }
   const p = e.target.closest('.sr-p'); if (p) { haptic(); srParaSheet(+p.dataset.p); }
 });
+function srQuizAnswer(btn) {
+  const [qi, oi] = btn.dataset.qa.split(':').map(Number), m = (srMeta(SR.rb) || [])[SR.rc], q = m && m.q[qi]; if (!q) return;
+  const box = btn.closest('.sr-qz'); if (box.classList.contains('answered')) return;
+  box.classList.add('answered');
+  box.querySelectorAll('[data-qa]').forEach((b, i) => { b.classList.toggle('ok', i === q.correct); b.classList.toggle('no', i === oi && i !== q.correct); });
+  const w = box.querySelector('.sr-why'); if (w && w.textContent) w.hidden = false;
+  if (srPaged()) { const p = PG.p; srPgLayout(); srPgShow(p, true); }
+}
 function srMenu() {
   const b = srBook(SR.rb), st = srState(), c = SR.rc, done = srIsDone(SR.rb, c), mine = st.bm.filter(m => m.b === SR.rb);
   const pos = st.pos[SR.rb] || { c, p: 0 };
+  const chipRow = (attr, list, cur) => `<div class="chips sr-row" data-noswipe>${list.map(([v, l]) => `<button class="${String(v) === String(cur) ? 'on' : ''}" ${attr}="${v}">${l}</button>`).join('')}</div>`;
   openSheet(`<h3>${esc(b.tr)}</h3>
-    <div class="set-block" style="padding:0"><div class="lbl">Text size</div><div class="slider-row"><input type="range" id="srFs" min="0.8" max="1.6" step="0.05" value="${st.fs || 1}"><output id="srFsV">${Math.round((st.fs || 1) * 100)}%</output></div></div>
+    ${srMulti(b) ? `<div class="opt-h">Language</div>${srModeChips(b, 'data-srmm')}` : ''}
+    <div class="opt-h">Layout</div>${chipRow('data-srlay', [['scroll', 'Scroll'], ['pages', 'Pages']], st.mode || 'scroll')}
+    <div class="opt-h">Text size</div><div class="slider-row"><input type="range" id="srFs" min="0.8" max="1.8" step="0.05" value="${st.fs || 1}"><output id="srFsV">${Math.round((st.fs || 1) * 100)}%</output></div>
+    <div class="opt-h">Line spacing</div>${chipRow('data-srlh', [[0.88, 'Compact'], [1, 'Normal'], [1.15, 'Relaxed']], st.lh || 1)}
+    ${srPrim(b.id) !== 'en' || srSecL(b.id) ? `<div class="opt-h">Arabic font</div>${chipRow('data-srfont', [['', 'Naskh'], ['amiri', 'Amiri']], st.font || '')}` : ''}
     <div class="sr-opts">
       <button class="pill-btn" data-srm="bm">${SRI.mark}Bookmark this place</button>
       <button class="pill-btn" data-srm="listen">${SRI.ear}Listen from here</button>
+      <button class="pill-btn" data-srm="popts">${SRI.ear}Listening options</button>
       <button class="pill-btn" data-srm="chapters">${SRI.book}All chapters</button>
       ${mine.length ? `<button class="pill-btn" data-srm="marks">${SRI.mark}Bookmarks in this book (${mine.length})</button>` : ''}
       <button class="pill-btn" data-srm="done">${done ? 'Mark this chapter as not read' : 'Mark this chapter as read'}</button>
     </div>
-    <div class="set-row" style="padding:14px 4px 4px"><div class="lbl">Follow the voice<div class="sub">While listening, keep the paragraph being read on the screen</div></div><button class="switch ${st.follow !== false ? 'on' : ''}" id="srFollow" aria-label="Follow the voice"></button></div>
+    <div class="set-row" style="padding:14px 4px 4px"><div class="lbl">Follow the voice<div class="sub">While listening, keep the ${srUnit(b)} being read on the screen</div></div><button class="switch ${st.follow !== false ? 'on' : ''}" id="srFollow" aria-label="Follow the voice"></button></div>
     <div class="sr-note" style="margin:12px 4px 0">${esc(b.src)}</div>`);
+  const relayout = () => { const p = (st.pos[SR.rb] || {}).p || 0; srApplySize(); if (srPaged()) { srPgLayout(); srPgShow(PG.pp[p] || 0, true); } };
   $('#srFs').addEventListener('input', e => { st.fs = +e.target.value; $('#srFsV').textContent = Math.round(st.fs * 100) + '%'; srApplySize(); srSaveSoon(); });
+  $('#srFs').addEventListener('change', () => relayout());
   $('#srFollow').onclick = e => { st.follow = st.follow === false; e.currentTarget.classList.toggle('on', st.follow); srSaveSoon(); };
   $('#sheetBody').onclick = e => {
+    const set1 = (attr, fn) => { const x = e.target.closest(`[${attr}]`); if (!x) return false; haptic(); $$(`#sheetBody [${attr}]`).forEach(y => y.classList.toggle('on', y === x)); fn(x.getAttribute(attr)); srSave(true); return true; };
+    if (set1('data-srmm', v => srSetMode(b.id, v, true))) return;
+    if (set1('data-srlay', v => { st.mode = v; srApplySize(); const p = (st.pos[SR.rb] || {}).p || 0; $('#srInner').removeAttribute('style'); $('#srInner').removeAttribute('dir'); srRenderChapter(p); srPlayUI(); })) return;
+    if (set1('data-srlh', v => { st.lh = +v; relayout(); })) return;
+    if (set1('data-srfont', v => { st.font = v; relayout(); })) return;
     const m = e.target.closest('[data-srm]'); if (!m) return; haptic(); const k = m.dataset.srm;
     if (k === 'bm') { const pp = pos.c === c ? pos.p : 0; srBmSheet(st.bm.find(x => x.b === SR.rb && x.c === c && x.p === pp) || { b: SR.rb, c, p: pp }); }
     else if (k === 'listen') { closeSheet(); srtStart(SR.rb, c, pos.c === c ? pos.p : 0); }
+    else if (k === 'popts') srPlayOpts();
     else if (k === 'chapters') { closeSheet(); SR.view = 'book'; SR.b = SR.rb; SR.q = ''; srClose(); go('seerah'); }
     else if (k === 'marks') srMarksSheet(SR.rb);
     else if (k === 'done') { srSetDone(SR.rb, c, !done); srSave(true); srBarUpdate(); closeSheet(); toast(done ? 'Marked as not read' : 'Marked as read'); }
   };
 }
+// Switch the reading language of a book; places, bookmarks and read chapters stay, as the books line up hadith by hadith
+function srSetMode(id, m, inReader) {
+  const st = srState(); st.lang[id] = m; srSave(true);
+  srEnsure(id, () => {
+    if (inReader && SR.open && SR.rb === id) { const p = (st.pos[id] || {}).p || 0; $('#srInner').removeAttribute('style'); srApplySize(); srRenderChapter(p); }
+    if (tab === 'seerah') srRender();
+    if (SRT.on && SRT.b === id) toast('Listening continues in the language it started in. Start again to switch.');
+  });
+}
 function srParaSheet(p) {
-  const id = SR.rb, c = SR.rc, b = srBook(id), d = srData(id), t = d[c][2][p], st = srState(), l = srL(b);
+  const id = SR.rb, c = SR.rc, b = srBook(id), d = srData(id), t = d[c][2][p], st = srState(), l = srL(b), r = srRefOf(id, c, p);
   const m = st.bm.find(x => x.b === id && x.c === c && x.p === p);
-  openSheet(`<h3>Paragraph ${p + 1}</h3><p class="sr-sheet-x ${l[2]}" dir="${l[1]}">${esc(t)}</p>
+  openSheet(`<h3>${r != null ? esc(srRefLabel(b, r)) : (srUnit(b) === 'scene' ? 'Scene ' : 'Paragraph ') + (p + 1)}</h3><p class="sr-sheet-x ${l[2]}" dir="${l[1]}">${esc(t)}</p>
     <div class="sr-opts">
       <button class="pill-btn" data-srp="listen">${SRI.ear}Listen from here</button>
       <button class="pill-btn" data-srp="bm">${SRI.mark}${m ? 'Edit bookmark · ' + esc(m.l) : 'Bookmark with a label'}</button>
       <button class="pill-btn" data-srp="copy">Copy</button>
       <button class="pill-btn" data-srp="share">Share</button>
+      ${r != null && b.id === 'bukhari' ? '<button class="pill-btn" data-srp="web">Open on sunnah.com</button>' : ''}
     </div>`);
   $('#sheetBody').onclick = e => {
     const x = e.target.closest('[data-srp]'); if (!x) return; haptic(); const k = x.dataset.srp;
-    const ref = `${b.tr}, ${d[c][0]}`;
+    const ref = r != null ? `${srRefLabel(b, r)} · ${b.tr}, ${d[c][0]}` : `${b.tr}, ${d[c][0]}`;
     if (k === 'listen') { closeSheet(); srtStart(id, c, p); }
     else if (k === 'bm') srBmSheet(m || { b: id, c, p });
     else if (k === 'copy') { try { B.copy(t + '\n\n' + ref); } catch (er) {} closeSheet(); toast('Copied'); }
     else if (k === 'share') { try { B.share(t + '\n\n' + ref + ' · via Noor'); } catch (er) {} closeSheet(); }
+    else if (k === 'web') { closeSheet(); location.href = 'https://sunnah.com/bukhari:' + String(r).split('–')[0]; }
   };
 }
 function srBmSheet(m) {
   const st = srState(), b = srBook(m.b), d = srData(m.b), ch = d && d[m.c], old = !!m.id;
   let col = m.col || 0;
   openSheet(`<h3>${old ? 'Edit bookmark' : 'New bookmark'}</h3>
-    <div class="about" style="padding:0 0 4px">${esc(b ? b.tr : '')}${ch ? ' · ' + srTxt(b, ch[0]) : ''} · paragraph ${m.p + 1}</div>
+    <div class="about" style="padding:0 0 4px">${esc(b ? b.tr : '')}${ch ? ' · ' + srTxt(b, ch[0]) : ''} · ${b ? srUnit(b) : 'paragraph'} ${m.p + 1}</div>
     <input class="note" id="srBmL" maxlength="60" placeholder="Label, e.g. Hijrah · read again" value="${esc(m.l || '')}" autocomplete="off">
     <div class="sr-cols" data-noswipe>${SR_COLS.map((cc, i) => `<button class="${i === col ? 'on' : ''}" data-srcol="${i}" style="--bc:${cc}" aria-label="Colour ${i + 1}"></button>`).join('')}</div>
     <div class="actions"><button class="pill-btn primary" id="srBmSave">Save</button>${old ? '<button class="pill-btn" id="srBmGo">Open</button><button class="pill-btn" id="srBmDel">Delete</button>' : ''}</div>`);
@@ -7484,21 +7753,33 @@ function srMarksSheet(id) {
   $('#sheetBody').onclick = null;
 }
 function srRefresh() {
-  if (SR.open) { const sc = $('#srScroll'), y = sc.scrollTop; const pos = srState().pos[SR.rb]; srRenderChapter(0); sc.scrollTop = y; if (pos) srMarkHere(); }
+  if (SR.open) {
+    const pos = srState().pos[SR.rb], sc = $('#srScroll'), y = sc.scrollTop;
+    if (srPaged()) { const pg = PG.p; srRenderChapter(0); srPgShow(pg, true); }
+    else { srRenderChapter(0); sc.scrollTop = y; }
+    if (pos) { srState().pos[SR.rb] = pos; srMarkHere(); srBarUpdate(); }
+  }
   if (tab === 'seerah') srRender();
 }
 document.addEventListener('click', e => {
+  const fl = e.target.closest('[data-srflt]'); if (fl) { haptic(); srState().flt = fl.dataset.srflt; srSaveSoon(); srRender(); return; }
+  const cf = e.target.closest('[data-srcf]'); if (cf) { haptic(); SR.cf = cf.dataset.srcf; $$('[data-srcf]').forEach(x => x.classList.toggle('on', x === cf)); srRenderList(); return; }
+  const md = e.target.closest('[data-srmode]'); if (md) { haptic(); srSetMode(SR.b, md.dataset.srmode); return; }
   const a = e.target.closest('[data-sr]');
   if (a) {
     haptic(); const k = a.dataset.sr, id = a.dataset.b, st = srState();
-    if (k === 'book') { SR.view = 'book'; SR.b = id; SR.q = ''; srRender(); $('#scroller').scrollTop = 0; }
+    if (k === 'book') { SR.view = 'book'; SR.b = id; SR.q = ''; SR.cf = 'all'; srRender(); $('#scroller').scrollTop = 0; }
     else if (k === 'home') { SR.view = 'home'; srRender(); $('#scroller').scrollTop = 0; }
     else if (k === 'cont') { const p = st.pos[id] || st.lpos[id] || { c: 0, p: 0 }; srOpen(id, p.c, p.p); }
     else if (k === 'listen') { const p = st.lpos[id] || st.pos[id] || { c: 0, p: 0 }; if (SRT.on && SRT.b === id) srtCmd(SRT.playing ? 'pause' : 'resume'); else srtStart(id, p.c, p.p); }
     else if (k === 'next') srGoChapter(SR.rc + 1);
-    else if (k === 'prev') srGoChapter(SR.rc - 1);
+    else if (k === 'prev') srGoChapter(SR.rc - 1, srPaged());
     else if (k === 'toggle') { if (SRT.on) srtCmd(SRT.playing ? 'pause' : 'resume'); else { const p = st.lpos[st.last] || st.pos[st.last]; if (p) srtStart(st.last, p.c, p.p); } }
     else if (k === 'open') { if (SRT.on) srOpen(SRT.b, SRT.c, SRT.p); }
+    else if (k === 'dldel') {
+      if (SRT.on && SRT.b === SR.b) { toast('Stop the narration first'); return; }
+      (srMeta(SR.b) || []).forEach(x => { try { B.seerahAudio('del:' + x.id); } catch (er) {} }); toast('Narration removed from this phone'); srRender();
+    }
     return;
   }
   const g = e.target.closest('[data-srgo]'); if (g) { haptic(); const [c, p] = g.dataset.srgo.split(':').map(Number); srOpen(SR.b, c, p, p > 0); return; }
@@ -7506,21 +7787,25 @@ document.addEventListener('click', e => {
   const bm = e.target.closest('[data-srbm]'); if (bm) { haptic(); const m = srState().bm.find(x => x.id === bm.dataset.srbm); if (m) { closeSheet(); srOpen(m.b, m.c, m.p, true); } }
 });
 
-/* --- read aloud --- */
-const SRT = { on: false, playing: false, b: '', c: 0, p: 0, k: 0, items: [], sleepAt: 0, sleepCh: false };
+/* --- listening: the device's voice, or the recorded narration of the battles --- */
+const SRT = { on: false, playing: false, b: '', c: 0, p: 0, k: 0, items: [], sleepAt: 0, sleepCh: false, dl: -1, lang: '' };
 function srtStart(id, c, p) {
   srEnsure(id, d => {
     const b = srBook(id), st = srState(); if (!b) return;
     try { if (self.AU && AU.active && isPlayingNow()) audio({ op: 'toggle' }); } catch (e) {}   // pause the Qur'an recitation
-    const items = []; let n = 0;
-    for (let ci = c; ci < d.length && (ci === c || n < 60000); ci++) d[ci][2].forEach((t, pi) => {
+    const meta = b.audio ? (srMeta(id) || [])[c] : null, items = []; let n = 0;
+    for (let ci = c; ci < d.length && (ci === c || (!b.audio && n < 60000)); ci++) d[ci][2].forEach((t, pi) => {
       if (ci === c && pi < p) return;
-      items.push({ c: ci, p: pi, h: d[ci][0], t: pi === 0 ? d[ci][0] + '.\n' + t : t }); n += t.length;
+      const it = { c: ci, p: pi, h: d[ci][0], t: pi === 0 && !b.audio ? d[ci][0] + '.\n' + t : t };
+      if (meta) it.a = meta.a[pi];
+      items.push(it); n += t.length;
     });
     if (!items.length) return;
-    Object.assign(SRT, { on: true, playing: true, b: id, c: items[0].c, p: items[0].p, k: 0, items: items.map(x => [x.c, x.p]) });
+    const lang = srPrim(id);
+    Object.assign(SRT, { on: true, playing: true, b: id, c: items[0].c, p: items[0].p, k: 0, items: items.map(x => [x.c, x.p]), dl: -1, lang });
     st.lpos[id] = { c: items[0].c, p: items[0].p }; st.last = id; srSave(true);
-    const payload = { b: id, lang: b.lang, title: b.tr, rate: st.rate || 1, items };
+    const payload = { b: id, lang, title: b.tr, rate: st.rate || 1, rep: st.rep == null ? 1 : st.rep, gap: st.gap || 0, items };
+    if (meta) payload.audio = { url: SR_CDN + meta.id + '.zip', dir: meta.id };
     if (B.seerahSpeak) { try { B.seerahSpeak(JSON.stringify(payload)); } catch (e) { toast("Couldn't start reading aloud"); } }
     else srWeb.play(payload);
     srPlayUI(); srSpeakMark();
@@ -7528,25 +7813,29 @@ function srtStart(id, c, p) {
 }
 function srtCmd(op) {
   if (B.seerahCmd) { try { B.seerahCmd(op); } catch (e) {} } else srWeb.cmd(op);
-  if (op === 'stop') { SRT.on = false; SRT.playing = false; srPlayUI(); srSpeakMark(); }
+  if (op === 'stop') { SRT.on = false; SRT.playing = false; SRT.dl = -1; srPlayUI(); srSpeakMark(); }
 }
 window.onSeerahTts = j => {
   let o; try { o = typeof j === 'string' ? JSON.parse(j) : j; } catch (e) { return; }
   const st = srState();
+  if (o.st === 'dl') { SRT.dl = o.dl >= 100 ? -1 : o.dl; srPlayUI(); return; }
+  if (o.st === 'neterr') { SRT.playing = false; SRT.dl = -1; srPlayUI(); toast("Couldn't download the narration. Check the connection and try again."); return; }
   if (o.st === 'nolang') { SRT.on = SRT.playing = false; srPlayUI(); srSpeakMark(); srNoVoice(); return; }
   if (o.st === 'err') { SRT.on = SRT.playing = false; srPlayUI(); toast("This device couldn't start reading aloud"); return; }
-  if (o.st === 'stop') { SRT.on = SRT.playing = false; srPlayUI(); srSpeakMark(); srSave(true); return; }
+  if (o.st === 'stop') { SRT.on = SRT.playing = false; SRT.dl = -1; srPlayUI(); srSpeakMark(); srSave(true); return; }
   if (o.st === 'end') {
     const d = srData(SRT.b), last = SRT.items[SRT.items.length - 1];
-    if (d && last && last[0] + 1 < d.length) { srtStart(SRT.b, last[0] + 1, 0); return; }
-    SRT.playing = false; srPlayUI(); toast('You reached the end of the book'); return;
+    if (st.cont !== false && d && last && last[0] + 1 < d.length) { srtStart(SRT.b, last[0] + 1, 0); return; }
+    SRT.playing = false; srPlayUI(); toast(d && last && last[0] + 1 < d.length ? 'End of the chapter' : 'You reached the end of the book'); return;
   }
   SRT.on = true; SRT.playing = !!o.playing && o.st !== 'pause' && o.st !== 'sleep';
   if (o.b) SRT.b = o.b; SRT.k = o.k | 0; SRT.c = o.c | 0; SRT.p = o.p | 0; SRT.sleepAt = o.sleepAt || 0; SRT.sleepCh = !!o.sleepCh;
+  if (o.st === 'play') SRT.dl = -1;
   if (SRT.b) { st.lpos[SRT.b] = { c: SRT.c, p: SRT.p }; srSaveSoon(); }
   if (o.st === 'sleep') toast('Sleep timer: paused');
   if (SR.open && SR.rb === SRT.b && st.follow !== false && SRT.playing) {
     if (SR.rc !== SRT.c) { SR.rc = SRT.c; st.pos[SR.rb] = { c: SRT.c, p: SRT.p }; srRenderChapter(SRT.p); }
+    else if (srPaged()) { const pg = PG.pp[SRT.p]; if (pg != null && pg !== PG.p) srPgShow(pg); }
     else { const e = $(`#srInner .sr-p[data-p="${SRT.p}"]`), sc = $('#srScroll'); if (e) sc.scrollTo({ top: Math.max(0, e.offsetTop - 80), behavior: 'smooth' }); }
   }
   srSpeakMark(); srPlayUI();
@@ -7557,7 +7846,7 @@ function srSpeakMark() {
 }
 function srNowHTML() {
   const b = srBook(SRT.b), d = srData(SRT.b), ch = d && d[SRT.c];
-  return `<div class="glass sr-cont"><small>${SRT.playing ? 'Reading aloud' : 'Paused'} · ${esc(b.tr)}</small><b>${ch ? srTxt(b, ch[0]) : ''}</b><span class="m">Paragraph ${SRT.p + 1}${ch ? ' of ' + ch[2].length : ''}</span>
+  return `<div class="glass sr-cont"><small>${SRT.playing ? (b.audio ? 'Playing' : 'Reading aloud') : 'Paused'} · ${esc(b.tr)}</small><b>${ch ? srTxt(b, ch[0]) : ''}</b><span class="m">${srUnit(b) === 'scene' ? 'Scene' : srUnit(b) === 'hadith' ? 'Hadith' : 'Paragraph'} ${SRT.p + 1}${ch ? ' of ' + ch[2].length : ''}</span>
     <div class="row"><button class="pill-btn primary" data-sr="toggle">${SRT.playing ? SRI.pause + 'Pause' : SRI.play + 'Resume'}</button><button class="pill-btn" data-sr="open">${SRI.book}Open the text</button></div></div>`;
 }
 function srPlayUI() {
@@ -7565,15 +7854,22 @@ function srPlayUI() {
   if (tab === 'seerah' && !SR.open && SR.view === 'home') srRender();
   if (tab === 'today' && $('#srToday')) $('#srToday').outerHTML = srTodayHTML();
   if (!el) return;
-  if (!SRT.on || !SR.open) { el.hidden = true; $('#srScroll').style.paddingBottom = ''; return; }
-  const b = srBook(SRT.b), d = srData(SRT.b), ch = d && d[SRT.c], r = st.rate || 1;
-  const sl = SRT.sleepCh ? 'End of chapter' : SRT.sleepAt > Date.now() ? Math.max(1, Math.round((SRT.sleepAt - Date.now()) / 60000)) + ' min' : 'Sleep';
-  el.hidden = false;
-  el.innerHTML = `<div class="top"><div class="i"><b dir="auto">${ch ? esc(ch[0]) : ''}</b><small>${esc(b ? b.tr : '')} · paragraph ${SRT.p + 1}${ch ? ' of ' + ch[2].length : ''}</small></div>
-    <button class="chipb" data-srpl="rate">${r}×</button><button class="chipb ${SRT.sleepAt || SRT.sleepCh ? 'on' : ''}" data-srpl="sleep">${sl}</button></div>
-    <div class="ctl"><button class="ctl-btn" data-srpl="prev" aria-label="Previous paragraph">${SRI.prev}</button><button class="big-play" data-srpl="toggle" aria-label="${SRT.playing ? 'Pause' : 'Play'}">${SRT.playing ? SRI.pause : SRI.play}</button>
-    <button class="ctl-btn" data-srpl="next" aria-label="Next paragraph">${SRI.next}</button><button class="ctl-btn" data-srpl="stop" aria-label="Stop">${SRI.stop}</button></div>`;
-  $('#srScroll').style.paddingBottom = `calc(var(--sab) + ${el.offsetHeight + 40}px)`;
+  const sc = $('#srScroll'), oldPad = sc.style.paddingBottom;
+  if (!SRT.on || !SR.open) { el.hidden = true; sc.style.paddingBottom = srPaged() && SR.open ? 'calc(var(--sab) + 76px)' : ''; }
+  else {
+    const b = srBook(SRT.b), d = srData(SRT.b), ch = d && d[SRT.c], r = st.rate || 1, rp = st.rep == null ? 1 : st.rep;
+    const sl = SRT.sleepCh ? 'End of chapter' : SRT.sleepAt > Date.now() ? Math.max(1, Math.round((SRT.sleepAt - Date.now()) / 60000)) + ' min' : 'Sleep';
+    const sub = SRT.dl >= 0 ? `Downloading the narration · ${SRT.dl}%` : `${esc(b ? b.tr : '')} · ${srUnit(b)} ${SRT.p + 1}${ch ? ' of ' + ch[2].length : ''}`;
+    el.hidden = false;
+    el.innerHTML = `<div class="top"><div class="i"><b dir="auto">${ch ? esc(ch[0]) : ''}</b><small>${sub}</small></div></div>
+      <div class="ctl"><button class="ctl-btn" data-srpl="prev" aria-label="Previous">${SRI.prev}</button><button class="big-play" data-srpl="toggle" aria-label="${SRT.playing ? 'Pause' : 'Play'}">${SRT.playing ? SRI.pause : SRI.play}</button>
+      <button class="ctl-btn" data-srpl="next" aria-label="Next">${SRI.next}</button><button class="ctl-btn" data-srpl="stop" aria-label="Stop">${SRI.stop}</button></div>
+      <div class="sr-chipr"><button class="chipb" data-srpl="rate">${r}×</button><button class="chipb ${rp !== 1 ? 'on' : ''}" data-srpl="opts">${rp === 0 ? 'Repeat ∞' : rp > 1 ? 'Repeat ' + rp + '×' : 'Repeat'}</button><button class="chipb ${st.gap ? 'on' : ''}" data-srpl="opts">${st.gap ? 'Pause ' + st.gap / 1000 + 's' : 'Pause'}</button><button class="chipb ${SRT.sleepAt || SRT.sleepCh ? 'on' : ''}" data-srpl="sleep">${sl}</button></div>`;
+    sc.style.paddingBottom = `calc(var(--sab) + ${el.offsetHeight + (srPaged() ? 92 : 40)}px)`;
+  }
+  const nav = $('#srPgNav'); if (nav) nav.style.bottom = SRT.on && SR.open ? `calc(var(--sab) + ${el.offsetHeight + 22}px)` : '';
+  if (SR.open && srPaged() && sc.style.paddingBottom !== oldPad) { const p = (st.pos[SR.rb] || {}).p || 0; srPgLayout(); srPgShow(PG.pp[p] || 0, true); }
+  else srPgNav();
 }
 $('#srPlay').addEventListener('click', e => {
   const x = e.target.closest('[data-srpl]'); if (!x) return; haptic(); const k = x.dataset.srpl;
@@ -7581,14 +7877,35 @@ $('#srPlay').addEventListener('click', e => {
   else if (k === 'next' || k === 'prev' || k === 'stop') srtCmd(k);
   else if (k === 'rate') srRateSheet();
   else if (k === 'sleep') srSleepSheet();
+  else if (k === 'opts') srPlayOpts();
 });
 function srRateSheet() {
-  const st = srState(), rates = [0.75, 0.9, 1, 1.15, 1.25, 1.5, 1.75, 2];
-  openSheet(`<h3>Reading speed</h3><div class="chips sr-row" data-noswipe style="margin:0;padding:0;flex-wrap:wrap">${rates.map(r => `<button class="${r === (st.rate || 1) ? 'on' : ''}" data-srrate="${r}">${r}×</button>`).join('')}</div>`);
+  const st = srState(), rates = [0.5, 0.75, 0.9, 1, 1.15, 1.25, 1.5, 1.75, 2];
+  openSheet(`<h3>${srBook(SRT.b || SR.rb) && srBook(SRT.b || SR.rb).audio ? 'Playback speed' : 'Reading speed'}</h3><div class="chips sr-row" data-noswipe style="margin:0;padding:0;flex-wrap:wrap">${rates.map(r => `<button class="${r === (st.rate || 1) ? 'on' : ''}" data-srrate="${r}">${r}×</button>`).join('')}</div>`);
   $('#sheetBody').onclick = e => { const b = e.target.closest('[data-srrate]'); if (!b) return; haptic(); st.rate = +b.dataset.srrate; srSave(true); srtCmd('rate:' + st.rate); closeSheet(); srPlayUI(); };
 }
+// Like the Qur'an player: repeat each paragraph, pause after each one, carry on to the next chapter or stop
+function srPlayOpts() {
+  const st = srState(), rp = st.rep == null ? 1 : st.rep;
+  const row = (attr, list, cur, fmt) => `<div class="chips sr-row" data-noswipe style="margin:0;padding:0;flex-wrap:wrap">${list.map(v => `<button class="${+v === +cur ? 'on' : ''}" ${attr}="${v}">${fmt(v)}</button>`).join('')}</div>`;
+  openSheet(`<h3>Listening options</h3>
+    <div class="opt-h">Speed</div>${row('data-srrate', [0.5, 0.75, 0.9, 1, 1.15, 1.25, 1.5, 1.75, 2], st.rate || 1, v => v + '×')}
+    <div class="opt-h">Repeat each paragraph<div class="sub sr-sub2">Hear a hadith or a passage again before moving on</div></div>${row('data-srrep', [1, 2, 3, 5, 0], rp, v => +v === 0 ? '∞' : v + '×')}
+    <div class="opt-h">Pause after each paragraph</div>${row('data-srgap', [0, 1000, 2000, 3000, 5000, 8000], st.gap || 0, v => +v === 0 ? 'Off' : v / 1000 + 's')}
+    <div class="set-row" style="padding:14px 0 0"><div class="lbl">Continue to the next chapter<div class="sub">When a chapter finishes; off stops at its end</div></div><button class="switch ${st.cont !== false ? 'on' : ''}" id="srCont" aria-label="Continue to the next chapter"></button></div>
+    <div class="actions" style="margin-top:14px"><button class="pill-btn" id="srSleepO">Sleep timer</button>${B.seerahVoiceSettings ? '<button class="pill-btn" id="srVoiceO">Device voices</button>' : ''}</div>`);
+  const pick = (attr, x) => $$(`#sheetBody [${attr}]`).forEach(y => y.classList.toggle('on', y === x));
+  $('#srCont').onclick = e => { haptic(); st.cont = st.cont === false; e.currentTarget.classList.toggle('on', st.cont); srSave(true); };
+  $('#srSleepO').onclick = () => { haptic(); srSleepSheet(); };
+  if ($('#srVoiceO')) $('#srVoiceO').onclick = () => { haptic(); try { B.seerahVoiceSettings(); } catch (er) {} closeSheet(); };
+  $('#sheetBody').onclick = e => {
+    let x = e.target.closest('[data-srrate]'); if (x) { haptic(); pick('data-srrate', x); st.rate = +x.dataset.srrate; srSave(true); if (SRT.on) srtCmd('rate:' + st.rate); srPlayUI(); return; }
+    x = e.target.closest('[data-srrep]'); if (x) { haptic(); pick('data-srrep', x); st.rep = +x.dataset.srrep; srSave(true); if (SRT.on) srtCmd('rep:' + st.rep); srPlayUI(); return; }
+    x = e.target.closest('[data-srgap]'); if (x) { haptic(); pick('data-srgap', x); st.gap = +x.dataset.srgap; srSave(true); if (SRT.on) srtCmd('gap:' + st.gap); srPlayUI(); }
+  };
+}
 function srSleepSheet() {
-  openSheet(`<h3>Sleep timer</h3><div class="about" style="padding:0 0 12px">Reading stops by itself after the time you pick.</div><div class="chips sr-row" data-noswipe style="margin:0;padding:0;flex-wrap:wrap">
+  openSheet(`<h3>Sleep timer</h3><div class="about" style="padding:0 0 12px">Listening stops by itself after the time you pick.</div><div class="chips sr-row" data-noswipe style="margin:0;padding:0;flex-wrap:wrap">
     ${[[0, 'Off'], [10, '10 min'], [20, '20 min'], [30, '30 min'], [45, '45 min'], [60, '1 hour'], ['ch', 'End of this chapter']].map(([v, l]) => `<button data-srsleep="${v}">${l}</button>`).join('')}</div>`);
   $('#sheetBody').onclick = e => {
     const b = e.target.closest('[data-srsleep]'); if (!b) return; haptic(); const v = b.dataset.srsleep;
@@ -7597,47 +7914,90 @@ function srSleepSheet() {
   };
 }
 function srNoVoice() {
-  const b = srBook(SRT.b || SR.rb), ln = b ? srL(b)[0] : '';
-  openSheet(`<h3>No ${b && b.lang === 'ar' ? 'Arabic' : b && b.lang === 'ur' ? 'Urdu' : 'English'} voice yet</h3><div class="about" style="padding:0 0 12px">Reading aloud uses the text-to-speech voices on this device, and none is installed for ${esc(ln)}. Add one in the speech settings (for example Speech Services by Google → Install voice data), then try again.</div>
+  const l = SRT.lang || (SR.rb ? srPrim(SR.rb) : 'ar'), ln = (SR_LANG[l] || SR_LANG.ar)[0];
+  openSheet(`<h3>No ${l === 'ar' ? 'Arabic' : l === 'ur' ? 'Urdu' : 'English'} voice yet</h3><div class="about" style="padding:0 0 12px">Reading aloud uses the text-to-speech voices on this device, and none is installed for ${esc(ln)}. Add one in the speech settings (for example Speech Services by Google → Install voice data), then try again.</div>
     ${B.seerahVoiceSettings ? '<div class="actions"><button class="pill-btn primary" id="srVoiceSet">Open speech settings</button></div>' : ''}`);
   const v = $('#srVoiceSet'); if (v) v.onclick = () => { haptic(); try { B.seerahVoiceSettings(); } catch (e) {} closeSheet(); };
 }
-// In a browser there is no native service: speak with speechSynthesis, one paragraph at a time
+// In a browser there is no native service: speak with speechSynthesis, or play the narration clips from the archive
 const srWeb = {
-  items: [], k: 0, lang: 'ar', rate: 1, gen: 0, playing: false, sleepT: 0, sleepAt: 0, sleepCh: -1,
+  items: [], k: 0, lang: 'ar', rate: 1, rep: 1, repLeft: 1, gap: 0, gen: 0, playing: false, sleepT: 0, sleepAt: 0, sleepCh: -1, audio: null, el: null, urls: {},
   ok() { return 'speechSynthesis' in self && 'SpeechSynthesisUtterance' in self; },
   emit(st) { const it = this.items[this.k] || {}; window.onSeerahTts({ st, k: this.k, c: it.c, p: it.p, b: SRT.b, playing: this.playing, sleepAt: this.sleepAt, sleepCh: this.sleepCh >= 0 }); },
   voice() { const vs = speechSynthesis.getVoices(); return vs.find(v => v.lang && v.lang.toLowerCase().replace('_', '-').startsWith(this.lang)); },
   play(pl) {
-    if (!this.ok()) { window.onSeerahTts({ st: 'nolang' }); return; }
-    this.items = pl.items; this.lang = pl.lang; this.rate = pl.rate || 1; this.k = 0; this.sleepCh = -1; this.playing = true; this.say();
+    this.stopSound();
+    this.items = pl.items; this.lang = pl.lang; this.rate = pl.rate || 1; this.rep = pl.rep == null ? 1 : pl.rep; this.repLeft = this.rep; this.gap = pl.gap || 0;
+    this.k = 0; this.sleepCh = -1; this.playing = true; this.audio = pl.audio || null;
+    if (!this.audio && !this.ok()) { window.onSeerahTts({ st: 'nolang' }); return; }
+    this.say();
+  },
+  stopSound() { this.gen++; try { speechSynthesis.cancel(); } catch (e) {} if (this.el) { try { this.el.pause(); } catch (e) {} } },
+  after() {
+    const again = this.rep === 0 || this.repLeft > 1;
+    if (again && this.rep !== 0) this.repLeft--; if (!again) this.repLeft = this.rep;
+    const g = this.gen, go = () => { if (g !== this.gen || !this.playing) return; if (!again) this.k++; this.say(); };
+    if (this.gap) setTimeout(go, this.gap); else go();
+  },
+  async clips() {
+    const a = this.audio; if (this.urls[a.dir]) return this.urls[a.dir];
+    window.onSeerahTts({ st: 'dl', dl: 0 });
+    const buf = new Uint8Array(await (await fetch(a.url)).arrayBuffer()), dv = new DataView(buf.buffer), map = {};
+    let e = buf.length - 22; while (e > 0 && dv.getUint32(e, true) !== 0x06054b50) e--;
+    let o = dv.getUint32(e + 16, true); const n = dv.getUint16(e + 10, true);
+    for (let i = 0; i < n; i++) {
+      const size = dv.getUint32(o + 20, true), nl = dv.getUint16(o + 28, true), xl = dv.getUint16(o + 30, true), cl = dv.getUint16(o + 32, true), lo = dv.getUint32(o + 42, true);
+      const name = new TextDecoder().decode(buf.subarray(o + 46, o + 46 + nl));
+      const start = lo + 30 + dv.getUint16(lo + 26, true) + dv.getUint16(lo + 28, true);
+      if (dv.getUint16(o + 10, true) === 0 && /\.m4a$/.test(name)) map[name] = URL.createObjectURL(new Blob([buf.subarray(start, start + size)], { type: 'audio/mp4' }));
+      o += 46 + nl + xl + cl;
+    }
+    window.onSeerahTts({ st: 'dl', dl: 100 });
+    return this.urls[a.dir] = map;
   },
   say() {
     const g = ++this.gen; try { speechSynthesis.cancel(); } catch (e) {}
     const it = this.items[this.k]; if (!it) { this.playing = false; this.emit('end'); return; }
     if (this.sleepCh >= 0 && it.c !== this.sleepCh) { this.sleepCh = -1; this.playing = false; this.emit('sleep'); return; }
+    this.playing = true;
+    if (this.audio) {
+      this.clips().then(map => {
+        if (g !== this.gen || !this.playing) return;
+        const u = map[it.a]; if (!u) { this.k++; this.say(); return; }
+        if (!this.el) this.el = new Audio();
+        const el = this.el; el.src = u; el.playbackRate = this.rate; el.onended = () => { if (g === this.gen && this.playing) this.after(); };
+        el.play().catch(() => {}); this.emit('play');
+      }).catch(() => { this.playing = false; window.onSeerahTts({ st: 'neterr' }); });
+      return;
+    }
     const vs = speechSynthesis.getVoices(), v = this.voice();
     if (vs.length && !v) { this.playing = false; this.emit('nolang'); return; }
     const parts = (it.t.match(/[^.!?؟۔،,\n]+[.!?؟۔،,\n]*\s*/g) || [it.t]).reduce((a, s) => { if (a.length && (a[a.length - 1] + s).length < 220) a[a.length - 1] += s; else a.push(s); return a; }, []);
-    this.playing = true; this.emit('play');
+    this.emit('play');
     parts.forEach((s, i) => {
       const u = new SpeechSynthesisUtterance(s); if (v) u.voice = v; u.lang = v ? v.lang : this.lang; u.rate = this.rate;
-      if (i === parts.length - 1) u.onend = () => { if (g === this.gen && this.playing) { this.k++; this.say(); } };
+      if (i === parts.length - 1) u.onend = () => { if (g === this.gen && this.playing) this.after(); };
       u.onerror = () => {};
       speechSynthesis.speak(u);
     });
   },
   cmd(op) {
-    if (op === 'pause') { this.playing = false; this.gen++; try { speechSynthesis.cancel(); } catch (e) {} this.emit('pause'); }
-    else if (op === 'resume') { if (this.items.length) this.say(); }
-    else if (op === 'next') { if (this.k + 1 < this.items.length) { this.k++; this.say(); } }
-    else if (op === 'prev') { this.k = Math.max(0, this.k - 1); this.say(); }
-    else if (op === 'stop') { this.playing = false; this.gen++; clearTimeout(this.sleepT); this.sleepAt = 0; try { speechSynthesis.cancel(); } catch (e) {} window.onSeerahTts({ st: 'stop' }); }
-    else if (op.startsWith('rate:')) { this.rate = +op.slice(5) || 1; if (this.playing) this.say(); }
+    if (op === 'pause') { this.playing = false; this.stopSound(); this.emit('pause'); }
+    else if (op === 'resume') {
+      if (!this.items.length) return;
+      if (this.audio && this.el && this.el.src && !this.el.ended && this.el.currentTime > 0) { this.playing = true; const g = ++this.gen; this.el.onended = () => { if (g === this.gen && this.playing) this.after(); }; this.el.play().catch(() => {}); this.emit('play'); }
+      else this.say();
+    }
+    else if (op === 'next') { if (this.k + 1 < this.items.length) { this.k++; this.repLeft = this.rep; this.say(); } }
+    else if (op === 'prev') { this.k = Math.max(0, this.k - 1); this.repLeft = this.rep; this.say(); }
+    else if (op === 'stop') { this.playing = false; this.stopSound(); clearTimeout(this.sleepT); this.sleepAt = 0; window.onSeerahTts({ st: 'stop' }); }
+    else if (op.startsWith('rate:')) { this.rate = +op.slice(5) || 1; if (this.audio && this.el) this.el.playbackRate = this.rate; else if (this.playing) this.say(); }
+    else if (op.startsWith('rep:')) { this.rep = Math.max(0, +op.slice(4) || 0); this.repLeft = this.rep; }
+    else if (op.startsWith('gap:')) this.gap = Math.max(0, +op.slice(4) || 0);
     else if (op === 'sleep:ch') { const it = this.items[this.k]; this.sleepCh = it ? it.c : -1; }
     else if (op.startsWith('sleep:')) {
       const ms = +op.slice(6) || 0; clearTimeout(this.sleepT); this.sleepCh = -1; this.sleepAt = ms ? Date.now() + ms : 0;
-      if (ms) this.sleepT = setTimeout(() => { this.sleepAt = 0; if (this.playing) { this.playing = false; this.gen++; try { speechSynthesis.cancel(); } catch (e) {} this.emit('sleep'); } }, ms);
+      if (ms) this.sleepT = setTimeout(() => { this.sleepAt = 0; if (this.playing) { this.playing = false; this.stopSound(); this.emit('sleep'); } }, ms);
     }
   }
 };
@@ -7655,15 +8015,15 @@ function srTodayHTML() {
   const st = srState(), b = srBook(st.last), p = b && (st.pos[b.id] || st.lpos[b.id]);
   if (!b || !p) return '<div id="srToday" hidden></div>';
   const d = srData(b.id), ch = d && d[(SRT.on && SRT.b === b.id ? SRT.c : p.c)];
-  return `<div class="glass sr-today" id="srToday" role="button" data-sr="cont" data-b="${b.id}"><span class="ic">${SRI.book}</span><span class="t"><small>${SRT.on ? (SRT.playing ? 'Seerah · reading aloud' : 'Seerah · paused') : 'Continue the Seerah'}</small><b dir="auto">${ch ? esc(ch[0]) : esc(b.tr)}</b></span>
+  return `<div class="glass sr-today" id="srToday" role="button" data-sr="cont" data-b="${b.id}"><span class="ic">${SRI.book}</span><span class="t"><small>${SRT.on ? (SRT.playing ? 'Seerah · ' + (b.audio ? 'playing' : 'reading aloud') : 'Seerah · paused') : 'Continue the Seerah'}</small><b dir="auto">${ch ? esc(ch[0]) : esc(b.tr)}</b></span>
     <button class="c2-play" data-sr="toggle" aria-label="${SRT.playing ? 'Pause' : 'Listen'}">${SRT.playing ? SRI.pause : SRI.play}</button></div>`;
 }
-{ const oc = continueHTML; continueHTML = () => { let h = oc(); try { h += srTodayHTML(); const st = srState(); if (st.last && !srData(st.last)) srEnsure(st.last, () => { if (tab === 'today' && $('#srToday')) $('#srToday').outerHTML = srTodayHTML(); }); } catch (e) {} return h; }; }
+{ const oc = continueHTML; continueHTML = () => { let h = oc(); try { h += srTodayHTML(); const st = srState(); if (st.last && srBook(st.last) && !srData(st.last)) srEnsure(st.last, () => { if (tab === 'today' && $('#srToday')) $('#srToday').outerHTML = srTodayHTML(); }); } catch (e) {} return h; }; }
 { const of = window.openFromWidget; window.openFromWidget = (t, ref) => {
   if (t !== 'seerah') return of(t, ref);
   closeSheet(); srSync(); go('seerah');
   const st = srState(), id = SRT.on ? SRT.b : st.last, p = id && (SRT.on ? { c: SRT.c, p: SRT.p } : st.pos[id]);
-  if (id && p) setTimeout(() => srOpen(id, p.c, p.p), 200);
+  if (id && p && srBook(id)) setTimeout(() => srOpen(id, p.c, p.p), 200);
 }; }
 { const ob = window.onBack; window.onBack = () => {
   if ($('#sheet').classList.contains('on') || $('#tour').classList.contains('on')) return ob();
@@ -7681,7 +8041,7 @@ else {
   document.fonts && document.fonts.ready.then(() => { if (tab !== 'wconfig') go(tab); }); go('today');
   // First launch only: people updating from an older version already have settings, so they skip it.
   // Show the tour once to everyone (new installs and people updating to this version); later from Settings.
-  if ((set.tourV || 0) < 6) setTimeout(openTour, 350);
+  if ((set.tourV || 0) < 7) setTimeout(openTour, 350);
   setTimeout(ptAutoLocate, 1500);
   setTimeout(snWatchCharge, 2500);
   setTimeout(plantAlarmSync, 3000);

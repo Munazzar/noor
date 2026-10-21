@@ -1,6 +1,6 @@
 # Noor
 
-Noor for the web: the Noor Android app (v3.28.1) running in the browser. It has daily Qur'an and Sunnah cards, prayer times with adhan and alerts, Qibla, the Qur'an reader with progress, recitation with 27 reciters, Sahih al-Bukhari and Sahih Muslim offline, adhkar, the "In times of…" topics, the progress tracker, focus mode, the dock clock and the Seerah (the Prophet's life to read and listen to, with labelled bookmarks).
+Noor for the web: the Noor Android app (v3.28.1) running in the browser. It has daily Qur'an and Sunnah cards, prayer times with adhan and alerts, Qibla, the Qur'an reader with progress, recitation with 27 reciters, Sahih al-Bukhari and Sahih Muslim offline, adhkar, the "In times of…" topics, the progress tracker, focus mode, the dock clock and the Seerah (the Prophet's life to read and listen to: Seerah in Sahih al-Bukhari in Arabic, English and Urdu, the Shama'il, the great battles with recorded narration and maps, and five classical Arabic biographies, with a page view, filters and labelled bookmarks).
 
 **Live:** https://munazzar.github.io/noor/
 
@@ -17,7 +17,7 @@ The Android app is a WebView around `index.html`. Its native features are called
 | Notifications and AlarmManager | Notification API; reminders and prayer alerts fire while Noor is open |
 | Live daily verse and hadith sync, tafsir, hadith search | Same public APIs (alquran.cloud, fawazahmed0/hadith-api, quran.com) |
 | Focus mode (DND, screen pinning) | Full screen and Screen Wake Lock |
-| SeerahVoice (reads the Seerah aloud with the device's text-to-speech) | `speechSynthesis` with this device's voices |
+| SeerahVoice (reads the Seerah aloud with the device's text-to-speech, plays the battle narration) | `speechSynthesis` with this device's voices; the narration archive is fetched from jsDelivr and played with `<audio>` |
 
 On screens 1024px and wider, `web/desktop.css` and `web/desktop.js` switch to a desktop layout: a side navigation bar, a wider page, two-column Today and Library, multi-column surah lists and grids, and sheets that open as centred dialogs. Phones get the app's layout unchanged.
 
