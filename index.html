@@ -1343,16 +1343,27 @@ select.name-in option{color:#111}
 .mushaf-bg .bv{border-bottom-color:rgba(140,110,50,.2)}
 .mushaf-bg .r-book{box-shadow:0 18px 40px -22px rgba(90,60,20,.55),0 0 0 1px rgba(140,110,50,.25)}
 
-/* 3.26: tajweed colours (quran.com palette, lifted for dark mode) */
-.tj-h,.tj-l,.tj-s{color:#9a9a9a}.tj-n{color:#537fff}.tj-p{color:#4050ff}.tj-f{color:#2144c1}.tj-o{color:#2144c1}.tj-x{color:#000ebc}
-.tj-q{color:#dd0008}.tj-g{color:#ff7e1e}.tj-k{color:#9400a8}.tj-K{color:#d500b7}.tj-d{color:#169777}.tj-D{color:#169200}.tj-S{color:#58b800}.tj-i{color:#26bffd}.tj-j,.tj-J{color:#a1a1a1}
-:root:not(.light) .tj-n{color:#8fa8ff}:root:not(.light) .tj-p{color:#7d88ff}:root:not(.light) .tj-f,:root:not(.light) .tj-o{color:#6f8cff}:root:not(.light) .tj-x{color:#5a6bff}
-:root:not(.light) .tj-k{color:#d06ce0}:root:not(.light) .tj-d{color:#35c49e}:root:not(.light) .tj-D{color:#3fcf3a}:root:not(.light) .tj-h,:root:not(.light) .tj-l,:root:not(.light) .tj-s{color:#8e949f}
+/* 3.32: tajweed colours of the King Fahd Complex tajweed mushaf, as quran.com shows them (its light, dark and sepia palettes) */
+.tj-s{color:#a5a5a5}.tj-n{color:#ce9e00}.tj-p{color:#ff7b00}.tj-o{color:#f40000}.tj-x{color:#b50000}.tj-g{color:#09b000}.tj-q{color:#2fadff}.tj-t{color:#3f48e6}
+:root:not(.light) .tj-s{color:#999}:root:not(.light) .tj-n{color:#ffc1e0}:root:not(.light) .tj-p{color:#ff8e3b}:root:not(.light) .tj-o{color:#ff5e8e}
+:root:not(.light) .tj-x{color:#e30000}:root:not(.light) .tj-g{color:#26b55d}:root:not(.light) .tj-q{color:#00deff}:root:not(.light) .tj-t{color:#3c84d5}
+:root.light .pg.madinah .tj-s{color:#ababab}:root.light .pg.madinah .tj-n{color:#c09725}:root.light .pg.madinah .tj-p{color:#e67b00}:root.light .pg.madinah .tj-o{color:#ff0000}
+:root.light .pg.madinah .tj-x{color:#b7001c}:root.light .pg.madinah .tj-q{color:#00b4e0}:root.light .pg.madinah .tj-t{color:#134fe1}
 .tj-leg{display:grid;gap:6px}
 .tj-li{display:flex;gap:10px;align-items:flex-start;padding:6px 0;border-bottom:1px solid var(--field-border)}
-.tj-sw{flex:none;width:14px;height:14px;border-radius:4px;margin-top:3px;background:currentColor}
+.tj-sw{flex:none;width:14px;height:14px;border-radius:50%;margin-top:3px;background:currentColor}
 .tj-li b{font-size:14px;font-weight:700;display:block}
-.tj-li small{font-size:12px;color:var(--text-2)}
+.tj-li b span{font-family:"Amiri Quran",serif;font-weight:400;font-size:15px;margin-left:6px}
+.tj-li small{font-size:12px;color:var(--text-2);display:block}
+.tj-li .ar-ex{font-family:"Amiri Quran",serif;font-size:21px;line-height:1.7;direction:rtl;color:var(--text);margin-top:2px}
+/* the colour key under the reader header, like quran.com's: one row that scrolls sideways, tap for the full key */
+.tj-bar{display:flex;gap:12px;margin:8px -2px 0;padding:2px 2px;overflow-x:auto;scrollbar-width:none;font-size:11.5px;font-weight:600;color:var(--text-2);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.tj-bar::-webkit-scrollbar{display:none}
+.tj-bar{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent)}
+.tj-bar[hidden]{display:none}
+.tj-chip{display:inline-flex;align-items:center;gap:5px;white-space:nowrap;flex:none}
+.tj-chip i{width:9px;height:9px;border-radius:50%;background:currentColor;flex:none}
+.tj-bar .tj-more{margin-left:auto;padding-left:4px;color:var(--text-2);opacity:.8}
 
 /* 3.26: Madinah mushaf pages — cream page, blue floral border, surah and juz in the top band, the page number in a medallion */
 :root{--mf-tile:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'%3E%3Crect width='22' height='22' fill='%236fa9cf'/%3E%3Cpath d='M0 11 C5 3 17 19 22 11' stroke='%23f6f3e8' stroke-width='1' fill='none'/%3E%3Cpath d='M11 0 C4 6 18 16 11 22' stroke='%23f6f3e8' stroke-width='.8' fill='none' opacity='.75'/%3E%3Cpath d='M2 2 q3 1 3 4 M20 20 q-3 -1 -3 -4' stroke='%232d5f86' stroke-width='.6' fill='none' opacity='.8'/%3E%3Cg transform='translate%285.5 16.5%29'%3E%3Cellipse cx='0' cy='-1.5' rx='1' ry='1.6' transform='rotate%280%29' fill='%23d6606e' stroke='%237a1f2e' stroke-width='.3'/%3E%3Cellipse cx='0' cy='-1.5' rx='1' ry='1.6' transform='rotate%2890%29' fill='%23d6606e' stroke='%237a1f2e' stroke-width='.3'/%3E%3Cellipse cx='0' cy='-1.5' rx='1' ry='1.6' transform='rotate%28180%29' fill='%23d6606e' stroke='%237a1f2e' stroke-width='.3'/%3E%3Cellipse cx='0' cy='-1.5' rx='1' ry='1.6' transform='rotate%28270%29' fill='%23d6606e' stroke='%237a1f2e' stroke-width='.3'/%3E%3Ccircle r='.8' fill='%23f7e7b0'/%3E%3C/g%3E%3Cg transform='translate%2816.5 5.5%29'%3E%3Cellipse cx='0' cy='-1' rx='.65' ry='1.05' transform='rotate%2845%29' fill='%23d6606e' stroke='%237a1f2e' stroke-width='.25'/%3E%3Cellipse cx='0' cy='-1' rx='.65' ry='1.05' transform='rotate%28135%29' fill='%23d6606e' stroke='%237a1f2e' stroke-width='.25'/%3E%3Cellipse cx='0' cy='-1' rx='.65' ry='1.05' transform='rotate%28225%29' fill='%23d6606e' stroke='%237a1f2e' stroke-width='.25'/%3E%3Cellipse cx='0' cy='-1' rx='.65' ry='1.05' transform='rotate%28315%29' fill='%23d6606e' stroke='%237a1f2e' stroke-width='.25'/%3E%3Ccircle r='.55' fill='%23f7e7b0'/%3E%3C/g%3E%3C/svg%3E");--mf-paper:#fdf8e8;--mf-ink:#15130f;--mf-edge:#2d5f86;--mf-lab:#dcebf5;--mf-gold:#b8923e;--mf-mark:#8a3b4a}
@@ -1926,7 +1937,7 @@ select.name-in option{color:#111}
       <p><b>Live content</b> comes from api.alquran.cloud (Qur'an) and the open hadith-api (Bukhari &amp; Muslim only). It's labelled <b>NEW</b>. Tap any card to open its source.</p>
       <p><b>Bukhari &amp; Muslim</b> in the Library: the complete Sahih al-Bukhari (7,554 hadith) and Sahih Muslim (7,360), Arabic with English, from the open hadith-api (fawazahmed0), numbered as on sunnah.com.</p>
       <p><b>Adhkar &amp; Ruqyah</b>: morning and evening adhkar from the Morning-and-Evening-Adhkar-DB (MIT), which follows Hisn al-Muslim with each source and grading; one narration graded weak there is left out. The other adhkar and the ruqyah are only from the Qur'an, Bukhari and Muslim, or narrations graded sahih or hasan, each shown with its reference. References to Bukhari or Muslim open the full hadith in the app.</p>
-      <p><b>Recitations</b> stream from everyayah.com (verse by verse) and mp3quran.net (whole surahs, with their verse timings), and are saved on this device only if you download them. <b>Tajweed colours</b>: rule positions from the open quran-tajweed data by Collin Fair (CC BY 4.0). <b>Madinah page numbers</b>: the quran-meta package (MIT).</p>
+      <p><b>Recitations</b> stream from everyayah.com (verse by verse) and mp3quran.net (whole surahs, with their verse timings), and are saved on this device only if you download them. <b>Tajweed colours</b>: the colour scheme of the King Fahd Complex tajweed mushaf, as on quran.com. Rule positions from quran.com's tajweed text (via the MIT-licensed react-native-quran-tajweed package), checked against that mushaf. <b>Madinah page numbers</b>: the quran-meta package (MIT).</p>
       <p><b>Fonts</b>: Amiri Quran, Inter, Playfair Display, Cormorant Garamond, Dancing Script, Great Vibes, Caveat, Quicksand, Bebas Neue and DSEG7, all under the SIL Open Font License.</p>
       <p><button class="pill-btn" id="openSunnah">Open sunnah.com</button> <button class="pill-btn" id="openQuran">Open quran.com</button></p>
     </div>
@@ -3317,50 +3328,61 @@ document.addEventListener('click', e => {
   if (t) { haptic(); const n = +t.dataset.s, m = QMETA[n - 1]; openReader(n, m && Q.pos > m.start && Q.pos < m.start + m.count ? Q.pos - m.start + 1 : 0); }
 });
 
-/* ---------- 3.26: tajweed colours (data/tajweed.js, loaded the first time tajweed is turned on) ---------- */
+/* ---------- 3.32: tajweed colours (data/tajweed2.js, loaded the first time tajweed is turned on) ----------
+   The colours and rules of the King Fahd Complex tajweed mushaf, which is what quran.com shows. In the key's order: */
 const TJ_RULES = [
-  ['h', 'Hamzat al-wasl', 'A joining hamza, not pronounced when joined'], ['l', 'Lam shamsiyyah', 'The lam of "al-" merges into a sun letter'], ['s', 'Silent', 'Written but not pronounced'],
-  ['n', 'Madd 2', 'Natural prolongation: 2 counts'], ['p', 'Madd 2, 4, 6', 'Permissible (ʿarid, leen): 2, 4 or 6 counts'], ['f', 'Madd munfasil', 'Separated: 4 or 5 counts'],
-  ['o', 'Madd muttasil', 'Connected (obligatory): 4 or 5 counts'], ['x', 'Madd lazim', 'Necessary: 6 counts'], ['q', 'Qalqalah', 'Echoing bounce on ق ط ب ج د'],
-  ['g', 'Ghunnah', 'Nasal sound: noon or meem with shaddah, 2 counts'], ['k', 'Ikhfa', 'Hidden noon with nasal sound'], ['K', 'Ikhfa shafawi', 'Hidden meem before ب'],
-  ['d', 'Idgham with ghunnah', 'Noon merges into ي ن م و with nasal sound'], ['D', 'Idgham without ghunnah', 'Noon merges into ل ر'], ['S', 'Idgham shafawi', 'Meem merges into meem'],
-  ['i', 'Iqlab', 'Noon becomes meem before ب'], ['j', 'Idgham mutajanisayn', 'Merging of letters from the same exit'], ['J', 'Idgham mutaqaribayn', 'Merging of close letters']];
-const TJ_PRI = 'hlsjJnpfoxqgkKdDSi';   // later wins where two rules overlap
-function tjReady() { return !!(self.NOOR_DATA && NOOR_DATA.tajweed); }
+  ['s', 'Silent', 'لا يُلفظ', 'Written but not read: hamzat al-wasl when joined, lam shamsiyyah, and a noon or tanween merged into the next letter', 'ٱلرَّحۡمَٰنِ'],
+  ['n', 'Normal madd · 2', 'مد طبيعي', 'The small alif, waw or ya: held for 2 counts', 'ذَٰلِكَ'],
+  ['p', 'Permissible madd · 2, 4 or 6', 'مد جائز', 'A long vowel or leen letter before the last letter when you stop: 2, 4 or 6 counts', 'ٱلرَّحِيمِ'],
+  ['o', 'Connected and separated madd · 4 or 5', 'مد متصل ومنفصل', 'A long vowel followed by a hamza, in the same word or the next: 4 or 5 counts', 'جَآءَ'],
+  ['x', 'Necessary madd · 6', 'مد لازم', 'A long vowel followed by a shaddah or sukun: 6 counts', 'ٱلضَّآلِّينَ'],
+  ['g', 'Ghunnah and ikhfa', 'غنة وإخفاء', 'A nasal sound held for 2 counts: noon and meem with shaddah, ikhfa, iqlab and idgham with ghunnah', 'إِنَّ'],
+  ['q', 'Qalqalah', 'قلقلة', 'An echo on ق ط ب ج د with a sukun, or when you stop on them', 'يَقۡطَعُونَ'],
+  ['t', 'Tafkhim', 'تفخيم', 'A heavy letter: خ ص ض غ ط ق ظ, a heavy ra, and the lam of Allah after a or u', 'وَٱللَّهُ']];
+const TJ_SHORT = { s: 'Silent', n: 'Madd 2', p: 'Madd 2·4·6', o: 'Madd 4·5', x: 'Madd 6', g: 'Ghunnah', q: 'Qalqalah', t: 'Tafkhim' };
+// the examples in the key, coloured the same way (offsets into each word)
+const TJ_EX = { s: 's0.2,t2.3,n9.1', n: 'n0.3', p: 's0.2,t2.3,p7.1', o: 'o2.2', x: 's0.2,t2.3,x5.2,pa.1', g: 'g2.3', q: 'q2.2,t4.2', t: 's2.1,t3.4' };
+function tjReady() { return !!(self.NOOR_DATA && NOOR_DATA.tajweed2); }
 function tjEnsure(cb) {
   if (tjReady()) { cb && cb(); return; }
   if (tjEnsure.loading) { tjEnsure.q.push(cb); return; }
   tjEnsure.loading = true; tjEnsure.q = [cb];
-  const sc = document.createElement('script'); sc.src = 'data/tajweed.js';
+  const sc = document.createElement('script'); sc.src = 'data/tajweed2.js';
   sc.onload = () => { tjEnsure.loading = false; tjEnsure.q.forEach(f => f && f()); };
   sc.onerror = () => { tjEnsure.loading = false; toast('Couldn\'t load the tajweed colours'); };
   document.head.appendChild(sc);
 }
+/* text with coloured runs "<colour><start hex>.<length hex>,…" (sorted, whole letters). A run that starts on a superscript
+   alif is drawn on a tatweel, so the small alif can take its own colour while the letter under it keeps its own. */
+function tjSpans(ar, enc) {
+  let out = '', k = 0;
+  for (const part of (enc || '').split(',')) { const m = part.match(/^([a-z])([0-9a-f]+)\.([0-9a-f]+)$/); if (!m) continue;
+    const st = parseInt(m[2], 16), e = Math.min(ar.length, st + parseInt(m[3], 16)); if (st < k || st >= e) continue;
+    out += esc(ar.slice(k, st)) + `<span class="tj tj-${m[1]}">${ar[st] === 'ٰ' ? 'ـ' : ''}${esc(ar.slice(st, e))}</span>`; k = e; }
+  return out + esc(ar.slice(k));
+}
 /* Arabic text of verse i (0-based) of surah n, with tajweed spans when they're on */
 function qAr(n, i, ar) {
   if (!set.tajweed || !tjReady()) return esc(ar);
-  const enc = (NOOR_DATA.tajweed[n - 1] || [])[i]; if (!enc) return esc(ar);
-  const col = new Array(ar.length).fill('');
-  for (const part of enc.split(',')) { const m = part.match(/^([a-zA-Z])([0-9a-f]+)\.([0-9a-f]+)$/); if (!m) continue;
-    const st = parseInt(m[2], 16), ln = parseInt(m[3], 16);
-    for (let k = st; k < st + ln && k < ar.length; k++) if (!col[k] || TJ_PRI.indexOf(m[1]) >= TJ_PRI.indexOf(col[k])) col[k] = m[1]; }
-  // colour whole letters: a letter and the marks on it always share one colour (a mark on its own can't be drawn)
-  for (let k = 0; k < ar.length;) {
-    let e = k + 1; while (e < ar.length && /\p{M}/u.test(ar[e])) e++;
-    let c = ''; for (let j = k; j < e; j++) if (col[j] && (!c || TJ_PRI.indexOf(col[j]) > TJ_PRI.indexOf(c))) c = col[j];
-    for (let j = k; j < e; j++) col[j] = c; k = e;
-  }
-  let out = '', k = 0;
-  while (k < ar.length) { let e = k + 1; while (e < ar.length && col[e] === col[k]) e++;
-    out += col[k] ? `<span class="tj tj-${col[k]}">${esc(ar.slice(k, e))}</span>` : esc(ar.slice(k, e)); k = e; }
-  return out;
+  const enc = (NOOR_DATA.tajweed2[n - 1] || [])[i]; return enc ? tjSpans(ar, enc) : esc(ar);
 }
-function tjLegendHTML() { return `<div class="tj-leg">${TJ_RULES.map(([c, n, d]) => `<div class="tj-li"><i class="tj-sw tj-${c}"></i><div><b class="tj tj-${c}">${esc(n)}</b><small>${esc(d)}</small></div></div>`).join('')}</div>`; }
+function tjLegendHTML() { return `<div class="tj-leg">${TJ_RULES.map(([c, n, a, d, ex]) => `<div class="tj-li"><i class="tj-sw tj-${c}"></i><div><b class="tj tj-${c}">${esc(n)}<span lang="ar">${esc(a)}</span></b><small>${esc(d)}</small><div class="ar-ex" lang="ar">${tjSpans(ex, TJ_EX[c])}</div></div></div>`).join('')}</div>`; }
 function tjSheet() {
-  openSheet(`<h3>Tajweed colours</h3><div class="about" style="padding:0 0 10px">Each colour marks a rule of recitation (Hafs). Turn them on or off here or from the reader's menu.</div>
+  openSheet(`<h3>Tajweed colours</h3><div class="about" style="padding:0 0 10px">The colours of the King Fahd Complex tajweed mushaf, as on quran.com. Each one marks a rule of recitation (Hafs). Turn them on or off here or from the reader's menu.</div>
     <div class="set-row" style="padding:6px 0 10px"><div class="lbl">Show tajweed colours</div><button class="switch ${set.tajweed ? 'on' : ''}" id="tjSw" aria-label="Tajweed colours"></button></div>${tjLegendHTML()}
-    <div class="about" style="padding:10px 0 0;font-size:12px">Rule positions from the open quran-tajweed data by Collin Fair (CC BY 4.0), matched to this text.</div>`);
+    <div class="about" style="padding:10px 0 0;font-size:12px">Rule positions from quran.com's tajweed text, completed with the stop, idgham, iqlab and heavy-lam rules and checked word by word against the printed tajweed mushaf: 99.7% of words carry the same colours. Where a rule sits on a mark (a tanween, or the small meem of iqlab) the whole letter takes the colour.</div>`);
   $('#tjSw').onclick = () => { haptic(); tjSet(!set.tajweed); $('#tjSw').classList.toggle('on', !!set.tajweed); };
+}
+/* the key under the reader header while the colours are on */
+function tjBar() {
+  let el = $('#rTjBar');
+  if (!el) {
+    el = document.createElement('div'); el.className = 'tj-bar'; el.id = 'rTjBar'; el.setAttribute('role', 'button'); el.setAttribute('aria-label', 'What the tajweed colours mean');
+    el.innerHTML = TJ_RULES.map(([c]) => `<span class="tj-chip"><i class="tj-${c}"></i>${TJ_SHORT[c]}</span>`).join('') + '<span class="tj-chip tj-more">What they mean ›</span>';
+    el.onclick = () => { haptic(); tjSheet(); };
+    $('#rProg').after(el);
+  }
+  el.hidden = !set.tajweed;
 }
 function tjSet(on) {
   set.tajweed = !!on; saveSet();
@@ -3373,6 +3395,7 @@ function openReader(n, verse) {
   const s = QMETA[n - 1]; if (!s) return;
   if (set.tajweed && !tjReady()) { tjEnsure(() => openReader(n, verse)); return; }
   rSurah = s;
+  tjBar();
   let verses = [];
   try { verses = JSON.parse(B.getSurah(n)); } catch (e) {}
   $('#rName').textContent = `${s.n}. ${s.tr}`;
@@ -5690,7 +5713,7 @@ const TOUR = [
     pts: [['', '<b>Today</b> opens with <b>Pick up where you left off</b>: back to your verse, or resume the recitation where it stopped'], ['', '<b>Shortcuts</b> for the adhkar of the hour, focus reading, Qibla and how you feel'], ['', '<b>Progress</b>: your prayers, Qur\'an and fasting on a calendar, with each month at a glance'], ['', '<b>More</b>: In Times Of, the Library, Bukhari and Muslim, adhkar, prayer times, reminders and settings']] },
   { c: ['#2d5f86', '#b8923e'], i: TI('<path d="M12 6.5C10 5 7.5 4.5 4 4.8v13.4c3.5-.3 6 .2 8 1.8 2-1.6 4.5-2.1 8-1.8V4.8c-3.5-.3-6 .2-8 1.7z"/><path d="M12 6.5V20"/>'),
     h: 'Mushaf pages & tajweed', p: 'Read page by page like the printed Madinah mushaf, with the colours of tajweed if you like.',
-    pts: [['', '<b>Madinah pages</b>: the blue border, the surah and juz at the top, and the real mushaf page number (604 pages)'], ['', '<b>Tajweed colours</b>: madd, ghunnah, ikhfa, idgham, iqlab, qalqalah and more, with a legend; turn them on from the reader menu'], ['', '<b>Clearer marks</b>: open tanween now shows correctly in every surah']] },
+    pts: [['', '<b>Madinah pages</b>: the blue border, the surah and juz at the top, and the real mushaf page number (604 pages)'], ['', '<b>Tajweed colours</b> as on quran.com, from the King Fahd Complex tajweed mushaf: madd, ghunnah and ikhfa, qalqalah, tafkhim and silent letters, with a colour key under the reader header; turn them on from the reader menu'], ['', '<b>Clearer marks</b>: open tanween now shows correctly in every surah']] },
   { c: ['#2fae62', '#6f7fe6'], i: TI('<circle cx="12" cy="12" r="8.5"/><path d="M8.2 12.3l2.6 2.6 5-5.4"/>'),
     h: 'Your own trackers', p: 'Track anything you choose, the way you choose, on the Progress tab and on Today.',
     pts: [['', '<b>Six ways to track</b>: yes or no, a count (100 istighfar), an amount with your unit, minutes, a 1 to 5 rating, or days you stayed away from something'], ['', '<b>Your schedule</b>: every day, chosen days, or a number of times a week, with a daily reminder'], ['', '<b>Streaks and history</b>: a month view for each tracker; tap any day to change it']] },
