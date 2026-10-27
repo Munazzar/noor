@@ -891,7 +891,7 @@ select.name-in option{color:#111}
 #libSeg button{font-size:13px;padding:0 2px}
 
 /* ---- 3.11: Arabic-only reading ---- */
-.no-en-q .k-quran .en,.no-en-q #rInner .verse .en,.no-en-q #pInner .en{display:none}
+.no-en-q .k-quran .en,.no-en-q #rInner .verse .en{display:none}
 .no-en-h .k-hadith:has(.ar) .en,.no-en-h .k-hadith:has(.ar) .hc-more{display:none}
 .no-en-h .list-card.hc .ar.clamp{display:block;-webkit-line-clamp:unset;overflow:visible}
 .no-en-q .k-quran .ar,.no-en-h .k-hadith .ar{margin-bottom:4px}
@@ -2167,6 +2167,7 @@ select.name-in option{color:#111}
     <div class="r-row">
       <button class="icon-btn" id="rBack" aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
       <div class="r-title"><b id="rName"></b><small id="rSub"></small></div>
+      <button class="icon-btn" id="rTaf" aria-label="Tafsir Ibn Kathir for this verse"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5zM4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/><path d="M8 7.5h8M8 11h6"/></svg></button>
       <button class="icon-btn" id="rListen" aria-label="Listen to this surah"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><path d="M4 15a2 2 0 0 1 2-2h1.5v7H6a2 2 0 0 1-2-2zM20 15a2 2 0 0 0-2-2h-1.5v7H18a2 2 0 0 0 2-2z"/></svg></button>
       <button class="icon-btn" id="rMenu" aria-label="Options"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></button>
     </div>
@@ -4767,15 +4768,16 @@ function closePlayer() {
   if (!$('#reader').classList.contains('on') && tab !== 'wconfig') $('#tabbar').classList.remove('hide');
   updateMini(); if (tab === 'listen') renderListen();
 }
+function pShowEn() { return set.lsEn != null ? set.lsEn !== false : set.quranEn !== false; }
 function renderPlayerVerses(n) {
   const s = QMETA[n - 1]; if (!s) return;
   if (set.tajweed && !tjReady()) tjEnsure(() => { if (pOpen && pSurah === n) { renderPlayerVerses(n); updatePlayerLive(true); } });
   pSurah = n;
   let verses = []; try { verses = JSON.parse(B.getSurah(n)); } catch (e) {}
   $('#pName').textContent = `${s.n}. ${s.tr}`;
-  const showEn = set.lsEn !== false;
+  const showEn = pShowEn();
   $('#pInner').innerHTML = (n !== 1 && n !== 9 ? `<div class="bism">بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ</div>` : '') + verses.map(([ar, en], i) => `<div class="p-verse" data-pa="${i + 1}" id="pv${i + 1}">
-      <div class="vh"><span class="vnum">${i + 1}</span><span class="vhint"></span><span class="rep"></span></div>
+      <div class="vh"><span class="vnum">${i + 1}</span><span class="vhint"></span><span class="rep"></span><button class="vtaf" data-ptaf="${s.start + i}" aria-label="Tafsir Ibn Kathir for verse ${i + 1}">Tafsir</button></div>
       <div class="ar">${qAr(n, i, ar)} <span style="font-size:.8em">۝${toArabicDigits(i + 1)}</span></div>${showEn ? `<div class="en">${esc(en)}</div>` : ''}</div>`).join('');
   $('#pScroll').scrollTop = 0;
 }
@@ -4802,7 +4804,13 @@ function updatePlayerLive(jump) {
 }
 $('#pScroll').addEventListener('touchstart', () => { pUserScroll = Date.now(); }, { passive: true });
 $('#pScroll').addEventListener('wheel', () => { pUserScroll = Date.now(); }, { passive: true });
+$('#rTaf').onclick = () => {
+  if (!rSurah) return; haptic();
+  const last = rSurah.start + rSurah.count - 1, g = BK.on ? bookFirstVerse(BK.p) : Q.pos;
+  tfOpen(g != null && g >= rSurah.start && g <= last ? g : rSurah.start);
+};
 $('#pInner').addEventListener('click', e => {
+  const t = e.target.closest('[data-ptaf]'); if (t) { haptic(); tfOpen(+t.dataset.ptaf); return; }
   const v = e.target.closest('[data-pa]'); if (!v) return; haptic();
   const a = +v.dataset.pa;
   if (AU.active && AU.s === pSurah) audio({ op: 'jump', a }); else playFrom(pSurah, a);
@@ -4882,9 +4890,9 @@ function sheetJump() {
 function sheetTrans() {
   const mq = recById(curRid()).src === 'mq';
   openSheet(`<h3>Translation</h3>
-    <div class="set-row" style="padding:10px 0"><div class="lbl">Show English under each verse<div class="sub">Saheeh International</div></div><button class="switch ${set.lsEn !== false ? 'on' : ''}" id="oEnT"></button></div>
+    <div class="set-row" style="padding:10px 0"><div class="lbl">Show English under each verse<div class="sub">Saheeh International</div></div><button class="switch ${pShowEn() ? 'on' : ''}" id="oEnT"></button></div>
     <div class="set-row" style="padding:10px 0"><div class="lbl">Play English audio after each verse<div class="sub">${mq ? 'Not available with whole-surah recordings. Choose a verse-by-verse reciter.' : 'Ibrahim Walk reading Saheeh International'}</div></div><button class="switch ${aOpt('translation', false) && !mq ? 'on' : ''}" id="oEnA" ${mq ? 'disabled style="opacity:.4"' : ''}></button></div>`);
-  $('#oEnT').onclick = () => { haptic(); set.lsEn = set.lsEn === false; saveSet(); $('#oEnT').classList.toggle('on', set.lsEn); if (pOpen) { renderPlayerVerses(pSurah); updatePlayerLive(true); } };
+  $('#oEnT').onclick = () => { haptic(); set.lsEn = !pShowEn(); saveSet(); $('#oEnT').classList.toggle('on', set.lsEn); if (pOpen) { renderPlayerVerses(pSurah); updatePlayerLive(true); } };
   if (!mq) $('#oEnA').onclick = () => { haptic(); const v = !aOpt('translation', false); $('#oEnA').classList.toggle('on', v); setOpt({ translation: v }); };
 }
 function sheetSleep() {
@@ -4934,11 +4942,11 @@ function sheetMore() {
   openSheet(`<h3>Player options</h3>
     <div class="set-row" style="padding:10px 0"><div class="lbl">Bismillah before each surah<div class="sub">Verse-by-verse reciters (not At-Tawbah)</div></div><button class="switch ${aOpt('basmala', true) ? 'on' : ''}" id="oBas"></button></div>
     <div class="set-row" style="padding:10px 0"><div class="lbl">Count listening as reading<div class="sub">Verses you listen to are marked read in the Read tab and tracker</div></div><button class="switch ${aOpt('countRead', false) ? 'on' : ''}" id="oCR"></button></div>
-    <div class="set-row" style="padding:10px 0"><div class="lbl">Show English under each verse</div><button class="switch ${set.lsEn !== false ? 'on' : ''}" id="oEnT2"></button></div>
+    <div class="set-row" style="padding:10px 0"><div class="lbl">Show English under each verse</div><button class="switch ${pShowEn() ? 'on' : ''}" id="oEnT2"></button></div>
     <div class="actions" style="margin-top:12px;flex-direction:column;align-items:stretch"><button class="pill-btn danger" id="oStop" style="justify-content:center">${AIC.stop}Stop and close the player</button></div>`);
   $('#oBas').onclick = () => { haptic(); const v = !aOpt('basmala', true); $('#oBas').classList.toggle('on', v); setOpt({ basmala: v }); };
   $('#oCR').onclick = () => { haptic(); const v = !aOpt('countRead', false); $('#oCR').classList.toggle('on', v); setOpt({ countRead: v }); };
-  $('#oEnT2').onclick = () => { haptic(); set.lsEn = set.lsEn === false; saveSet(); $('#oEnT2').classList.toggle('on', set.lsEn); renderPlayerVerses(pSurah); updatePlayerLive(true); };
+  $('#oEnT2').onclick = () => { haptic(); set.lsEn = !pShowEn(); saveSet(); $('#oEnT2').classList.toggle('on', set.lsEn); renderPlayerVerses(pSurah); updatePlayerLive(true); };
   $('#oStop').onclick = () => { haptic(); audio({ op: 'stop' }); closeSheet(); closePlayer(); };
 }
 
