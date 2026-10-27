@@ -8712,7 +8712,7 @@ const TV = {
         this.wt = setTimeout(() => { if (this.wait) { const f = this.wait; this.wait = null; this.list = []; f && f(); } }, 10000);
         return;
       }
-      try { this.list = tvShape(JSON.parse(j).voices || []); } catch (e) { this.list = []; }
+      try { const d = JSON.parse(j); this.list = tvShape(d.voices || []); this.ar = !!d.ar; } catch (e) { this.list = []; }
       cb && cb(); return;
     }
     if (!this.ok()) { this.list = []; cb && cb(); return; }
@@ -8726,19 +8726,24 @@ const TV = {
     const L = this.list || []; return L.find(v => v.id === set.tfVoice) || L.find(v => v.natural && v.r === 'US') || L.find(v => v.natural) || L[0] || null;
   },
   webVoice(id) { return speechSynthesis.getVoices().find(v => (v.voiceURI || v.name) === id); },
-  speak(sid, texts, from, voice, rate) {
+  webArabic() { const L = speechSynthesis.getVoices().filter(v => /^ar/i.test(v.lang)); return L.find(v => /natural|google|online|premium|enhanced/i.test(v.name)) || L[0] || null; },
+  arOk() { return this.native() ? !!this.ar : 'speechSynthesis' in self && !!this.webArabic(); },
+  speak(sid, items, from, voice, rate) {
     this.previewing = '';
-    if (this.native()) { try { NoorVoice.speak(JSON.stringify({ id: String(sid), voice: voice || '', rate, items: texts, from })); } catch (e) { tvEvent({ st: 'err', id: String(sid) }); } return; }
+    if (this.native()) { try { NoorVoice.speak(JSON.stringify({ id: String(sid), voice: voice || '', rate, items, from })); } catch (e) { tvEvent({ st: 'err', id: String(sid) }); } return; }
     const g = ++this.gen; try { speechSynthesis.cancel(); } catch (e) {}
-    const v = voice ? this.webVoice(voice) : null;
-    if (from >= texts.length) { tvEvent({ st: 'end', id: String(sid) }); return; }
-    for (let k = from; k < texts.length; k++) {
+    const v = voice ? this.webVoice(voice) : null, av = this.webArabic();
+    const txt = it => typeof it === 'string' ? it : it.t, isAr = it => typeof it !== 'string' && it.l === 'ar';
+    let last = -1; for (let k = from; k < items.length; k++) if (txt(items[k]) && (!isAr(items[k]) || av)) last = k;
+    if (last < 0) { tvEvent({ st: 'end', id: String(sid) }); return; }
+    for (let k = from; k <= last; k++) {
+      const t = txt(items[k]), ar = isAr(items[k]); if (!t || (ar && !av)) continue;
       // long utterances get cut off in some browsers: speak sentences of up to ~220 characters
-      const parts = (texts[k].match(/[^.!?;\n]+[.!?;\n]*\s*/g) || [texts[k]]).reduce((a, s) => { if (a.length && (a[a.length - 1] + s).length < 220) a[a.length - 1] += s; else a.push(s); return a; }, []);
+      const parts = (t.match(/[^.!?;\n]+[.!?;\n]*\s*/g) || [t]).reduce((a, s) => { if (a.length && (a[a.length - 1] + s).length < 220) a[a.length - 1] += s; else a.push(s); return a; }, []);
       parts.forEach((s, i) => {
-        const u = new SpeechSynthesisUtterance(s); if (v) { u.voice = v; u.lang = v.lang; } else u.lang = 'en-US'; u.rate = rate;
+        const u = new SpeechSynthesisUtterance(s), vv = ar ? av : v; if (vv) { u.voice = vv; u.lang = vv.lang; } else u.lang = 'en-US'; u.rate = rate;
         if (i === 0) u.onstart = () => { if (g === this.gen) tvEvent({ st: 'play', id: String(sid), k }); };
-        if (i === parts.length - 1 && k === texts.length - 1) u.onend = () => { if (g === this.gen) tvEvent({ st: 'end', id: String(sid), k }); };
+        if (i === parts.length - 1 && k === last) u.onend = () => { if (g === this.gen) tvEvent({ st: 'end', id: String(sid), k }); };
         u.onerror = ev => { if (g === this.gen && ev.error !== 'interrupted' && ev.error !== 'canceled') tvEvent({ st: 'err', id: String(sid), k }); };
         speechSynthesis.speak(u);
       });
@@ -8777,15 +8782,98 @@ function tvEvent(o) {
     TF.on = TF.playing = false; tfUI(); toast("This device couldn't read the tafsir aloud"); return;
   }
   if (o.st === 'end') {
-    TF.playing = false;
-    if (set.tfAuto !== false && TF.open && TF.g < tfG1()) { tfOpen(TF.g + 1, true, true); return; }
-    TF.on = false; tfUI(); toast(TF.g < tfG1() ? 'End of the tafsir for this verse' : 'You reached the end of the tafsir'); return;
+    if (TF.segs && TF.runEnd < TF.segs.length) { tfRun(TF.runEnd); return; }
+    tfEnded(); return;
   }
-  if (o.st === 'play') { TF.playing = true; TF.k = Math.max(0, TF.texts.length ? o.k | 0 : 0); tfUI(); }
+  if (o.st === 'play') { TF.playing = true; TF.k = Math.max(0, (TF.runAt | 0) + (o.k | 0)); tfUI(); }
 }
+function tfEnded() {
+  TF.playing = false;
+  if (set.tfAuto !== false && TF.open && TF.g < tfG1()) { tfOpen(TF.g + 1, true, true); return; }
+  TF.on = false; tfUI(); toast(TF.g < tfG1() ? 'End of the tafsir for this verse' : 'You reached the end of the tafsir');
+}
+/* --- 3.37: the Arabic in the tafsir. Qur'an quotes are recited, just the words quoted, using quran.com's
+   word timings; other Arabic (hadith, du'a) is read in an Arabic voice. --- */
+const TQ_QC = { basit: 2, basit_mj: 1, sudais: 3, shatri: 4, rifai: 5, husary: 6, husary_mj: 6, husary_ml: 12, alafasy: 7, minshawi: 9, minshawi_mj: 8, shuraym: 10, tablawi: 11 };
+const tqRec = () => TQ_QC[curRid()] || 7;   // reciters quran.com doesn't time are read by Mishari al-Afasy
+const TQ = { sur: {}, all: null, seg: {}, au: null, gen: 0, t: 0 };
+// The letters that both spellings share (the tafsir's Arabic and the app's Uthmani text differ in vowels and long letters)
+function tqSk(t) {
+  return String(t).replace(/[ً-ٰٟۖ-ۭـ]/g, '').replace(/[ٱأإآ]/g, 'ا').replace(/ى/g, 'ي')
+    .replace(/ة/g, 'ه').replace(/ؤ/g, 'و').replace(/ئ/g, 'ي').replace(/[^ء-ي]/g, '').replace(/[اويء]/g, '');
+}
+function tqSurah(n) {   // [{n, a, sk, w: where each word starts in sk}]
+  if (TQ.sur[n]) return TQ.sur[n];
+  let vs = []; try { vs = JSON.parse(B.getSurah(n)); } catch (e) {}
+  return TQ.sur[n] = vs.map((v, i) => { const w = []; let sk = ''; String(v[0] || '').split(/\s+/).filter(Boolean).forEach(x => { w.push(sk.length); sk += tqSk(x); }); return { n, a: i + 1, sk, w }; });
+}
+function tqAll() { if (!TQ.all) { TQ.all = []; for (let n = 1; n <= 114; n++) TQ.all.push(...tqSurah(n)); } return TQ.all; }
+// Where a quote comes from: the verses it cites, then the verse being explained, its surah, then the whole Qur'an
+function tqFind(part, refs, g) {
+  const p = tqSk(part); if (p.length < 3) return null;
+  const cur = tfRef(g), stages = [refs.map(([n, a]) => tqSurah(n)[a - 1]), [tqSurah(cur.n)[cur.a - 1]]];
+  if (p.length >= 4) stages.push(tqSurah(cur.n));
+  if (p.length >= 6) stages.push(null);
+  for (let st of stages) {
+    if (st === null) st = tqAll();
+    let best = null;
+    for (const v of st) { if (!v || !v.sk) continue; const i = v.sk.indexOf(p); if (i >= 0 && (!best || p.length / v.sk.length > best.c)) best = { v, i, c: p.length / v.sk.length }; }
+    if (!best) continue;
+    const { v, i } = best, word = o => { let k = 0; while (k + 1 < v.w.length && v.w[k + 1] <= o) k++; return k + 1; };
+    return { n: v.n, a: v.a, w0: word(i), w1: word(i + p.length - 1), whole: best.c > .9 };
+  }
+  return null;
+}
+// The tafsir as things to hear: {b: block, t: text, l: 'en' | 'ar' | 'q', q: [verse parts]}
+function tfSegs(blocks, g) {
+  const segs = [];
+  blocks.forEach(([t, x], i) => {
+    const s = x.replace(/[`´]/g, '').replace(/\s+/g, ' ').trim(); if (!s) return;
+    if (t !== 'ar') { segs.push({ b: i, t: s, l: 'en' }); return; }
+    if (!/[«»]/.test(s)) {   // « » marks the Prophet's words ﷺ
+      const near = s + ' ' + ((blocks[i + 1] || [])[1] || ''), refs = [...near.matchAll(/(\d{1,3}):(\d{1,3})/g)].map(m => [+m[1], +m[2]]).filter(([n]) => n >= 1 && n <= 114);
+      const q = s.split(/\s[-–]\s|۝|-$/).filter(x => tqSk(x)).map(x => { try { return tqFind(x, refs, g); } catch (e) { return null; } });
+      if (q.length && q.every(Boolean)) { segs.push({ b: i, t: s, l: 'q', q }); return; }
+    }
+    segs.push({ b: i, t: s, l: 'ar' });
+  });
+  return segs;
+}
+function tqClip(r) {   // → {url, from, to} in ms; to 0 plays to the end of the verse
+  const rec = tqRec(), key = r.n + ':' + r.a, ck = rec + '/' + key;
+  if (!TQ.seg[ck]) TQ.seg[ck] = fetch(`https://api.quran.com/api/v4/recitations/${rec}/by_ayah/${key}?fields=segments`)
+    .then(x => x.ok ? x.json() : Promise.reject(x.status)).then(j => j.audio_files[0]).catch(e => { delete TQ.seg[ck]; throw e; });
+  return TQ.seg[ck].then(f => {
+    const url = /^https?:/.test(f.url) ? f.url : /^\/\//.test(f.url) ? 'https:' + f.url : 'https://verses.quran.com/' + f.url.replace(/^\/+/, '');
+    if (r.whole) return { url, from: 0, to: 0 };
+    const sg = (f.segments || []).map(s => s.length > 3 ? s.slice(1) : s), a = sg.find(s => s[0] === r.w0), b = sg.find(s => s[0] === r.w1);
+    if (!a || !b) throw 'no timings';
+    return { url, from: Math.max(0, a[1] - 60), to: b[2] + 250 };
+  });
+}
+function tqStop() { TQ.gen++; clearTimeout(TQ.t); if (TQ.au) try { TQ.au.pause(); } catch (e) {} }
+function tqPlay(parts, done, fail) {
+  const gen = ++TQ.gen, au = TQ.au || (TQ.au = new Audio()); clearTimeout(TQ.t);
+  let i = 0;
+  const next = () => {
+    if (gen !== TQ.gen) return;
+    if (i >= parts.length) { done(); return; }
+    tqClip(parts[i++]).then(c => {
+      if (gen !== TQ.gen) return;
+      au.onended = () => { if (gen === TQ.gen) { clearTimeout(TQ.t); next(); } };
+      au.onerror = () => { if (gen === TQ.gen) fail(); };
+      au.onplaying = () => { clearTimeout(TQ.t); if (c.to) TQ.t = setTimeout(() => { if (gen === TQ.gen) { au.pause(); next(); } }, Math.max(0, c.to - au.currentTime * 1000)); };
+      const go = () => { try { au.currentTime = c.from / 1000; } catch (e) {} au.play().catch(() => { if (gen === TQ.gen) fail(); }); };
+      if (au.src !== c.url) { au.onloadedmetadata = () => { au.onloadedmetadata = null; if (gen === TQ.gen) go(); }; au.src = c.url; au.load(); } else go();
+    }, () => { if (gen === TQ.gen) fail(); });
+  };
+  next();
+}
+function tfHalt() { TV.stop(); tqStop(); }
+
 
 /* --- the sheet --- */
-function tfStop() { if (!TF.on) return; TF.on = TF.playing = false; TV.stop(); tfUI(); }
+function tfStop() { if (!TF.on) return; TF.on = TF.playing = false; tfHalt(); tfUI(); }
 function tfOpen(g, play, auto) {
   g = Math.max(tfG0(), Math.min(tfG1(), g | 0));
   const r = tfRef(g); if (!r.s) return;
@@ -8827,30 +8915,47 @@ function tfShow(raw, play) {
   const [s, a] = TF.key.split(':');
   body.innerHTML = `<div class="t-exp tf"><div class="body open">${TF.blocks.map(([t, x], i) => t === 'h' ? `<h4 data-b="${i}">${esc(x)}</h4>` : `<p data-b="${i}"${t === 'ar' ? ' class="arp"' : ''}>${esc(x)}</p>`).join('')}</div>
     <div class="src">Tafsir Ibn Kathir (abridged English), via quran.com · <button class="t-link" style="margin:0" data-qc="${esc(s + ':' + a)}">Open ↗</button></div>
-    <div class="tf-note">Listening reads the English in the voice you choose. The Arabic stays on screen. While listening, tap a paragraph to start from it.</div></div>`;
+    <div class="tf-note">Listening reads the English in the voice you choose. Qur'an verses quoted in the tafsir are recited by your reciter; other Arabic is read in an Arabic voice. While listening, tap a paragraph to start from it.</div></div>`;
   tfBarUI();
   if (play) tfPlay();
 }
 function tfPlay() {
   if (!TF.blocks) return;
-  TF.items = []; TF.texts = [];
-  TF.blocks.forEach(([t, x], i) => { if (t === 'ar') return; TF.items.push(i); TF.texts.push(x.replace(/[`´]/g, '').replace(/\s+/g, ' ')); });
+  TF.segs = tfSegs(TF.blocks, TF.g); TF.items = TF.segs.map(s => s.b); TF.texts = TF.segs.map(s => s.t);
   if (!TF.texts.length) { toast('Nothing to read aloud for this verse'); return; }
   if (SRT.on) srtCmd('stop');   // one voice at a time
   try { if (AU.active && isPlayingNow()) audio({ op: 'toggle' }); } catch (e) {}   // pause the Qur'an recitation
   TF.raw0 = TF.raw; TF.offline = false;
-  const go = () => tfSpeakFrom(0);
+  const go = () => {
+    if (!TF.arTold && TF.segs.some(s => s.l === 'ar') && !TV.arOk()) {
+      TF.arTold = true; toast('Add an Arabic voice to hear the hadith in Arabic', window.NoorVoice ? 'Settings' : '', () => { try { NoorVoice.settings(); } catch (e) {} });
+    }
+    tfSpeakFrom(0);
+  };
   if (TV.list) go(); else TV.load(go);
 }
 function tfSpeakFrom(k) {
-  const v = TV.pick();
+  tfHalt();
   Object.assign(TF, { on: true, playing: true, k, sid: TF.sid + 1 });
-  TV.speak(TF.sid, TF.texts, k, v ? (TF.offline && v.alt ? v.alt : v.id) : '', set.tfRate || 1);
-  tfUI();
+  tfRun(k); tfUI();
+}
+// From segment k: speak up to the next Qur'an quote, then recite it, and so on
+function tfRun(k) {
+  const S = TF.segs, sid = TF.sid;
+  if (k >= S.length) { tfEnded(); return; }
+  if (S[k].l !== 'q') { let j = k; while (j < S.length && S[j].l !== 'q') j++; tfSay(k, j); return; }
+  Object.assign(TF, { k, runAt: k, runEnd: k + 1, playing: true }); tfUI();
+  tqPlay(S[k].q, () => { if (TF.on && TF.sid === sid) tfRun(k + 1); }, () => { if (TF.on && TF.sid === sid) tfSay(k, k + 1, true); });
+}
+function tfSay(k, j, ar) {   // ar: the recitation couldn't load (offline), so read the quote in the Arabic voice
+  const v = TV.pick(), nq = TF.segs[j];
+  if (nq && nq.l === 'q') nq.q.forEach(r => tqClip(r).catch(() => {}));   // get the next recitation ready
+  Object.assign(TF, { runAt: k, runEnd: j });
+  TV.speak(TF.sid, TF.segs.slice(k, j).map(s => ar || s.l !== 'en' ? { t: s.t, l: 'ar' } : s.t), 0, v ? (TF.offline && v.alt ? v.alt : v.id) : '', set.tfRate || 1);
 }
 function tfBarUI() {
   const el = $('#tfBar'); if (!el) return;
-  const ready = !!(TF.blocks && TF.blocks.some(b => b[0] !== 'ar')) && TV.ok(), auto = set.tfAuto !== false, rate = set.tfRate || 1;
+  const ready = !!(TF.blocks && TF.blocks.length) && TV.ok(), auto = set.tfAuto !== false, rate = set.tfRate || 1;
   el.innerHTML = `<button class="pill-btn primary" id="tfPlay" ${ready ? '' : 'disabled'}>${TF.on && TF.playing ? AIC.pause + 'Pause' : AIC.play + (TF.on ? 'Resume' : 'Listen')}</button>
     <button class="pill-btn" id="tfRate" aria-label="Reading speed">${rate}×</button>
     <button class="pill-btn ${TF.voicesOpen ? 'on' : ''}" id="tfVoice" aria-expanded="${TF.voicesOpen}">${AIC.person}Voice</button>
@@ -8861,7 +8966,7 @@ function tfBarUI() {
   $('#tfPlay').onclick = () => {
     haptic();
     if (!TF.on) tfPlay();
-    else if (TF.playing) { TF.playing = false; TV.stop(); tfUI(); }
+    else if (TF.playing) { TF.playing = false; tfHalt(); tfUI(); }
     else { TF.offline = false; tfSpeakFrom(TF.k); }
   };
   $('#tfRate').onclick = () => { haptic(); set.tfRate = TF_RATES[(TF_RATES.indexOf(rate) + 1) % TF_RATES.length]; saveSet(); if (TF.on && TF.playing) tfSpeakFrom(TF.k); else tfBarUI(); };
@@ -8887,7 +8992,7 @@ function tfVoicesClick(e) {
   const t = e.target.closest('[data-tvtry]');
   if (t) {
     haptic(); const v = TV.list.find(x => x.id === t.dataset.tvtry); if (!v) return;
-    if (TF.on && TF.playing) { TF.playing = false; TV.stop(); tfBarUI(); }
+    if (TF.on && TF.playing) { TF.playing = false; tfHalt(); tfBarUI(); }
     if (TV.previewing === v.id) TV.stop(); else TV.preview(v);
     tfVoicesUI(); return;
   }
@@ -8914,7 +9019,7 @@ function tfMark() {
 }
 // One voice at a time: the Seerah or the Qur'an starting stops the tafsir
 { const ss = srtStart; srtStart = (...a) => { tfStop(); return ss(...a); }; }
-{ const oa = window.onAudio; window.onAudio = j => { oa(j); try { if (TF.playing && AU.active && isPlayingNow()) { TF.playing = false; TV.stop(); tfUI(); } } catch (e) {} }; }
+{ const oa = window.onAudio; window.onAudio = j => { oa(j); try { if (TF.playing && AU.active && isPlayingNow()) { TF.playing = false; tfHalt(); tfUI(); } } catch (e) {} }; }
 /* --- Today: a slim "continue the Seerah" row once you have started --- */
 function srTodayHTML() {
   const st = srState(), b = srBook(st.last), p = b && (st.pos[b.id] || st.lpos[b.id]);
