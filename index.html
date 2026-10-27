@@ -5223,7 +5223,7 @@ const PLANT_DEFS = `<defs>
   <radialGradient id="pl-cap" cx=".4" cy=".3" r=".8"><stop offset="0" stop-color="#ffb3a1"/><stop offset=".6" stop-color="#e85d4f"/><stop offset="1" stop-color="#b8372e"/></radialGradient>
 </defs>`;
 /* 3.22: garden styles. The drawing is shared; each style recolours it and changes a few shapes.
-   'auto' follows the app: Olive grove in light, Moonlit in dark. */
+   'auto' follows the app: Olive grove in light, Moonlit in dark. 3.36: Spring is the default. */
 const GARDEN_SKINS = {
   spring: { name: 'Spring', map: {} },
   olive: { name: 'Olive grove', leafW: .62, fruit: 'olive', map: {
@@ -5255,7 +5255,7 @@ const GARDEN_SKINS = {
     '#ffd6e6': '#fff6e6', '#f590b6': '#f3d7b0', '#f7cddc': '#f6e6cf', '#ffc2d7': '#f7b36a', '#ffcb3d': '#e9a23a',
     '#ffe3b8': '#ffd2bc', '#ff8a4c': '#e8453a', '#d0362a': '#a8202a' } }
 };
-function gardenSkinId() { const v = set.gardenStyle || 'auto'; return v === 'auto' ? (lookIsLight() ? 'olive' : 'moon') : GARDEN_SKINS[v] ? v : 'olive'; }
+function gardenSkinId() { const v = set.gardenStyle || 'spring'; return v === 'auto' ? (lookIsLight() ? 'olive' : 'moon') : GARDEN_SKINS[v] ? v : 'olive'; }
 let plantSeq = 0;
 function plantSVG(n, opt = {}) {
   const SK = GARDEN_SKINS[opt.skin || gardenSkinId()] || GARDEN_SKINS.spring;
@@ -5449,8 +5449,8 @@ function gardenNext(n) {
   return { k, cur, nxt, frac: Math.max(0, Math.min(1, (n - cur[0]) / Math.max(1, nxt[0] - cur[0]))), left: nxt[0] - n };
 }
 function gardenStyleHTML() {
-  const cur = set.gardenStyle || 'auto', n = Math.max(40, activityStreak(dayLog()).n);
-  const opts = [['auto', 'Match theme', null]].concat(Object.keys(GARDEN_SKINS).filter(k => k !== 'spring').concat(['spring']).map(k => [k, GARDEN_SKINS[k].name, k]));
+  const cur = set.gardenStyle || 'spring', n = Math.max(40, activityStreak(dayLog()).n);
+  const opts = [['spring', 'Spring', 'spring'], ['auto', 'Match theme', null]].concat(Object.keys(GARDEN_SKINS).filter(k => k !== 'spring').map(k => [k, GARDEN_SKINS[k].name, k]));
   return `<div class="gs-row" data-noswipe>${opts.map(([k, l, sk]) => `<button class="gs-opt ${cur === k ? 'on' : ''}" data-gstyle="${k}">${sk ? plantSVG(Math.min(n, 300), { size: 58, skin: sk }) : `<span class="gs-auto">${plantSVG(Math.min(n, 300), { size: 40, skin: 'olive' })}${plantSVG(Math.min(n, 300), { size: 40, skin: 'moon' })}</span>`}<b>${esc(l)}</b></button>`).join('')}</div>`;
 }
 document.addEventListener('click', e => {
