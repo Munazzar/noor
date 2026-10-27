@@ -1,6 +1,6 @@
 # Noor
 
-Noor for the web: the Noor Android app (v3.28.1) running in the browser. It has daily Qur'an and Sunnah cards, prayer times with adhan and alerts, Qibla, the Qur'an reader with progress, recitation with 27 reciters, Sahih al-Bukhari and Sahih Muslim offline, adhkar, the "In times of…" topics, the progress tracker, focus mode and the dock clock.
+Noor for the web: the Noor Android app (v3.34) running in the browser. It has daily Qur'an and Sunnah cards, prayer times with adhan and alerts, Qibla, the Qur'an reader with progress and tajweed colours, Tafsir Ibn Kathir under every verse (read it, or listen in a voice you choose), the Seerah (eight books to read or listen to, and the great battles with narration and maps), recitation with 27 reciters, Sahih al-Bukhari and Sahih Muslim offline, adhkar, the "In times of…" topics, the progress tracker, focus mode and the dock clock.
 
 **Live:** https://munazzar.github.io/noor/
 
@@ -17,6 +17,7 @@ The Android app is a WebView around `index.html`. Its native features are called
 | Notifications and AlarmManager | Notification API; reminders and prayer alerts fire while Noor is open |
 | Live daily verse and hadith sync, tafsir, hadith search | Same public APIs (alquran.cloud, fawazahmed0/hadith-api, quran.com) |
 | Focus mode (DND, screen pinning) | Full screen and Screen Wake Lock |
+| Text-to-speech (Seerah voice, NoorVoice for the tafsir) | `speechSynthesis` with the browser's voices |
 
 On screens 1024px and wider, `web/desktop.css` and `web/desktop.js` switch to a desktop layout: a side navigation bar, a wider page, two-column Today and Library, multi-column surah lists and grids, and sheets that open as centred dialogs. Phones get the app's layout unchanged.
 
