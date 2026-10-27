@@ -3088,7 +3088,27 @@ function privFullHTML() {
     <p>Prayer times and the Qibla are calculated on this device. Your location is never uploaded or shared.</p>
     <p>Bukhari, Muslim, the adhkar and the Qur'an text are built into the app, so reading and searching them works offline. The app only goes online for audio, tafsir and the optional live cards, and it sends only what it needs to fetch them, never anything about you.</p>
     <p>Photos or videos you pick as a Dock background are copied into Noor's own storage on this device and never uploaded.</p>
-    <p>Clearing this site's data in your browser removes everything from this device. Noor itself never sees any of it.</p></div></div>`;
+    <p>Clearing this site's data in your browser removes everything from this device. Noor itself never sees any of it.</p>
+    <button class="pill-btn" data-wipe style="margin-top:6px;color:#e5484d">Delete all data on this ${window.NoorSys ? 'phone' : 'device'}</button></div></div>`;
+}
+document.addEventListener('click', e => {
+  if (e.target.closest('[data-wipe]')) {
+    haptic();
+    openSheet(`<h3>Delete all data?</h3><div class="about" style="padding:0 0 14px">This removes everything Noor keeps on this ${window.NoorSys ? 'phone' : 'device'}: your settings, reminders, saved cards, prayer and fasting logs, reading progress, streak, garden, downloads and Dock backgrounds. It can't be undone.${window.NoorSys ? ' Noor will close; open it again to start fresh.' : ''}</div>
+      <div class="actions"><button class="pill-btn" data-wipeno>Cancel</button><button class="pill-btn primary" data-wipeyes style="background:#e5484d;border-color:#e5484d">Delete everything</button></div>`);
+    return;
+  }
+  if (e.target.closest('[data-wipeno]')) { haptic(); closeSheet(); return; }
+  if (e.target.closest('[data-wipeyes]')) { haptic(); wipeAll(); }
+});
+async function wipeAll() {
+  try { tfStop(); } catch (e) {}
+  if (window.NoorSys) { try { NoorSys.wipe(); return; } catch (e) {} }
+  try { localStorage.clear(); sessionStorage.clear(); } catch (e) {}
+  try { if (indexedDB.databases) for (const d of await indexedDB.databases()) if (d.name) indexedDB.deleteDatabase(d.name); } catch (e) {}
+  try { if (self.caches) for (const k of await caches.keys()) await caches.delete(k); } catch (e) {}
+  try { if (navigator.serviceWorker) for (const r of await navigator.serviceWorker.getRegistrations()) await r.unregister(); } catch (e) {}
+  location.reload();
 }
 function renderSettings() {
   { const g = $('#gsPick'); if (g) g.innerHTML = gardenStyleHTML(); }
@@ -7021,15 +7041,7 @@ function snFit(sl) {
 }
 
 /* ---- dim & warm at night (between Isha and Fajr), like a bedside clock ---- */
-function snNight() {
-  const o = snOpt(); let dark = false;
-  if (o.night) {
-    const c = ptCfg(), now = Date.now();
-    try { if (ptReady(c)) { const t = ptDay(c, ptYmd(ptTz(c), now)); dark = t[5] != null && t[0] != null && (now >= t[5] + 30 * 60000 || now < t[0]); } } catch (e) {}
-    if (!ptReady(c)) { const h = new Date().getHours(); dark = h >= 22 || h < 5; }
-  }
-  SN.el.classList.toggle('nighty', dark);
-}
+function snNight() { SN.el.classList.remove('nighty'); }   // 3.38: the Dock never dims at night
 
 /* ---- battery (when the phone lets us read it) ---- */
 function snBattery() {
@@ -7099,7 +7111,6 @@ function snSheet() {
     <div class="glass group">
       ${sw('landscape', 'Open in landscape', 'Turns the screen sideways while the dock is open')}
       ${sw('lock', 'Keep Noor full screen', 'Other apps can\'t open while the dock is on. Tap ✕ (or Back) to unlock.')}
-      ${sw('night', 'Dim at night', 'Darker and warmer from after Isha until Fajr')}
       ${canBat ? sw('charge', 'Open when charging', 'Starts the dock when you plug in while Noor is open') : ''}
     </div>
     <div class="actions" style="margin-top:14px">${SN.on ? '<button class="pill-btn primary" id="snDone" style="flex:1;justify-content:center">Done</button>' : '<button class="pill-btn primary" id="snGo" style="flex:1;justify-content:center">Start dock</button>'}</div>`);
@@ -8299,7 +8310,7 @@ function srtStart(id, c, p, rng, again) {
     if (!items.length) return;
     Object.assign(SRT, { on: true, playing: true, b: id, c: items[0].c, p: items[0].p, k: 0, x: items[0].x || 0, items: items.map(x => [x.c, x.p, x.x || 0, x.l]), dl: -1, lang: prim, from, to, rrLeft: again ? SRT.rrLeft : rr });
     st.lpos[id] = { c: items[0].c, p: items[0].p }; st.last = id; srSave(true);
-    const payload = { b: id, lang: say === 'ar' ? 'ar' : prim, title: b.tr, rate: st.rate || 1, rep: st.rep == null ? 1 : st.rep, gap: st.gap || 0, items };
+    const payload = { b: id, lang: say === 'ar' ? 'ar' : prim, title: b.tr, rate: srRate(st, b), rep: st.rep == null ? 1 : st.rep, gap: st.gap || 0, items };
     if (meta) payload.audio = { url: SR_CDN + meta.id + '.zip', dir: meta.id };
     if (B.seerahSpeak) { try { B.seerahSpeak(JSON.stringify(payload)); } catch (e) { toast("Couldn't start reading aloud"); } }
     else srWeb.play(payload);
@@ -8428,7 +8439,7 @@ function srJumpTo(i) {   // play from paragraph i of the chapter in the player
 }
 $('#srpInner').addEventListener('click', e => { const v = e.target.closest('[data-srpa]'); if (!v) return; haptic(); srJumpTo(+v.dataset.srpa); });
 function srPanel() {
-  const st = srState(), on = SRT.playing, rp = st.rep == null ? 1 : st.rep, sp = st.rate || 1, rr = st.rr == null ? 1 : st.rr, b = srBook(SRP.b), u = srUnit(b);
+  const st = srState(), on = SRT.playing, rp = st.rep == null ? 1 : st.rep, sp = srRate(st, srBook(SRP.b)), rr = st.rr == null ? 1 : st.rr, b = srBook(SRP.b), u = srUnit(b);
   const sleepOn = SRT.sleepAt > Date.now() || SRT.sleepCh;
   $('#srpPanel').innerHTML = `<button class="p-hide2" data-srphide aria-label="Hide the player (listening continues)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="p-prog"><i id="srpProg"></i></div>
     <div class="p-ctl"><button class="mini-chip ${rp !== 1 ? 'on' : ''}" data-srpp="repeat" aria-label="Repeat">${rp === 0 ? '∞' : rp + '×'}</button>
@@ -8484,11 +8495,17 @@ function srRepeatSheet() {
   };
   $('#srWhole').onclick = () => { haptic(); closeSheet(); if (cus) srtStart(id, c, SRT.p); toast('Whole chapter'); };
 }
+const srRate = (st, b) => st.rate || (b && b.audio ? 1 : 0.8);
 function srSpeedSheet() {
-  const st = srState(), sp = st.rate || 1, set1 = v => { st.rate = v; srSave(true); if (SRT.on) srtCmd('rate:' + v); if (SRP.open) srPanel(); };
-  openSheet(`<h3>${srBook(SRP.b).audio ? 'Playback speed' : 'Reading speed'}</h3>${optRow('srSp', [0.5, 0.75, 0.9, 1, 1.1, 1.25, 1.5, 1.75, 2], sp, v => v + '×')}
+  const st = srState(), sp = srRate(st, srBook(SRP.b)), set1 = v => { st.rate = v; srSave(true); if (SRT.on) srtCmd('rate:' + v); if (SRP.open) srPanel(); };
+  openSheet(`<h3>${srBook(SRP.b).audio ? 'Playback speed' : 'Reading speed'}</h3>${optRow('srSp', [0.5, 0.75, 0.8, 0.9, 1, 1.1, 1.25, 1.5, 1.75, 2], sp, v => v + '×')}
     <div class="opt-h">Fine tune</div><div class="slider-row"><input type="range" id="srSpR" min="0.5" max="2" step="0.05" value="${sp}"><output id="srSpV">${sp}×</output></div>
-    <div class="about" style="padding:10px 0 0">${srBook(SRP.b).audio ? 'The narration keeps its natural pitch at any speed.' : 'The speed of the voice reading the text aloud.'}</div>`);
+    <div class="about" style="padding:10px 0 0">${srBook(SRP.b).audio ? 'The narration keeps its natural pitch at any speed.' : 'The speed of the voice reading the text aloud.'}</div>
+    ${srBook(SRP.b).audio || !TV.ok() ? '' : '<div class="opt-h">Voice</div><div id="tfVoices"></div><div class="about" style="padding:6px 0 0">The same voice reads the Tafsir. A new voice starts from the next paragraph.</div>'}`);
+  if ($('#tfVoices')) {
+    TF.voicesOpen = true; $('#tfVoices').onclick = tfVoicesClick; sheetOnClose = () => { TF.voicesOpen = false; if (TV.previewing) TV.stop(); };
+    if (TV.list) tfVoicesUI(); else { tfVoicesUI(); TV.load(tfVoicesUI); }
+  }
   $('#srSp').onclick = e => { const b = e.target.closest('button'); if (!b) return; haptic(); $$('#srSp button').forEach(x => x.classList.toggle('on', x === b)); const v = +b.dataset.v; $('#srSpR').value = v; $('#srSpV').textContent = v + '×'; set1(v); };
   $('#srSpR').oninput = e => { $('#srSpV').textContent = (+e.target.value).toFixed(2).replace(/0$/, '') + '×'; };
   $('#srSpR').onchange = e => { const v = Math.round(+e.target.value * 100) / 100; $$('#srSp button').forEach(b => b.classList.toggle('on', +b.dataset.v === v)); set1(v); };
@@ -8662,7 +8679,7 @@ document.addEventListener('visibilitychange', () => { if (!document.hidden) srSy
    as the fallback); on the web, the browser's voices. The Arabic quotations stay on screen and are
    not read out. "Next verse" carries on through the surah and beyond, like the Qur'an player. */
 const TF = { open: false, g: -1, key: '', raw: '', blocks: null, on: false, playing: false, k: 0, items: [], texts: [], sid: 0, wantPlay: false, voicesOpen: false };
-const TF_RATES = [0.8, 1, 1.15, 1.3, 1.5];
+const TF_RATES = [0.5, 0.8, 1, 1.15, 1.3, 1.5];
 const TF_SAMPLE = 'In the name of Allah, the Most Merciful. This is how the tafsir will sound in this voice.';
 const tfG0 = () => QMETA[0].start, tfG1 = () => QMETA[113].start + QMETA[113].count - 1;
 function tfRef(g) { let n = 1; while (n < 114 && QMETA[n].start <= g) n++; const s = QMETA[n - 1]; return { s, n, a: g - s.start + 1, key: n + ':' + (g - s.start + 1) }; }
@@ -8713,7 +8730,7 @@ const TV = {
         return;
       }
       try { const d = JSON.parse(j); this.list = tvShape(d.voices || []); this.ar = !!d.ar; } catch (e) { this.list = []; }
-      cb && cb(); return;
+      this.sync(); cb && cb(); return;
     }
     if (!this.ok()) { this.list = []; cb && cb(); return; }
     const get = () => speechSynthesis.getVoices().filter(v => /^en/i.test(v.lang)).map(v => ({ id: v.voiceURI || v.name, name: v.name, loc: v.lang.replace('_', '-'), net: !v.localService }));
@@ -8722,9 +8739,11 @@ const TV = {
     speechSynthesis.addEventListener('voiceschanged', () => { this.list = null; done(); }, { once: true });
     setTimeout(done, 1500);
   },
-  pick() {   // the chosen voice, or the first natural American one
-    const L = this.list || []; return L.find(v => v.id === set.tfVoice) || L.find(v => v.natural && v.r === 'US') || L.find(v => v.natural) || L[0] || null;
+  pick() {   // the chosen voice, or American · Voice 3
+    const L = this.list || [], us = L.filter(v => v.r === 'US');
+    return L.find(v => v.id === set.tfVoice) || us[2] || us.find(v => v.natural) || L.find(v => v.natural) || L[0] || null;
   },
+  sync() { const v = this.pick(); if (v && this.native()) try { NoorVoice.setVoice(v.id); } catch (e) {} },   // the Seerah reads in it too
   webVoice(id) { return speechSynthesis.getVoices().find(v => (v.voiceURI || v.name) === id); },
   webArabic() { const L = speechSynthesis.getVoices().filter(v => /^ar/i.test(v.lang)); return L.find(v => /natural|google|online|premium|enhanced/i.test(v.name)) || L[0] || null; },
   arOk() { return this.native() ? !!this.ar : 'speechSynthesis' in self && !!this.webArabic(); },
@@ -8751,9 +8770,9 @@ const TV = {
   },
   preview(v) {
     this.previewing = v.id;
-    if (this.native()) { try { NoorVoice.preview(v.id, TF_SAMPLE, set.tfRate || 1); } catch (e) {} return; }
+    if (this.native()) { try { NoorVoice.preview(v.id, TF_SAMPLE, set.tfRate || 0.8); } catch (e) {} return; }
     this.gen++; try { speechSynthesis.cancel(); } catch (e) {}
-    const u = new SpeechSynthesisUtterance(TF_SAMPLE), wv = this.webVoice(v.id); if (wv) { u.voice = wv; u.lang = wv.lang; } u.rate = set.tfRate || 1;
+    const u = new SpeechSynthesisUtterance(TF_SAMPLE), wv = this.webVoice(v.id); if (wv) { u.voice = wv; u.lang = wv.lang; } u.rate = set.tfRate || 0.8;
     u.onend = u.onerror = () => tvEvent({ st: 'preview', v: v.id });
     speechSynthesis.speak(u);
   },
@@ -8765,6 +8784,7 @@ const TV = {
 };
 window.onNoorVoice = j => {
   let o; try { o = typeof j === 'string' ? JSON.parse(j) : j; } catch (e) { return; }
+  if (o.st === 'cmd') { tfRemote(o.c); return; }
   if (o.st === 'ready') { if (TV.wait || (TV.list && !TV.list.length)) { const f = TV.wait || tfVoicesUI; TV.wait = null; clearTimeout(TV.wt); TV.list = null; TV.load(f); } return; }
   tvEvent(o);
 };
@@ -8951,11 +8971,11 @@ function tfSay(k, j, ar) {   // ar: the recitation couldn't load (offline), so r
   const v = TV.pick(), nq = TF.segs[j];
   if (nq && nq.l === 'q') nq.q.forEach(r => tqClip(r).catch(() => {}));   // get the next recitation ready
   Object.assign(TF, { runAt: k, runEnd: j });
-  TV.speak(TF.sid, TF.segs.slice(k, j).map(s => ar || s.l !== 'en' ? { t: s.t, l: 'ar' } : s.t), 0, v ? (TF.offline && v.alt ? v.alt : v.id) : '', set.tfRate || 1);
+  TV.speak(TF.sid, TF.segs.slice(k, j).map(s => ar || s.l !== 'en' ? { t: s.t, l: 'ar' } : s.t), 0, v ? (TF.offline && v.alt ? v.alt : v.id) : '', set.tfRate || 0.8);
 }
 function tfBarUI() {
   const el = $('#tfBar'); if (!el) return;
-  const ready = !!(TF.blocks && TF.blocks.length) && TV.ok(), auto = set.tfAuto !== false, rate = set.tfRate || 1;
+  const ready = !!(TF.blocks && TF.blocks.length) && TV.ok(), auto = set.tfAuto !== false, rate = set.tfRate || 0.8;
   el.innerHTML = `<button class="pill-btn primary" id="tfPlay" ${ready ? '' : 'disabled'}>${TF.on && TF.playing ? AIC.pause + 'Pause' : AIC.play + (TF.on ? 'Resume' : 'Listen')}</button>
     <button class="pill-btn" id="tfRate" aria-label="Reading speed">${rate}×</button>
     <button class="pill-btn ${TF.voicesOpen ? 'on' : ''}" id="tfVoice" aria-expanded="${TF.voicesOpen}">${AIC.person}Voice</button>
@@ -8997,12 +9017,25 @@ function tfVoicesClick(e) {
     tfVoicesUI(); return;
   }
   const r = e.target.closest('[data-tv]'); if (!r) return;
-  haptic(); set.tfVoice = r.dataset.tv; saveSet(); TF.offline = false;
+  haptic(); set.tfVoice = r.dataset.tv; saveSet(); TF.offline = false; TV.sync();
   if (TF.on && TF.playing) tfSpeakFrom(TF.k);
   tfVoicesUI();
 }
+// Play/pause, next and previous from the notification and the lock screen
+function tfRemote(c) {
+  if (c === 'stop') { tfStop(); return; }
+  if (!TF.on || !TF.segs) return;
+  if (c === 'pause') { if (TF.playing) { TF.playing = false; tfHalt(); tfUI(); } return; }
+  if (c === 'play') { if (!TF.playing) { TF.offline = false; tfSpeakFrom(TF.k); } return; }
+  if (c === 'next' || c === 'prev') tfSpeakFrom(Math.max(0, Math.min(TF.segs.length - 1, TF.k + (c === 'next' ? 1 : -1))));
+}
+function tfMedia() {
+  if (!TV.native()) return;
+  const r = TF.on ? tfRef(TF.g) : null;
+  try { NoorVoice.media(JSON.stringify(r ? { on: true, playing: !!TF.playing, title: 'Tafsir Ibn Kathir · ' + TF.key, text: r.s.tr } : { on: false })); } catch (e) {}
+}
 function tfUI() {
-  tfBarUI();
+  tfBarUI(); tfMedia();
   $$('#tfBody .speak').forEach(e => e.classList.remove('speak'));
   if (!TF.on || !TF.open) return;
   const e = $(`#tfBody [data-b="${TF.items[TF.k]}"]`); if (!e) return;
@@ -9018,7 +9051,7 @@ function tfMark() {
   if (TF.open) { const v = $('#v' + TF.g); if (v) v.classList.add('tf-on'); }
 }
 // One voice at a time: the Seerah or the Qur'an starting stops the tafsir
-{ const ss = srtStart; srtStart = (...a) => { tfStop(); return ss(...a); }; }
+{ const ss = srtStart; srtStart = (...a) => { tfStop(); if (TV.native() && !TV.list) TV.load(); return ss(...a); }; }
 { const oa = window.onAudio; window.onAudio = j => { oa(j); try { if (TF.playing && AU.active && isPlayingNow()) { TF.playing = false; tfHalt(); tfUI(); } } catch (e) {} }; }
 /* --- Today: a slim "continue the Seerah" row once you have started --- */
 function srTodayHTML() {
